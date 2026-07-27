@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# TODO: sustituir por el dominio real antes de publicar
+Sitemap: https://www.melgarabogados.es/sitemap.xml
