@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://www.googletagmanager.com https://*.google-analytics.com; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; object-src 'none'; base-uri 'self'; form-action 'self'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://www.googletagmanager.com https://*.google-analytics.com; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; frame-src https://www.google.com https://maps.google.com; object-src 'none'; base-uri 'self'; form-action 'self'">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="theme-color" content="#0B1626">
 
@@ -121,7 +121,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/styles.css?v=2">
 </head>
 <body>
 
@@ -258,51 +258,121 @@
 
     <!-- ==================== EL DESPACHO ==================== -->
     <section class="about section" id="despacho">
-      <div class="container about-grid">
-        <div class="about-media reveal">
-          <div class="frame-gold">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow reveal">01 — El despacho</p>
+          <h2 class="reveal" style="--d:.08s">Aquí es donde <em>se prepara</em> su defensa</h2>
+          <p class="section-intro reveal" style="--d:.16s">
+            Un despacho en el centro de Madrid, a doce minutos de los juzgados de Plaza
+            de Castilla. Sin ventanillas ni intermediarios: usted se sienta a la mesa con
+            el abogado que va a firmar sus escritos.
+          </p>
+        </div>
+
+        <!-- TODO: sustituir estas imágenes de relleno por fotografías reales del despacho -->
+        <div class="office-gallery">
+          <figure class="office-shot office-shot-lg reveal">
             <picture>
-              <source type="image/webp" srcset="assets/img/despacho-interior.webp">
-              <img src="assets/img/despacho-interior.webp" alt="Interior del despacho de Melgar y Asociados en Madrid" width="1400" height="1000" loading="lazy" decoding="async">
+              <source type="image/webp" srcset="assets/img/oficina-recepcion.webp">
+              <img src="assets/img/oficina-recepcion.webp" alt="Recepción y sala de espera del despacho" width="900" height="640" loading="lazy" decoding="async">
             </picture>
-          </div>
-          <figure class="about-quote">
-            <blockquote>«Un buen abogado no promete resultados: prepara el caso como si todo dependiera de la próxima vista. Porque a menudo así es.»</blockquote>
-            <figcaption>— Héctor Melgar, socio director</figcaption>
+            <figcaption><span aria-hidden="true">I</span>Recepción y sala de espera</figcaption>
+          </figure>
+          <figure class="office-shot office-shot-sm reveal" style="--d:.08s">
+            <picture>
+              <source type="image/webp" srcset="assets/img/oficina-sala-reuniones.webp">
+              <img src="assets/img/oficina-sala-reuniones.webp" alt="Sala de reuniones donde se atiende a los clientes" width="900" height="640" loading="lazy" decoding="async">
+            </picture>
+            <figcaption><span aria-hidden="true">II</span>Sala de reuniones</figcaption>
+          </figure>
+          <figure class="office-shot office-shot-sm reveal" style="--d:.08s">
+            <picture>
+              <source type="image/webp" srcset="assets/img/oficina-biblioteca.webp">
+              <img src="assets/img/oficina-biblioteca.webp" alt="Biblioteca jurídica del despacho" width="900" height="640" loading="lazy" decoding="async">
+            </picture>
+            <figcaption><span aria-hidden="true">III</span>Biblioteca jurídica</figcaption>
+          </figure>
+          <figure class="office-shot office-shot-lg reveal" style="--d:.16s">
+            <picture>
+              <source type="image/webp" srcset="assets/img/oficina-fachada.webp">
+              <img src="assets/img/oficina-fachada.webp" alt="Fachada del edificio donde se ubica el despacho" width="900" height="640" loading="lazy" decoding="async">
+            </picture>
+            <figcaption><span aria-hidden="true">IV</span>El edificio</figcaption>
           </figure>
         </div>
 
-        <div class="about-copy">
-          <p class="eyebrow reveal">01 — El despacho</p>
-          <h2 class="reveal" style="--d:.08s">Oficio, criterio y una manera <em>clásica</em> de entender la abogacía</h2>
-          <p class="lead reveal" style="--d:.16s">
-            Melgar &amp; Asociados nace con una convicción: quien atraviesa un proceso
-            judicial no necesita promesas, necesita un abogado que estudie su caso a
-            fondo, le hable claro y esté disponible cuando importa.
-          </p>
-          <ul class="values reveal" style="--d:.24s">
-            <li>
-              <span class="value-num" aria-hidden="true">I</span>
-              <div>
-                <h3>Claridad</h3>
-                <p>Le explicamos su situación sin jerga, con las opciones reales y sus riesgos. También cuando la respuesta honesta es «no le conviene pleitear».</p>
-              </div>
-            </li>
-            <li>
-              <span class="value-num" aria-hidden="true">II</span>
-              <div>
-                <h3>Disponibilidad</h3>
-                <p>Hablará siempre con su abogado, no con un contestador. Urgencias penales atendidas las 24 horas, los 365 días.</p>
-              </div>
-            </li>
-            <li>
-              <span class="value-num" aria-hidden="true">III</span>
-              <div>
-                <h3>Rigor</h3>
-                <p>Cada escrito y cada vista se preparan de forma exhaustiva. Presupuesto cerrado por escrito antes de empezar: sin sorpresas.</p>
-              </div>
-            </li>
-          </ul>
+        <figure class="about-quote about-quote-wide reveal">
+          <blockquote>«Un buen abogado no promete resultados: prepara el caso como si todo dependiera de la próxima vista. Porque a menudo así es.»</blockquote>
+          <figcaption>— Héctor Melgar, socio director</figcaption>
+        </figure>
+
+        <ul class="values values-row reveal">
+          <li>
+            <span class="value-num" aria-hidden="true">I</span>
+            <div>
+              <h3>Claridad</h3>
+              <p>Le explicamos su situación sin jerga, con las opciones reales y sus riesgos. También cuando la respuesta honesta es «no le conviene pleitear».</p>
+            </div>
+          </li>
+          <li>
+            <span class="value-num" aria-hidden="true">II</span>
+            <div>
+              <h3>Disponibilidad</h3>
+              <p>Hablará siempre con su abogado, no con un contestador. Urgencias penales atendidas las 24 horas, los 365 días.</p>
+            </div>
+          </li>
+          <li>
+            <span class="value-num" aria-hidden="true">III</span>
+            <div>
+              <h3>Rigor</h3>
+              <p>Cada escrito y cada vista se preparan de forma exhaustiva. Presupuesto cerrado por escrito antes de empezar: sin sorpresas.</p>
+            </div>
+          </li>
+        </ul>
+
+        <!-- ---------- Dónde estamos ---------- -->
+        <div class="office-location">
+          <div class="location-copy reveal">
+            <h3 class="office-sub">Cómo llegar</h3>
+            <!-- TODO: dirección provisional — sustituir por la sede real del despacho -->
+            <ul class="location-list">
+              <li>
+                <span class="contact-label">Dirección</span>
+                <span class="contact-value todo-data">Calle de Serrano 41, 28001 Madrid</span>
+              </li>
+              <li>
+                <span class="contact-label">Metro y autobús</span>
+                <span class="contact-value">Serrano (L4) a 2 min<br><small>Líneas de bus 1, 9, 19, 51 y 74</small></span>
+              </li>
+              <li>
+                <span class="contact-label">Aparcamiento</span>
+                <span class="contact-value">Parking público a 80 m<br><small>Zona SER azul y verde en superficie</small></span>
+              </li>
+              <li>
+                <span class="contact-label">Accesibilidad</span>
+                <span class="contact-value">Acceso adaptado y ascensor<br><small>Si lo necesita, podemos desplazarnos nosotros</small></span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Mapa bajo demanda: el iframe de Google no se carga hasta que el
+               usuario lo pide, evitando cookies de terceros sin consentimiento. -->
+          <div class="map-embed reveal" style="--d:.1s" id="mapa-despacho"
+               data-map-src="https://www.google.com/maps?q=Calle%20de%20Serrano%2041%2C%2028001%20Madrid&amp;output=embed">
+            <div class="map-placeholder">
+              <svg class="map-pin" width="30" height="30" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.6" stroke="currentColor" stroke-width="1.6"/></svg>
+              <h4>Ver la ubicación en el mapa</h4>
+              <p>
+                El mapa lo proporciona Google. Al cargarlo, Google podrá tratar su
+                dirección IP e instalar cookies propias. Por eso no lo mostramos hasta
+                que usted lo pide.
+              </p>
+              <button class="btn btn-gold" type="button" id="cargar-mapa">Cargar el mapa</button>
+              <a href="https://www.google.com/maps/search/?api=1&amp;query=Calle+de+Serrano+41,+28001+Madrid" target="_blank" rel="noopener noreferrer">
+                O abrirlo en Google Maps<span aria-hidden="true"> →</span>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -407,11 +477,136 @@
       </div>
     </section>
 
+    <!-- ==================== POR QUÉ ELEGIRNOS ==================== -->
+    <section class="whyus section section-ivory" id="por-que-elegirnos">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow reveal">03 — Por qué elegirnos</p>
+          <h2 class="reveal" style="--d:.08s">La diferencia no se promete: <em>se mide</em></h2>
+          <p class="section-intro reveal" style="--d:.16s">
+            Cualquier despacho puede decir que se implica. Nosotros preferimos enseñarle
+            los compromisos que asumimos por escrito y los datos con los que puede
+            comprobarlos.
+          </p>
+        </div>
+
+        <!-- TODO: cifras provisionales — sustituir por los datos reales del despacho -->
+        <div class="metrics-grid">
+          <article class="metric reveal" style="--d:.05s">
+            <span class="metric-num"><span class="counter" data-count="4.9" data-decimals="1">0</span><small>/5</small></span>
+            <h3>Valoración de clientes</h3>
+            <p>Media obtenida sobre 187 opiniones verificadas de clientes que cerraron su asunto con nosotros.</p>
+          </article>
+          <article class="metric reveal" style="--d:.12s">
+            <span class="metric-num">&lt;24<small>h</small></span>
+            <h3>Primera respuesta</h3>
+            <p>Tiempo máximo de respuesta a una consulta en día laborable. En urgencias penales, 3 horas de media.</p>
+          </article>
+          <article class="metric reveal" style="--d:.19s">
+            <span class="metric-num"><span class="counter" data-count="68">0</span><small>%</small></span>
+            <h3>Resueltos sin juicio</h3>
+            <p>Asuntos cerrados por acuerdo, archivo o negociación antes de llegar a vista: menos coste y menos desgaste.</p>
+          </article>
+          <article class="metric reveal" style="--d:.26s">
+            <span class="metric-num"><span class="counter" data-count="100">0</span><small>%</small></span>
+            <h3>Presupuesto cerrado</h3>
+            <p>Todos los encargos se firman con hoja de encargo e importe cerrado por escrito. Ni una factura sorpresa.</p>
+          </article>
+        </div>
+
+        <div class="compare reveal">
+          <h3 class="compare-head">Qué cambia respecto a un despacho convencional</h3>
+
+          <div class="compare-row compare-legend" aria-hidden="true">
+            <span></span>
+            <span class="is-us">Melgar &amp; Asociados</span>
+            <span>Despacho convencional</span>
+          </div>
+
+          <ul class="compare-list">
+            <li class="compare-row">
+              <span class="compare-concept">Su interlocutor</span>
+              <span class="compare-us">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span><em class="compare-tag">Nosotros</em>El abogado que firma su defensa, de principio a fin</span>
+              </span>
+              <span class="compare-them">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 12h12" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+                <span><em class="compare-tag">Otros</em>Un gestor o un pasante que rota entre expedientes</span>
+              </span>
+            </li>
+            <li class="compare-row">
+              <span class="compare-concept">Primera consulta</span>
+              <span class="compare-us">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span><em class="compare-tag">Nosotros</em>Gratuita y sin compromiso, con valoración honesta del caso</span>
+              </span>
+              <span class="compare-them">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 12h12" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+                <span><em class="compare-tag">Otros</em>Entre 60 y 120 € antes de saber si pueden ayudarle</span>
+              </span>
+            </li>
+            <li class="compare-row">
+              <span class="compare-concept">Honorarios</span>
+              <span class="compare-us">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span><em class="compare-tag">Nosotros</em>Importe cerrado por escrito antes de iniciar actuaciones</span>
+              </span>
+              <span class="compare-them">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 12h12" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+                <span><em class="compare-tag">Otros</em>Estimación abierta y facturación por horas variable</span>
+              </span>
+            </li>
+            <li class="compare-row">
+              <span class="compare-concept">Seguimiento</span>
+              <span class="compare-us">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span><em class="compare-tag">Nosotros</em>Le informamos en cada hito del procedimiento, sin pedirlo</span>
+              </span>
+              <span class="compare-them">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 12h12" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+                <span><em class="compare-tag">Otros</em>Se entera cuando llama usted a preguntar</span>
+              </span>
+            </li>
+            <li class="compare-row">
+              <span class="compare-concept">Urgencias</span>
+              <span class="compare-us">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span><em class="compare-tag">Nosotros</em>Abogado de guardia 24 h, los 365 días del año</span>
+              </span>
+              <span class="compare-them">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 12h12" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+                <span><em class="compare-tag">Otros</em>Horario de oficina y contestador fuera de él</span>
+              </span>
+            </li>
+            <li class="compare-row">
+              <span class="compare-concept">Si no le conviene pleitear</span>
+              <span class="compare-us">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span><em class="compare-tag">Nosotros</em>Se lo decimos, aunque signifique perder el encargo</span>
+              </span>
+              <span class="compare-them">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 12h12" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+                <span><em class="compare-tag">Otros</em>Se inicia el procedimiento y ya se verá</span>
+              </span>
+            </li>
+          </ul>
+
+          <p class="compare-note">
+            <span class="todo-data">Datos internos del despacho, actualizados a — de — de 2026.</span>
+            Ningún dato de esta página constituye promesa ni garantía de resultado: el
+            desenlace de un procedimiento depende siempre de sus circunstancias concretas
+            y del criterio del tribunal.
+          </p>
+        </div>
+      </div>
+    </section>
+
     <!-- ==================== CÓMO TRABAJAMOS ==================== -->
     <section class="process section" id="proceso">
       <div class="container">
         <div class="section-head">
-          <p class="eyebrow reveal">03 — Cómo trabajamos</p>
+          <p class="eyebrow reveal">04 — Cómo trabajamos</p>
           <h2 class="reveal" style="--d:.08s">Un método sobrio, <em>sin sorpresas</em></h2>
         </div>
         <ol class="process-grid">
@@ -443,7 +638,7 @@
     <section class="team section section-ivory" id="equipo">
       <div class="container">
         <div class="section-head">
-          <p class="eyebrow reveal">04 — El equipo</p>
+          <p class="eyebrow reveal">05 — El equipo</p>
           <h2 class="reveal" style="--d:.08s">Los abogados que llevarán <em>su</em> caso</h2>
           <p class="section-intro reveal" style="--d:.16s">
             Sin intermediarios: la persona que le recibe es la misma que le defiende en sala.
@@ -508,7 +703,7 @@
     <section class="testimonials section section-dark" id="testimonios">
       <div class="container">
         <div class="section-head">
-          <p class="eyebrow eyebrow-gold reveal">05 — Testimonios</p>
+          <p class="eyebrow eyebrow-gold reveal">06 — Testimonios</p>
           <h2 class="reveal" style="--d:.08s">Lo que dicen quienes <em>confiaron</em> en nosotros</h2>
         </div>
 
@@ -572,7 +767,7 @@
     <section class="faq section" id="faq">
       <div class="container faq-grid">
         <div class="faq-head">
-          <p class="eyebrow reveal">06 — Preguntas frecuentes</p>
+          <p class="eyebrow reveal">07 — Preguntas frecuentes</p>
           <h2 class="reveal" style="--d:.08s">Resolvemos sus <em>dudas</em></h2>
           <p class="section-intro reveal" style="--d:.16s">
             Si su pregunta no está aquí, escríbanos: respondemos en menos de 24 horas laborables.
@@ -622,7 +817,7 @@
     <section class="contact section" id="contacto">
       <div class="container contact-grid">
         <div class="contact-info">
-          <p class="eyebrow reveal">07 — Contacto</p>
+          <p class="eyebrow reveal">08 — Contacto</p>
           <h2 class="reveal" style="--d:.08s">Pida <em>cita</em></h2>
           <p class="section-intro reveal" style="--d:.16s">
             Respondemos en menos de 24 horas laborables. Si su asunto es urgente,
@@ -633,7 +828,7 @@
           <ul class="contact-list reveal" style="--d:.22s">
             <li>
               <span class="contact-label">Dirección</span>
-              <span class="contact-value todo-data">Calle — n.º —, 280— Madrid</span>
+              <span class="contact-value todo-data">Calle de Serrano 41, 28001 Madrid</span>
             </li>
             <li>
               <span class="contact-label">Teléfono</span>
@@ -747,6 +942,7 @@
         <h3>Despacho</h3>
         <ul>
           <li><a href="#despacho">Quiénes somos</a></li>
+          <li><a href="#por-que-elegirnos">Por qué elegirnos</a></li>
           <li><a href="#equipo">Equipo</a></li>
           <li><a href="#testimonios">Testimonios</a></li>
           <li><a href="#contacto">Contacto</a></li>
@@ -786,6 +982,12 @@
     </div>
   </div>
 
-  <script src="js/main.js" defer></script>
+  <script src="js/main.js?v=2" defer></script>
+
+  <!-- WhatsApp flotante — TODO: sustituir número provisional por el real -->
+  <a class="whatsapp-float" href="https://wa.me/34910000000?text=Hola%2C%20me%20gustar%C3%ADa%20consultar%20un%20asunto%20legal%20con%20el%20despacho." target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+  </a>
+
 </body>
 </html>

@@ -38,6 +38,10 @@ La web queda en `https://<usuario>.github.io/<repo>/` (rutas relativas: funciona
 **Hostinger**: subir todo el contenido del proyecto a `public_html/` (el `.htaccess`
 incluido activa HTTPS forzado, cabeceras de seguridad, compresión y caché).
 
+> Al modificar `css/styles.css` o `js/main.js`, subir el número de versión del
+> parámetro `?v=` en los `<link>` y `<script>` de las 11 páginas. Sin eso, los
+> visitantes recurrentes seguirían usando la copia cacheada durante un mes.
+
 ## Pendiente antes del lanzamiento real
 
 - [ ] Sustituir teléfono, dirección y email provisionales (buscar `TODO` y `todo-data`)
@@ -45,6 +49,10 @@ incluido activa HTTPS forzado, cabeceras de seguridad, compresión y caché).
 - [ ] Descomentar el bloque JSON-LD de `index.html` al tener datos reales
 - [ ] Sustituir el dominio placeholder en `canonical`, `og:url`, `robots.txt` y `sitemap.xml`
 - [ ] Fotos reales del equipo y despacho (WebP) en lugar de los placeholders
+      (incluidas las cuatro de `assets/img/oficina-*.webp`)
+- [ ] Dirección real en «Cómo llegar», en Contacto y en el `data-map-src` del mapa
+- [ ] Cifras reales en «Por qué elegirnos» (valoración, % sin juicio, fecha del dato)
+- [ ] Número de WhatsApp real en el botón flotante de las 11 páginas
 - [ ] Testimonios reales (los actuales son ficticios)
 - [ ] Backend del formulario de contacto (repetir validación y honeypot en servidor)
 - [ ] ID real de GA4 en el script comentado (Consent Mode v2 ya configurado)

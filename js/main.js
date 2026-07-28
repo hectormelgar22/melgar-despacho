@@ -92,15 +92,23 @@
   /* ---------- Contadores del hero ---------- */
   var counters = $$('.counter');
   function animateCounter(el) {
-    var target = parseInt(el.getAttribute('data-count'), 10);
-    if (reducedMotion) { el.textContent = target.toLocaleString('es-ES'); return; }
+    var target = parseFloat(el.getAttribute('data-count'));
+    var decimals = parseInt(el.getAttribute('data-decimals'), 10) || 0;
+    function format(value) {
+      return value.toLocaleString('es-ES', {
+        minimumFractionDigits: decimals,
+        maximumFractionDigits: decimals
+      });
+    }
+    if (reducedMotion) { el.textContent = format(target); return; }
+    var factor = Math.pow(10, decimals);
     var duration = 1600;
     var start = null;
     function step(ts) {
       if (!start) start = ts;
       var p = Math.min((ts - start) / duration, 1);
       var eased = 1 - Math.pow(1 - p, 3);
-      el.textContent = Math.round(target * eased).toLocaleString('es-ES');
+      el.textContent = format(Math.round(target * eased * factor) / factor);
       if (p < 1) window.requestAnimationFrame(step);
     }
     window.requestAnimationFrame(step);
@@ -219,6 +227,26 @@
     $$('[required]', form).forEach(function (field) {
       field.addEventListener('input', function () { field.removeAttribute('aria-invalid'); });
       field.addEventListener('change', function () { field.removeAttribute('aria-invalid'); });
+    });
+  }
+
+  /* ---------- Mapa de Google bajo demanda ----------
+     El iframe no se inserta hasta que el usuario lo pide: así ninguna
+     visita genera peticiones ni cookies de Google sin su intervención. */
+  var mapBox = $('#mapa-despacho');
+  var mapBtn = $('#cargar-mapa');
+  if (mapBox && mapBtn) {
+    mapBtn.addEventListener('click', function () {
+      var src = mapBox.getAttribute('data-map-src');
+      if (!src) return;
+      var frame = document.createElement('iframe');
+      frame.src = src;
+      frame.title = 'Mapa con la ubicación del despacho Melgar & Asociados';
+      frame.loading = 'lazy';
+      frame.setAttribute('referrerpolicy', 'no-referrer-when-downgrade');
+      frame.setAttribute('allowfullscreen', '');
+      mapBox.innerHTML = '';
+      mapBox.appendChild(frame);
     });
   }
 
