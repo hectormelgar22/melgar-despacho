@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://www.googletagmanager.com https://*.google-analytics.com; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; object-src 'none'; base-uri 'self'; form-action 'self'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="theme-color" content="#0B1626">
+
+  <title>Prepare su consulta: qué documentos traer | Melgar &amp; Asociados</title>
+  <meta name="description" content="Responda tres preguntas y obtenga la lista exacta de documentos que necesitará para su primera consulta con el abogado. Imprimible y personalizada. Herramienta gratuita de Melgar & Asociados.">
+
+  <!-- TODO: sustituir por el dominio real antes de publicar -->
+  <link rel="canonical" href="https://www.melgarabogados.es/checklist-consulta.html">
+
+  <!-- Google Consent Mode v2 — todo denegado por defecto -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('consent', 'default', {
+      'ad_storage': 'denied',
+      'analytics_storage': 'denied',
+      'ad_user_data': 'denied',
+      'ad_personalization': 'denied',
+      'wait_for_update': 500
+    });
+    gtag('js', new Date());
+  </script>
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:site_name" content="Melgar &amp; Asociados">
+  <meta property="og:url" content="https://www.melgarabogados.es/checklist-consulta.html">
+  <meta property="og:title" content="Prepare su consulta: qué documentos traer">
+  <meta property="og:description" content="Tres preguntas y sabrá exactamente qué documentos preparar para su primera consulta.">
+  <meta property="og:image" content="https://www.melgarabogados.es/assets/img/og-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css?v=2">
+
+  <style>
+    /* ============================================================
+       PREPARE SU CONSULTA — estilos de la herramienta
+       ============================================================ */
+    .wizard {
+      max-width: 780px;
+      margin-inline: auto;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-top: 3px solid var(--gold);
+      padding: clamp(1.6rem, 4vw, 2.6rem);
+    }
+
+    /* ---------- Barra de progreso ---------- */
+    .wizard-progress { margin-bottom: 2rem; }
+    .wizard-steps {
+      display: flex;
+      justify-content: space-between;
+      list-style: none;
+      margin-bottom: .7rem;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .wizard-steps [aria-current="step"] { color: var(--gold-deep); }
+    .wizard-bar { height: 4px; background: var(--line); overflow: hidden; }
+    .wizard-bar span {
+      display: block;
+      height: 100%;
+      width: 33%;
+      background: linear-gradient(90deg, var(--gold-deep), var(--gold));
+      transition: width .5s var(--ease);
+    }
+
+    .wizard fieldset { border: none; margin: 0; padding: 0; }
+    .wizard legend {
+      font-family: var(--serif);
+      font-size: clamp(1.5rem, 3.4vw, 1.9rem);
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 1.4rem;
+    }
+    .wizard legend em { font-style: italic; color: var(--gold-deep); }
+
+    /* ---------- Paso 1: tarjetas de área ---------- */
+    .area-cards { display: grid; grid-template-columns: 1fr; gap: .8rem; }
+    @media (min-width: 640px) { .area-cards { grid-template-columns: repeat(3, 1fr); } }
+    .area-card-opt { position: relative; }
+    .area-card-opt input {
+      position: absolute;
+      opacity: 0;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+    }
+    .area-card-opt label {
+      display: flex;
+      flex-direction: column;
+      gap: .7rem;
+      height: 100%;
+      padding: 1.2rem 1.1rem;
+      background: var(--ivory);
+      border: 1px solid var(--line);
+      cursor: pointer;
+      transition: border-color .3s var(--ease), transform .3s var(--ease);
+    }
+    .area-card-opt label svg { color: var(--gold-deep); }
+    .area-card-opt label strong { font-family: var(--serif); font-size: 1.2rem; font-weight: 600; color: var(--ink); }
+    .area-card-opt label span { font-size: .84rem; color: var(--muted); }
+    .area-card-opt input:checked + label {
+      border-color: var(--gold-deep);
+      box-shadow: inset 0 0 0 1px var(--gold-deep);
+    }
+    .area-card-opt input:focus-visible + label { outline: 2px solid var(--gold-deep); outline-offset: 2px; }
+    .area-card-opt label:hover { transform: translateY(-3px); }
+
+    /* ---------- Pasos 2 y 3: radios ---------- */
+    .radio-list { display: grid; gap: .6rem; }
+    .radio-opt { position: relative; }
+    .radio-opt input { position: absolute; opacity: 0; width: 100%; height: 100%; cursor: pointer; }
+    .radio-opt label {
+      display: flex;
+      align-items: center;
+      gap: .8rem;
+      padding: .95rem 1.1rem;
+      background: var(--ivory);
+      border: 1px solid var(--line);
+      font-size: .96rem;
+      font-weight: 600;
+      color: var(--text);
+      cursor: pointer;
+      transition: border-color .3s var(--ease);
+    }
+    .radio-opt label::before {
+      content: "";
+      flex: none;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 2px solid var(--line);
+      transition: border-color .3s var(--ease), box-shadow .3s var(--ease);
+    }
+    .radio-opt input:checked + label { border-color: var(--gold-deep); }
+    .radio-opt input:checked + label::before {
+      border-color: var(--gold-deep);
+      box-shadow: inset 0 0 0 4px var(--gold-deep);
+    }
+    .radio-opt input:focus-visible + label { outline: 2px solid var(--gold-deep); outline-offset: 2px; }
+
+    .wizard-nav { display: flex; justify-content: space-between; gap: 1rem; margin-top: 1.8rem; }
+    .wizard-error { margin-top: .9rem; font-size: .9rem; font-weight: 600; color: #A33A2E; }
+
+    /* ---------- Resultado: checklist ---------- */
+    .check-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: .8rem;
+      margin-bottom: 1.4rem;
+    }
+    .check-counter {
+      font-size: .82rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--gold-deep);
+      font-variant-numeric: tabular-nums;
+    }
+    .check-group-title {
+      font-family: var(--sans);
+      font-size: .74rem;
+      font-weight: 700;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--gold-deep);
+      margin: 1.6rem 0 .7rem;
+      padding-bottom: .45rem;
+      border-bottom: 1px solid var(--line);
+    }
+    .check-list { list-style: none; display: grid; gap: .55rem; }
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: .8rem;
+      padding: .9rem 1rem;
+      background: var(--ivory);
+      border: 1px solid var(--line);
+    }
+    .check-item input[type="checkbox"] {
+      flex: none;
+      width: 19px;
+      height: 19px;
+      margin-top: .15rem;
+      accent-color: var(--gold-deep);
+    }
+    .check-item label { font-size: .95rem; font-weight: 600; color: var(--text); cursor: pointer; }
+    .check-item small { display: block; margin-top: .2rem; font-size: .82rem; font-weight: 400; color: var(--muted); }
+    .check-item.done label { text-decoration: line-through; text-decoration-color: var(--gold-deep); opacity: .75; }
+
+    .check-actions { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 1.8rem; }
+    .check-saved { margin-top: .8rem; font-size: .88rem; font-weight: 600; color: #1E5B36; }
+
+    .tool-disclaimer {
+      margin-top: clamp(2rem, 5vw, 3rem);
+      padding: 1.1rem 1.3rem;
+      font-size: .85rem;
+      line-height: 1.65;
+      color: var(--muted);
+      background: rgba(201, 164, 92, .1);
+      border-left: 3px solid var(--gold-deep);
+      max-width: 78ch;
+      margin-inline: auto;
+    }
+
+    .otras-tools { background: var(--paper); border-top: 1px solid var(--line); padding-block: 2.4rem; }
+    .otras-tools .container { display: flex; flex-wrap: wrap; align-items: baseline; gap: 1rem 2rem; }
+    .otras-tools strong { font-family: var(--serif); font-size: 1.3rem; font-weight: 600; color: var(--ink); }
+    .otras-tools a {
+      font-size: .82rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+      text-decoration: none; color: var(--gold-deep); transition: color .3s var(--ease);
+    }
+    .otras-tools a:hover { color: var(--ink); }
+
+    /* ---------- Impresión: solo la checklist, con membrete ---------- */
+    .print-head { display: none; }
+    @media print {
+      body { background: #fff; }
+      .site-header, .area-hero, .wizard-progress, .check-actions, .check-saved,
+      .otras-tools, .cta-band, .site-footer, .cookie-banner, .whatsapp-float,
+      .skip-link, .tool-disclaimer { display: none !important; }
+      .wizard { border: none; padding: 0; max-width: none; }
+      .print-head {
+        display: block;
+        margin-bottom: 1.2cm;
+        padding-bottom: .4cm;
+        border-bottom: 2px solid #C9A45C;
+      }
+      .print-head strong {
+        display: block;
+        font-family: "Cormorant Garamond", serif;
+        font-size: 20pt;
+        color: #0B1626;
+      }
+      .print-head span { display: block; font-size: 9pt; color: #55616E; margin-top: .15cm; }
+      .check-item { border: 1px solid #ccc; break-inside: avoid; }
+      .check-item input { accent-color: #7A6027; }
+    }
+  </style>
+</head>
+<body>
+
+  <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+
+  <header class="site-header" id="cabecera">
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="Melgar y Asociados — inicio">
+        <span class="brand-mark" aria-hidden="true">M</span>
+        <span class="brand-text">
+          <span class="brand-name">Melgar <em>&amp;</em> Asociados</span>
+          <span class="brand-tag">Despacho de Abogados · Madrid</span>
+        </span>
+      </a>
+      <nav class="main-nav" id="menu-principal" aria-label="Navegación principal">
+        <ul>
+          <li><a href="index.html#despacho">El despacho</a></li>
+          <li class="has-submenu">
+            <button type="button" class="submenu-toggle" aria-expanded="false" aria-controls="submenu-areas">
+              Áreas de práctica
+              <svg class="chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <ul class="submenu" id="submenu-areas">
+              <li><a href="derecho-penal.html"><span class="submenu-num" aria-hidden="true">I</span>Derecho Penal</a></li>
+              <li><a href="derecho-civil.html"><span class="submenu-num" aria-hidden="true">II</span>Derecho Civil</a></li>
+              <li><a href="derecho-laboral.html"><span class="submenu-num" aria-hidden="true">III</span>Derecho Laboral</a></li>
+              <li><a href="familia-matrimonio.html"><span class="submenu-num" aria-hidden="true">IV</span>Familia y matrimonio</a></li>
+              <li><a href="derecho-mercantil.html"><span class="submenu-num" aria-hidden="true">V</span>Derecho Mercantil</a></li>
+              <li><a href="negligencias-accidentes.html"><span class="submenu-num" aria-hidden="true">VI</span>Negligencias y accidentes</a></li>
+              <li class="submenu-all"><a href="index.html#areas">Ver todas las áreas<span aria-hidden="true"> →</span></a></li>
+            </ul>
+          </li>
+          <li><a href="index.html#equipo">Equipo</a></li>
+          <li><a href="index.html#testimonios">Testimonios</a></li>
+          <li><a href="index.html#contacto">Contacto</a></li>
+        </ul>
+        <div class="nav-cta-mobile">
+          <a class="btn btn-gold" href="index.html#contacto">Pedir cita</a>
+          <a class="nav-phone" href="tel:+34910000000">+34 910 000 000</a>
+        </div>
+      </nav>
+      <div class="header-actions">
+        <a class="header-phone" href="tel:+34910000000">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>+34 910 000 000</span>
+        </a>
+        <a class="btn btn-gold btn-header" href="index.html#contacto">Pedir cita</a>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu-principal" aria-label="Abrir menú">
+          <span class="menu-bar" aria-hidden="true"></span>
+          <span class="menu-bar" aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="contenido">
+
+    <section class="area-hero">
+      <span class="area-hero-num" aria-hidden="true">✓</span>
+      <div class="container">
+        <nav class="breadcrumb reveal" aria-label="Ruta de navegación">
+          <a href="index.html">Inicio</a><span class="sep" aria-hidden="true">/</span>
+          <span aria-current="page">Prepare su consulta</span>
+        </nav>
+        <h1>
+          <span class="hero-eyebrow reveal" style="--d:.08s">Herramienta gratuita</span>
+          <span class="area-display reveal" style="--d:.16s">Llegue a la consulta <em>con todo preparado.</em></span>
+        </h1>
+        <p class="area-hero-sub reveal" style="--d:.26s">
+          Una primera consulta rinde el doble cuando los documentos correctos están
+          sobre la mesa. Responda tres preguntas y le diremos exactamente qué traer
+          — y dónde conseguir cada cosa.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="wizard" id="wizard">
+
+          <!-- Membrete solo visible al imprimir -->
+          <div class="print-head" aria-hidden="true">
+            <strong>Melgar &amp; Asociados — Despacho de Abogados</strong>
+            <!-- TODO: datos provisionales — sustituir por los reales -->
+            <span>Calle de Serrano 41, 28001 Madrid · +34 910 000 000 · contacto@melgarabogados.es</span>
+            <span>Documentos para su primera consulta</span>
+          </div>
+
+          <div class="wizard-progress" aria-hidden="false">
+            <ol class="wizard-steps">
+              <li id="wstep-1" aria-current="step">1. Área</li>
+              <li id="wstep-2">2. Situación</li>
+              <li id="wstep-3">3. Contexto</li>
+            </ol>
+            <div class="wizard-bar"><span id="wizard-bar-fill"></span></div>
+          </div>
+
+          <form id="wizard-form" novalidate>
+            <div id="wizard-paso"></div>
+            <p class="wizard-error" id="wizard-error" role="alert"></p>
+            <div class="wizard-nav">
+              <button type="button" class="btn btn-line" id="btn-atras">← Atrás</button>
+              <button type="button" class="btn btn-gold" id="btn-siguiente">Siguiente →</button>
+            </div>
+          </form>
+
+          <div id="wizard-resultado" hidden></div>
+        </div>
+
+        <p class="tool-disclaimer">
+          <strong>Aviso:</strong> esta lista es orientativa y se ajustará en la propia
+          consulta según su caso. Si no consigue algún documento, venga igualmente:
+          sabremos cómo obtenerlo. Todo lo que traiga y nos cuente queda amparado por
+          el secreto profesional del abogado.
+        </p>
+      </div>
+    </section>
+
+    <nav class="otras-tools" aria-label="Otras herramientas">
+      <div class="container">
+        <strong>Otras herramientas:</strong>
+        <a href="calculadora-plazos.html">¿Está a tiempo de reclamar?</a>
+        <a href="timeline-proceso.html">Fases de su procedimiento</a>
+        <a href="simulador-honorarios.html">Estime sus honorarios</a>
+      </div>
+    </nav>
+
+    <section class="cta-band" aria-label="Llamada a la acción">
+      <div class="container cta-inner">
+        <div class="reveal">
+          <h2>¿Documentos listos?<br><em>Pida su cita.</em></h2>
+          <p>Respondemos en menos de 24 horas laborables.</p>
+        </div>
+        <div class="cta-actions reveal" style="--d:.12s">
+          <a class="cta-phone" href="tel:+34910000000">+34 910 000 000</a>
+          <a class="btn btn-gold btn-lg" href="index.html#contacto">Pedir cita</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="index.html">
+          <span class="brand-mark" aria-hidden="true">M</span>
+          <span class="brand-text">
+            <span class="brand-name">Melgar <em>&amp;</em> Asociados</span>
+            <span class="brand-tag">Despacho de Abogados · Madrid</span>
+          </span>
+        </a>
+        <p>Defensa penal, civil, laboral y de familia ante los tribunales de Madrid. Oficio, criterio y trato directo desde la primera consulta.</p>
+      </div>
+      <nav class="footer-col" aria-label="Áreas de práctica">
+        <h3>Áreas</h3>
+        <ul>
+          <li><a href="derecho-penal.html">Derecho Penal</a></li>
+          <li><a href="derecho-civil.html">Derecho Civil</a></li>
+          <li><a href="derecho-laboral.html">Derecho Laboral</a></li>
+          <li><a href="familia-matrimonio.html">Familia y matrimonio</a></li>
+          <li><a href="derecho-mercantil.html">Derecho Mercantil</a></li>
+          <li><a href="negligencias-accidentes.html">Negligencias y accidentes</a></li>
+        </ul>
+      </nav>
+      <nav class="footer-col" aria-label="Herramientas">
+        <h3>Herramientas</h3>
+        <ul>
+          <li><a href="calculadora-plazos.html">Calculadora de plazos</a></li>
+          <li><a href="timeline-proceso.html">Fases del procedimiento</a></li>
+          <li><a href="checklist-consulta.html">Prepare su consulta</a></li>
+          <li><a href="simulador-honorarios.html">Simulador de honorarios</a></li>
+        </ul>
+      </nav>
+      <nav class="footer-col" aria-label="Información legal">
+        <h3>Legal</h3>
+        <ul>
+          <li><a href="aviso-legal.html">Aviso legal</a></li>
+          <li><a href="privacidad.html">Política de privacidad</a></li>
+          <li><a href="cookies.html">Política de cookies</a></li>
+          <li><button type="button" class="link-btn" id="gestionar-cookies">Gestionar cookies</button></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="container footer-bottom">
+      <p>© <span id="anio">2026</span> Melgar &amp; Asociados. Todos los derechos reservados.</p>
+      <p class="footer-icam">Abogados colegiados · Ilustre Colegio de la Abogacía de Madrid <span class="todo-data">(n.º —)</span></p>
+    </div>
+  </footer>
+
+  <div class="cookie-banner" id="cookie-banner" role="dialog" aria-modal="false" aria-labelledby="cookie-titulo" hidden>
+    <div class="cookie-inner">
+      <div class="cookie-text">
+        <h2 id="cookie-titulo">Su privacidad, primero</h2>
+        <p>
+          Utilizamos cookies propias y de terceros con fines analíticos. Puede aceptarlas
+          o rechazarlas todas; la web funciona igual en ambos casos.
+          <a href="cookies.html">Más información</a>.
+        </p>
+      </div>
+      <div class="cookie-actions">
+        <button type="button" class="btn-cookie" id="cookies-rechazar">Rechazar todo</button>
+        <button type="button" class="btn-cookie" id="cookies-aceptar">Aceptar todo</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/main.js?v=2" defer></script>
+
+  <script>
+  /* ============================================================
+     PREPARE SU CONSULTA — asistente de documentos
+     ------------------------------------------------------------
+     ⚠ PARA EL DESPACHO: las áreas, situaciones y listas de
+     documentos (objeto REGLAS) son PLACEHOLDER realistas y deben
+     revisarse antes de publicar. // VERIFICAR
+     ------------------------------------------------------------
+     Nota de privacidad: el estado vive SOLO en memoria durante la
+     visita (sin localStorage ni sessionStorage): al cerrar la
+     pestaña no queda rastro.
+     ============================================================ */
+  (function () {
+    'use strict';
+
+    /* ---------- Datos de los pasos ---------- */
+    var AREAS = [ // VERIFICAR
+      { id: 'laboral', nombre: 'Laboral', desc: 'Despidos, salarios, acoso, incapacidades',
+        icono: '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2" stroke="currentColor" stroke-width="1.7"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 12h18" stroke="currentColor" stroke-width="1.7"/></svg>' },
+      { id: 'familia', nombre: 'Familia', desc: 'Divorcios, custodias, pensiones',
+        icono: '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="9" cy="8" r="3" stroke="currentColor" stroke-width="1.7"/><circle cx="16.5" cy="9.5" r="2.2" stroke="currentColor" stroke-width="1.7"/><path d="M3.5 20c.6-3.2 2.8-5 5.5-5s4.9 1.8 5.5 5M14.5 15.4c2.3.2 4 1.7 4.6 4.6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>' },
+      { id: 'herencias', nombre: 'Herencias', desc: 'Testamentos, particiones, impuestos',
+        icono: '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 3h7l4 4v14H7z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M14 3v4h4M10 12h5M10 16h5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>' }
+    ];
+
+    var SITUACIONES = { // VERIFICAR
+      laboral: [
+        { id: 'despido', texto: 'Me han despedido o creo que van a despedirme' },
+        { id: 'impago', texto: 'Me deben salarios u horas extra' },
+        { id: 'acoso', texto: 'Sufro acoso o presiones en el trabajo' }
+      ],
+      familia: [
+        { id: 'divorcio-acuerdo', texto: 'Queremos divorciarnos de mutuo acuerdo' },
+        { id: 'divorcio-contencioso', texto: 'Quiero divorciarme y no hay acuerdo' },
+        { id: 'pension', texto: 'Quiero modificar o reclamar una pensión' }
+      ],
+      herencias: [
+        { id: 'aceptar', texto: 'Ha fallecido un familiar y hay que tramitar la herencia' },
+        { id: 'conflicto', texto: 'Hay conflicto entre herederos' },
+        { id: 'testamento', texto: 'Quiero planificar mi testamento' }
+      ]
+    };
+
+    /* Preguntas de contexto (sí/no), dependientes del área */
+    var CONTEXTO = { // VERIFICAR
+      laboral: [
+        { id: 'doc-escrito', texto: '¿Tiene comunicación por escrito de la empresa (carta, email, burofax)?' },
+        { id: 'testigos', texto: '¿Hay compañeros que puedan declarar como testigos?' }
+      ],
+      familia: [
+        { id: 'menores', texto: '¿Hay hijos menores de edad?' },
+        { id: 'vivienda', texto: '¿Hay vivienda en común (propiedad o alquiler)?' }
+      ],
+      herencias: [
+        { id: 'testamento-si', texto: '¿Sabe si existe testamento?' },
+        { id: 'inmuebles', texto: '¿Hay inmuebles en la herencia?' }
+      ]
+    };
+
+    /* ----------------------------------------------------------
+       REGLAS — motor simple: para cada situación, documentos
+       base; las claves "ctx:<pregunta>:si|no" añaden documentos
+       condicionales. Cada documento:
+       { t: título, ayuda: dónde conseguirlo, nivel: "imprescindible"|"recomendable" }
+       ---------------------------------------------------------- */
+    var REGLAS = { // VERIFICAR
+      /* --- LABORAL --- */
+      'despido': [
+        { t: 'Carta de despido', ayuda: 'Se la debe entregar la empresa; si fue verbal, anote fecha y testigos', nivel: 'imprescindible' },
+        { t: 'Contrato de trabajo', ayuda: 'Copia propia o solicítelo a la empresa o al SEPE', nivel: 'imprescindible' },
+        { t: 'Últimas 6 nóminas', ayuda: 'Portal del empleado o RR. HH.', nivel: 'imprescindible' },
+        { t: 'Informe de vida laboral', ayuda: 'Se descarga al momento en la sede de la Seguridad Social', nivel: 'recomendable' },
+        { t: 'Convenio colectivo aplicable', ayuda: 'Le ayudamos a localizarlo; figura en la nómina', nivel: 'recomendable' }
+      ],
+      'impago': [
+        { t: 'Nóminas de los meses impagados', ayuda: 'Portal del empleado o RR. HH.', nivel: 'imprescindible' },
+        { t: 'Contrato de trabajo', ayuda: 'Copia propia o SEPE', nivel: 'imprescindible' },
+        { t: 'Registro de jornada u horas extra', ayuda: 'La empresa está obligada a llevarlo; sirven también sus propias anotaciones', nivel: 'recomendable' },
+        { t: 'Extractos bancarios de los cobros', ayuda: 'Banca online, últimos 12 meses', nivel: 'recomendable' }
+      ],
+      'acoso': [
+        { t: 'Cronología de los hechos', ayuda: 'Escriba fechas, lugares y personas presentes; le damos plantilla', nivel: 'imprescindible' },
+        { t: 'Mensajes, correos o notas relevantes', ayuda: 'Haga capturas y guarde originales; no los borre', nivel: 'imprescindible' },
+        { t: 'Partes médicos o de baja', ayuda: 'Su centro de salud o mutua', nivel: 'recomendable' }
+      ],
+      'ctx:doc-escrito:si': [
+        { t: 'Esa comunicación escrita (original)', ayuda: 'No responda a ella sin consultarnos antes', nivel: 'imprescindible' }
+      ],
+      'ctx:testigos:si': [
+        { t: 'Lista de posibles testigos', ayuda: 'Nombre, puesto y qué presenció cada uno', nivel: 'recomendable' }
+      ],
+
+      /* --- FAMILIA --- */
+      'divorcio-acuerdo': [
+        { t: 'Certificado literal de matrimonio', ayuda: 'Registro Civil (online o presencial), gratuito', nivel: 'imprescindible' },
+        { t: 'DNI de ambos cónyuges', ayuda: 'Copia simple', nivel: 'imprescindible' },
+        { t: 'Borrador de acuerdos ya hablados', ayuda: 'Aunque sea informal: custodia, vivienda, pensiones', nivel: 'recomendable' },
+        { t: 'Últimas 3 nóminas de cada cónyuge', ayuda: 'Para calcular pensiones con base real', nivel: 'recomendable' }
+      ],
+      'divorcio-contencioso': [
+        { t: 'Certificado literal de matrimonio', ayuda: 'Registro Civil, gratuito', nivel: 'imprescindible' },
+        { t: 'Documentación económica del otro cónyuge', ayuda: 'Nóminas, declaraciones de renta, movimientos que conozca', nivel: 'imprescindible' },
+        { t: 'Gastos fijos del hogar y de los hijos', ayuda: 'Recibos de colegio, actividades, suministros', nivel: 'recomendable' }
+      ],
+      'pension': [
+        { t: 'Sentencia o convenio vigente', ayuda: 'La que fijó la pensión actual', nivel: 'imprescindible' },
+        { t: 'Prueba del cambio de circunstancias', ayuda: 'Nuevo contrato, despido, certificado de ingresos…', nivel: 'imprescindible' },
+        { t: 'Justificantes de pagos o impagos', ayuda: 'Extractos bancarios de los últimos 12 meses', nivel: 'recomendable' }
+      ],
+      'ctx:menores:si': [
+        { t: 'Certificados de nacimiento de los hijos', ayuda: 'Registro Civil, gratuito', nivel: 'imprescindible' },
+        { t: 'Calendario escolar y de actividades', ayuda: 'Para diseñar un régimen de visitas realista', nivel: 'recomendable' }
+      ],
+      'ctx:vivienda:si': [
+        { t: 'Escritura o contrato de alquiler de la vivienda', ayuda: 'Su copia, la notaría o el arrendador', nivel: 'imprescindible' },
+        { t: 'Último recibo de hipoteca o renta', ayuda: 'Banca online o recibo domiciliado', nivel: 'recomendable' }
+      ],
+
+      /* --- HERENCIAS --- */
+      'aceptar': [
+        { t: 'Certificado de defunción', ayuda: 'Registro Civil; también lo facilita la funeraria', nivel: 'imprescindible' },
+        { t: 'Certificado de últimas voluntades', ayuda: 'Ministerio de Justicia, a partir de 15 días hábiles del fallecimiento', nivel: 'imprescindible' },
+        { t: 'DNI del fallecido y de los herederos', ayuda: 'Copias simples', nivel: 'imprescindible' },
+        { t: 'Certificado de seguros de vida', ayuda: 'Se pide junto al de últimas voluntades', nivel: 'recomendable' }
+      ],
+      'conflicto': [
+        { t: 'Testamento o declaración de herederos', ayuda: 'Copia autorizada en la notaría correspondiente', nivel: 'imprescindible' },
+        { t: 'Comunicaciones entre herederos', ayuda: 'Correos, mensajes, burofaxes cruzados', nivel: 'imprescindible' },
+        { t: 'Inventario aproximado de bienes', ayuda: 'Lo que conozca: cuentas, inmuebles, vehículos', nivel: 'recomendable' }
+      ],
+      'testamento': [
+        { t: 'DNI', ayuda: 'Copia simple', nivel: 'imprescindible' },
+        { t: 'Relación de bienes y deudas', ayuda: 'Lista aproximada: inmuebles, cuentas, préstamos', nivel: 'imprescindible' },
+        { t: 'Libro de familia', ayuda: 'Si tiene hijos o cónyuge', nivel: 'recomendable' }
+      ],
+      'ctx:testamento-si:si': [
+        { t: 'Copia del testamento', ayuda: 'Copia autorizada en la notaría donde se otorgó', nivel: 'imprescindible' }
+      ],
+      'ctx:inmuebles:si': [
+        { t: 'Escrituras de los inmuebles', ayuda: 'Copia propia o nota simple del Registro de la Propiedad (~10 €)', nivel: 'imprescindible' },
+        { t: 'Último recibo del IBI de cada inmueble', ayuda: 'Ayuntamiento o banca online; identifica la referencia catastral', nivel: 'recomendable' }
+      ]
+    };
+
+    /* ---------- Estado (solo en memoria, sin storage) ---------- */
+    var estado = { paso: 1, area: null, situacion: null, ctx: {}, marcados: {} };
+    var guardado = null; // instantánea de "Guardar mi progreso"
+
+    var $ = function (sel, ctx) { return (ctx || document).querySelector(sel); };
+    var $$ = function (sel, ctx) { return Array.prototype.slice.call((ctx || document).querySelectorAll(sel)); };
+
+    var pasoWrap = $('#wizard-paso');
+    var errorEl = $('#wizard-error');
+    var btnAtras = $('#btn-atras');
+    var btnSig = $('#btn-siguiente');
+    var resultadoWrap = $('#wizard-resultado');
+    var form = $('#wizard-form');
+
+    function setProgreso() {
+      $('#wizard-bar-fill').style.width = (estado.paso / 3 * 100) + '%';
+      [1, 2, 3].forEach(function (n) {
+        var li = $('#wstep-' + n);
+        if (n === estado.paso) li.setAttribute('aria-current', 'step');
+        else li.removeAttribute('aria-current');
+      });
+    }
+
+    /* ---------- Render de cada paso ---------- */
+    function renderPaso() {
+      errorEl.textContent = '';
+      setProgreso();
+      btnAtras.style.visibility = estado.paso === 1 ? 'hidden' : 'visible';
+      btnSig.textContent = estado.paso === 3 ? 'Ver mi lista →' : 'Siguiente →';
+
+      var html = '';
+      if (estado.paso === 1) {
+        html += '<fieldset><legend>¿Sobre qué <em>área</em> es su consulta?</legend><div class="area-cards">';
+        AREAS.forEach(function (a) {
+          var checked = estado.area === a.id ? ' checked' : '';
+          html += '<div class="area-card-opt">' +
+            '<input type="radio" name="area" id="area-' + a.id + '" value="' + a.id + '"' + checked + '>' +
+            '<label for="area-' + a.id + '">' + a.icono +
+            '<strong>' + a.nombre + '</strong><span>' + a.desc + '</span></label></div>';
+        });
+        html += '</div></fieldset>';
+      }
+      if (estado.paso === 2) {
+        html += '<fieldset><legend>¿Cuál describe mejor <em>su situación?</em></legend><div class="radio-list">';
+        SITUACIONES[estado.area].forEach(function (s) {
+          var checked = estado.situacion === s.id ? ' checked' : '';
+          html += '<div class="radio-opt">' +
+            '<input type="radio" name="situacion" id="sit-' + s.id + '" value="' + s.id + '"' + checked + '>' +
+            '<label for="sit-' + s.id + '">' + s.texto + '</label></div>';
+        });
+        html += '</div></fieldset>';
+      }
+      if (estado.paso === 3) {
+        html += '<fieldset><legend>Dos preguntas más <em>y terminamos.</em></legend>';
+        CONTEXTO[estado.area].forEach(function (q, qi) {
+          html += '<fieldset style="margin-bottom:1.3rem"><legend style="font-family:var(--sans);font-size:.95rem;font-weight:700;color:var(--text);margin-bottom:.6rem">' + q.texto + '</legend><div class="radio-list">';
+          ['si', 'no'].forEach(function (v) {
+            var checked = estado.ctx[q.id] === v ? ' checked' : '';
+            html += '<div class="radio-opt">' +
+              '<input type="radio" name="ctx-' + q.id + '" id="ctx-' + q.id + '-' + v + '" value="' + v + '"' + checked + '>' +
+              '<label for="ctx-' + q.id + '-' + v + '">' + (v === 'si' ? 'Sí' : 'No') + '</label></div>';
+          });
+          html += '</div></fieldset>';
+        });
+        html += '</fieldset>';
+      }
+      pasoWrap.innerHTML = html;
+      /* Gestión de foco al cambiar de paso */
+      var primero = $('input', pasoWrap);
+      if (primero) primero.focus();
+    }
+
+    /* ---------- Validación y navegación ---------- */
+    btnSig.addEventListener('click', function () {
+      errorEl.textContent = '';
+      if (estado.paso === 1) {
+        var a = $('input[name="area"]:checked', pasoWrap);
+        if (!a) { errorEl.textContent = 'Seleccione un área para continuar.'; return; }
+        if (estado.area !== a.value) { estado.situacion = null; estado.ctx = {}; }
+        estado.area = a.value;
+        estado.paso = 2;
+        renderPaso();
+        return;
+      }
+      if (estado.paso === 2) {
+        var s = $('input[name="situacion"]:checked', pasoWrap);
+        if (!s) { errorEl.textContent = 'Seleccione la situación que mejor encaje.'; return; }
+        estado.situacion = s.value;
+        estado.paso = 3;
+        renderPaso();
+        return;
+      }
+      /* Paso 3 */
+      var completo = true;
+      CONTEXTO[estado.area].forEach(function (q) {
+        var r = $('input[name="ctx-' + q.id + '"]:checked', pasoWrap);
+        if (!r) completo = false;
+        else estado.ctx[q.id] = r.value;
+      });
+      if (!completo) { errorEl.textContent = 'Responda a las dos preguntas para generar su lista.'; return; }
+      renderResultado();
+    });
+
+    btnAtras.addEventListener('click', function () {
+      if (estado.paso > 1) { estado.paso--; renderPaso(); }
+    });
+
+    /* ---------- Checklist final ---------- */
+    function documentosActuales() {
+      var docs = (REGLAS[estado.situacion] || []).slice();
+      CONTEXTO[estado.area].forEach(function (q) {
+        var extra = REGLAS['ctx:' + q.id + ':' + estado.ctx[q.id]];
+        if (extra) docs = docs.concat(extra);
+      });
+      return docs;
+    }
+
+    function renderResultado() {
+      form.hidden = true;
+      $('.wizard-progress').style.display = 'none';
+      resultadoWrap.hidden = false;
+
+      var docs = documentosActuales();
+      var grupos = { imprescindible: [], recomendable: [] };
+      docs.forEach(function (d, i) { grupos[d.nivel].push({ doc: d, idx: i }); });
+
+      var html = '<div class="check-header">' +
+        '<h2 style="font-family:var(--serif);font-size:1.7rem;color:var(--ink)">Su lista de documentos</h2>' +
+        '<span class="check-counter" aria-live="polite" id="check-counter"></span></div>';
+
+      [['imprescindible', 'Imprescindible'], ['recomendable', 'Recomendable']].forEach(function (par) {
+        if (!grupos[par[0]].length) return;
+        html += '<h3 class="check-group-title">' + par[1] + '</h3><ul class="check-list">';
+        grupos[par[0]].forEach(function (item) {
+          var id = 'doc-' + item.idx;
+          html += '<li class="check-item" id="item-' + item.idx + '">' +
+            '<input type="checkbox" id="' + id + '" data-idx="' + item.idx + '">' +
+            '<label for="' + id + '">' + item.doc.t +
+            '<small>' + item.doc.ayuda + '</small></label></li>';
+        });
+        html += '</ul>';
+      });
+
+      html += '<div class="check-actions">' +
+        '<button type="button" class="btn btn-gold" id="btn-imprimir">Descargar en PDF / imprimir</button>' +
+        '<button type="button" class="btn btn-line" id="btn-guardar">Guardar mi progreso</button>' +
+        '<button type="button" class="btn btn-line" id="btn-reiniciar">Empezar de nuevo</button></div>' +
+        '<p class="check-saved" id="check-saved" role="status"></p>';
+
+      resultadoWrap.innerHTML = html;
+      resultadoWrap.focus && resultadoWrap.setAttribute('tabindex', '-1');
+      resultadoWrap.focus();
+
+      var checks = $$('.check-item input', resultadoWrap);
+      function actualizarContador() {
+        var hechos = checks.filter(function (c) { return c.checked; }).length;
+        $('#check-counter').textContent = hechos + ' de ' + checks.length + ' documentos preparados';
+        checks.forEach(function (c) {
+          c.closest('.check-item').classList.toggle('done', c.checked);
+        });
+      }
+      checks.forEach(function (c) {
+        /* Restaurar estado guardado en memoria si coincide la selección */
+        if (estado.marcados[c.dataset.idx]) c.checked = true;
+        c.addEventListener('change', function () {
+          estado.marcados[c.dataset.idx] = c.checked;
+          actualizarContador();
+        });
+      });
+      actualizarContador();
+
+      $('#btn-imprimir').addEventListener('click', function () { window.print(); });
+      $('#btn-guardar').addEventListener('click', function () {
+        guardado = JSON.parse(JSON.stringify(estado));
+        $('#check-saved').textContent =
+          'Progreso guardado para esta visita. Se borra al cerrar la pestaña: no almacenamos nada en su dispositivo.';
+      });
+      $('#btn-reiniciar').addEventListener('click', function () {
+        estado = { paso: 1, area: null, situacion: null, ctx: {}, marcados: {} };
+        resultadoWrap.hidden = true;
+        resultadoWrap.innerHTML = '';
+        form.hidden = false;
+        $('.wizard-progress').style.display = '';
+        renderPaso();
+      });
+    }
+
+    renderPaso();
+  })();
+  </script>
+
+  <!-- WhatsApp flotante — TODO: sustituir número provisional por el real -->
+  <a class="whatsapp-float" href="https://wa.me/34910000000?text=Hola%2C%20me%20gustar%C3%ADa%20consultar%20un%20asunto%20legal%20con%20el%20despacho." target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+  </a>
+
+</body>
+</html>

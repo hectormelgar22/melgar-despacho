@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://www.googletagmanager.com https://*.google-analytics.com; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; object-src 'none'; base-uri 'self'; form-action 'self'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="theme-color" content="#0B1626">
+
+  <title>Calculadora de plazos legales — ¿Aún está a tiempo de reclamar? | Melgar &amp; Asociados</title>
+  <meta name="description" content="Compruebe de forma orientativa si su reclamación sigue dentro de plazo: despidos, daños, consumo y recursos administrativos. Herramienta gratuita de Melgar & Asociados, abogados en Madrid.">
+
+  <!-- TODO: sustituir por el dominio real antes de publicar -->
+  <link rel="canonical" href="https://www.melgarabogados.es/calculadora-plazos.html">
+
+  <!-- Google Consent Mode v2 — todo denegado por defecto -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('consent', 'default', {
+      'ad_storage': 'denied',
+      'analytics_storage': 'denied',
+      'ad_user_data': 'denied',
+      'ad_personalization': 'denied',
+      'wait_for_update': 500
+    });
+    gtag('js', new Date());
+  </script>
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:site_name" content="Melgar &amp; Asociados">
+  <meta property="og:url" content="https://www.melgarabogados.es/calculadora-plazos.html">
+  <meta property="og:title" content="¿Aún está a tiempo de reclamar? — Calculadora de plazos legales">
+  <meta property="og:description" content="Compruebe en un minuto, de forma orientativa, si su reclamación sigue dentro de plazo.">
+  <meta property="og:image" content="https://www.melgarabogados.es/assets/img/og-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css?v=2">
+
+  <style>
+    /* ============================================================
+       CALCULADORA DE PLAZOS — estilos propios de la herramienta
+       (usa las variables del sistema de diseño del sitio)
+       ============================================================ */
+    .tool-shell {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: clamp(1.6rem, 4vw, 2.5rem);
+      align-items: start;
+    }
+    @media (min-width: 920px) {
+      .tool-shell { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); }
+    }
+
+    .tool-form {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-top: 3px solid var(--gold);
+      padding: clamp(1.6rem, 4vw, 2.4rem);
+    }
+    .tool-step {
+      display: block;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .24em;
+      text-transform: uppercase;
+      color: var(--gold-deep);
+      margin-bottom: .5rem;
+    }
+
+    /* ---------- Tarjeta de resultado ---------- */
+    .result-card {
+      background: var(--ink);
+      color: var(--light);
+      border: 1px solid var(--line-dark);
+      border-top: 3px solid var(--gold);
+      padding: clamp(1.6rem, 4vw, 2.4rem);
+    }
+    .result-empty {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: .8rem;
+      color: var(--light-muted);
+      font-size: .95rem;
+    }
+    .result-empty svg { color: var(--gold); }
+
+    .semaforo {
+      display: inline-flex;
+      align-items: center;
+      gap: .6rem;
+      padding: .45rem .9rem;
+      font-size: .74rem;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      border: 1px solid;
+      margin-bottom: 1.3rem;
+    }
+    .semaforo::before {
+      content: "";
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+    /* Colores verificados AA sobre --ink */
+    .semaforo.verde { color: #7FC98F; border-color: rgba(127, 201, 143, .45); }
+    .semaforo.ambar { color: #E4B95C; border-color: rgba(228, 185, 92, .45); }
+    .semaforo.rojo  { color: #E88B7D; border-color: rgba(232, 139, 125, .45); }
+
+    .result-fecha {
+      font-family: var(--serif);
+      font-size: clamp(1.9rem, 4vw, 2.6rem);
+      font-weight: 600;
+      line-height: 1.1;
+      color: var(--ivory);
+    }
+    .result-fecha em { font-style: italic; color: var(--gold); }
+    .result-dias {
+      margin-top: 1.1rem;
+      font-size: 1rem;
+      color: var(--light-muted);
+    }
+    .result-dias strong {
+      font-family: var(--serif);
+      font-size: 1.9rem;
+      font-weight: 600;
+      color: var(--gold);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .plazo-barra {
+      margin-top: 1.4rem;
+      height: 7px;
+      background: rgba(233, 228, 216, .14);
+      overflow: hidden;
+    }
+    .plazo-barra span {
+      display: block;
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, var(--gold-deep), var(--gold));
+      transition: width 1.1s var(--ease);
+    }
+    .plazo-barra-label {
+      display: flex;
+      justify-content: space-between;
+      margin-top: .5rem;
+      font-size: .74rem;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--light-muted);
+    }
+
+    .result-nota {
+      margin-top: 1.4rem;
+      padding: 1rem 1.1rem;
+      font-size: .9rem;
+      line-height: 1.6;
+      color: var(--light);
+      background: rgba(201, 164, 92, .12);
+      border-left: 2px solid var(--gold);
+    }
+    .result-nota strong { color: var(--gold-soft); }
+    .result-cta { margin-top: 1.5rem; display: flex; flex-wrap: wrap; gap: .9rem; }
+
+    .tool-disclaimer {
+      margin-top: clamp(2rem, 5vw, 3rem);
+      padding: 1.1rem 1.3rem;
+      font-size: .85rem;
+      line-height: 1.65;
+      color: var(--muted);
+      background: rgba(201, 164, 92, .1);
+      border-left: 3px solid var(--gold-deep);
+      max-width: 78ch;
+    }
+
+    .otras-tools { background: var(--paper); border-top: 1px solid var(--line); padding-block: 2.4rem; }
+    .otras-tools .container { display: flex; flex-wrap: wrap; align-items: baseline; gap: 1rem 2rem; }
+    .otras-tools strong { font-family: var(--serif); font-size: 1.3rem; font-weight: 600; color: var(--ink); }
+    .otras-tools a {
+      font-size: .82rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+      text-decoration: none; color: var(--gold-deep); transition: color .3s var(--ease);
+    }
+    .otras-tools a:hover { color: var(--ink); }
+  </style>
+</head>
+<body>
+
+  <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+
+  <header class="site-header" id="cabecera">
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="Melgar y Asociados — inicio">
+        <span class="brand-mark" aria-hidden="true">M</span>
+        <span class="brand-text">
+          <span class="brand-name">Melgar <em>&amp;</em> Asociados</span>
+          <span class="brand-tag">Despacho de Abogados · Madrid</span>
+        </span>
+      </a>
+      <nav class="main-nav" id="menu-principal" aria-label="Navegación principal">
+        <ul>
+          <li><a href="index.html#despacho">El despacho</a></li>
+          <li class="has-submenu">
+            <button type="button" class="submenu-toggle" aria-expanded="false" aria-controls="submenu-areas">
+              Áreas de práctica
+              <svg class="chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <ul class="submenu" id="submenu-areas">
+              <li><a href="derecho-penal.html"><span class="submenu-num" aria-hidden="true">I</span>Derecho Penal</a></li>
+              <li><a href="derecho-civil.html"><span class="submenu-num" aria-hidden="true">II</span>Derecho Civil</a></li>
+              <li><a href="derecho-laboral.html"><span class="submenu-num" aria-hidden="true">III</span>Derecho Laboral</a></li>
+              <li><a href="familia-matrimonio.html"><span class="submenu-num" aria-hidden="true">IV</span>Familia y matrimonio</a></li>
+              <li><a href="derecho-mercantil.html"><span class="submenu-num" aria-hidden="true">V</span>Derecho Mercantil</a></li>
+              <li><a href="negligencias-accidentes.html"><span class="submenu-num" aria-hidden="true">VI</span>Negligencias y accidentes</a></li>
+              <li class="submenu-all"><a href="index.html#areas">Ver todas las áreas<span aria-hidden="true"> →</span></a></li>
+            </ul>
+          </li>
+          <li><a href="index.html#equipo">Equipo</a></li>
+          <li><a href="index.html#testimonios">Testimonios</a></li>
+          <li><a href="index.html#contacto">Contacto</a></li>
+        </ul>
+        <div class="nav-cta-mobile">
+          <a class="btn btn-gold" href="index.html#contacto">Pedir cita</a>
+          <a class="nav-phone" href="tel:+34910000000">+34 910 000 000</a>
+        </div>
+      </nav>
+      <div class="header-actions">
+        <a class="header-phone" href="tel:+34910000000">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>+34 910 000 000</span>
+        </a>
+        <a class="btn btn-gold btn-header" href="index.html#contacto">Pedir cita</a>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu-principal" aria-label="Abrir menú">
+          <span class="menu-bar" aria-hidden="true"></span>
+          <span class="menu-bar" aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="contenido">
+
+    <section class="area-hero">
+      <span class="area-hero-num" aria-hidden="true">§</span>
+      <div class="container">
+        <nav class="breadcrumb reveal" aria-label="Ruta de navegación">
+          <a href="index.html">Inicio</a><span class="sep" aria-hidden="true">/</span>
+          <span aria-current="page">Calculadora de plazos</span>
+        </nav>
+        <h1>
+          <span class="hero-eyebrow reveal" style="--d:.08s">Herramienta gratuita</span>
+          <span class="area-display reveal" style="--d:.16s">¿Aún está a tiempo <em>de reclamar?</em></span>
+        </h1>
+        <p class="area-hero-sub reveal" style="--d:.26s">
+          En Derecho, llegar tarde puede costar el caso entero. Seleccione su tipo de
+          asunto y la fecha del hecho, y le diremos de forma orientativa cuánto plazo
+          le queda — y si conviene actuar ya.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="tool-shell">
+
+          <!-- ---------- Paso 1 y 2: formulario ---------- -->
+          <form class="tool-form" id="form-plazos" novalidate>
+            <div class="form-field">
+              <span class="tool-step">Paso 1 de 2</span>
+              <label for="tipo-asunto">¿Qué le ha ocurrido?</label>
+              <select id="tipo-asunto" name="tipo" required>
+                <option value="" selected disabled>Seleccione su tipo de asunto</option>
+              </select>
+            </div>
+
+            <div class="form-field">
+              <span class="tool-step">Paso 2 de 2</span>
+              <label for="fecha-hecho">¿Cuándo ocurrió el hecho?</label>
+              <input type="date" id="fecha-hecho" name="fecha" required>
+            </div>
+
+            <button class="btn btn-gold btn-lg btn-submit" type="submit">Calcular mi plazo</button>
+            <p class="form-status" role="alert"></p>
+          </form>
+
+          <!-- ---------- Resultado ---------- -->
+          <div class="result-card" aria-live="polite" id="resultado">
+            <div class="result-empty">
+              <svg width="34" height="34" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M12 7.5V12l3 2.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+              <p>
+                Complete los dos pasos y pulse <strong>«Calcular mi plazo»</strong>.
+                El resultado aparecerá aquí con la fecha límite estimada y los días
+                que le quedan.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <p class="tool-disclaimer">
+          <strong>Aviso importante:</strong> este cálculo es meramente orientativo y no
+          constituye asesoramiento jurídico. Los plazos legales admiten supuestos de
+          interrupción y suspensión que solo pueden valorarse estudiando su caso
+          concreto, y su cómputo exacto puede variar (festivos aplicables, notificaciones,
+          régimen procesal). Antes de dar un plazo por perdido —o por seguro—,
+          consúltenos: la primera valoración es gratuita.
+        </p>
+      </div>
+    </section>
+
+    <nav class="otras-tools" aria-label="Otras herramientas">
+      <div class="container">
+        <strong>Otras herramientas:</strong>
+        <a href="timeline-proceso.html">Fases de su procedimiento</a>
+        <a href="checklist-consulta.html">Prepare su consulta</a>
+        <a href="simulador-honorarios.html">Estime sus honorarios</a>
+      </div>
+    </nav>
+
+    <section class="cta-band" aria-label="Llamada a la acción">
+      <div class="container cta-inner">
+        <div class="reveal">
+          <h2>El plazo corre.<br><em>Su defensa también debería.</em></h2>
+          <p>Cuéntenos su caso hoy y sabremos exactamente cuánto margen tiene.</p>
+        </div>
+        <div class="cta-actions reveal" style="--d:.12s">
+          <a class="cta-phone" href="tel:+34910000000">+34 910 000 000</a>
+          <a class="btn btn-gold btn-lg" href="index.html#contacto">Consultar mi caso</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="index.html">
+          <span class="brand-mark" aria-hidden="true">M</span>
+          <span class="brand-text">
+            <span class="brand-name">Melgar <em>&amp;</em> Asociados</span>
+            <span class="brand-tag">Despacho de Abogados · Madrid</span>
+          </span>
+        </a>
+        <p>Defensa penal, civil, laboral y de familia ante los tribunales de Madrid. Oficio, criterio y trato directo desde la primera consulta.</p>
+      </div>
+      <nav class="footer-col" aria-label="Áreas de práctica">
+        <h3>Áreas</h3>
+        <ul>
+          <li><a href="derecho-penal.html">Derecho Penal</a></li>
+          <li><a href="derecho-civil.html">Derecho Civil</a></li>
+          <li><a href="derecho-laboral.html">Derecho Laboral</a></li>
+          <li><a href="familia-matrimonio.html">Familia y matrimonio</a></li>
+          <li><a href="derecho-mercantil.html">Derecho Mercantil</a></li>
+          <li><a href="negligencias-accidentes.html">Negligencias y accidentes</a></li>
+        </ul>
+      </nav>
+      <nav class="footer-col" aria-label="Herramientas">
+        <h3>Herramientas</h3>
+        <ul>
+          <li><a href="calculadora-plazos.html">Calculadora de plazos</a></li>
+          <li><a href="timeline-proceso.html">Fases del procedimiento</a></li>
+          <li><a href="checklist-consulta.html">Prepare su consulta</a></li>
+          <li><a href="simulador-honorarios.html">Simulador de honorarios</a></li>
+        </ul>
+      </nav>
+      <nav class="footer-col" aria-label="Información legal">
+        <h3>Legal</h3>
+        <ul>
+          <li><a href="aviso-legal.html">Aviso legal</a></li>
+          <li><a href="privacidad.html">Política de privacidad</a></li>
+          <li><a href="cookies.html">Política de cookies</a></li>
+          <li><button type="button" class="link-btn" id="gestionar-cookies">Gestionar cookies</button></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="container footer-bottom">
+      <p>© <span id="anio">2026</span> Melgar &amp; Asociados. Todos los derechos reservados.</p>
+      <p class="footer-icam">Abogados colegiados · Ilustre Colegio de la Abogacía de Madrid <span class="todo-data">(n.º —)</span></p>
+    </div>
+  </footer>
+
+  <div class="cookie-banner" id="cookie-banner" role="dialog" aria-modal="false" aria-labelledby="cookie-titulo" hidden>
+    <div class="cookie-inner">
+      <div class="cookie-text">
+        <h2 id="cookie-titulo">Su privacidad, primero</h2>
+        <p>
+          Utilizamos cookies propias y de terceros con fines analíticos. Puede aceptarlas
+          o rechazarlas todas; la web funciona igual en ambos casos.
+          <a href="cookies.html">Más información</a>.
+        </p>
+      </div>
+      <div class="cookie-actions">
+        <button type="button" class="btn-cookie" id="cookies-rechazar">Rechazar todo</button>
+        <button type="button" class="btn-cookie" id="cookies-aceptar">Aceptar todo</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/main.js?v=2" defer></script>
+
+  <script>
+  /* ============================================================
+     CALCULADORA DE PLAZOS
+     ------------------------------------------------------------
+     ⚠ IMPORTANTE PARA EL DESPACHO:
+     El array PLAZOS contiene EJEMPLOS que deben ser COMPLETADOS
+     y VALIDADOS por un abogado antes de publicar. No añada plazos
+     sin verificar la norma vigente y su régimen de cómputo.
+     ============================================================ */
+  (function () {
+    'use strict';
+
+    /* ----------------------------------------------------------
+       PLAZOS — un objeto por tipo de asunto.
+       dias:      número de días del plazo.
+       tipoDias:  "habiles" (se saltan sábados, domingos y FESTIVOS)
+                  o "naturales" (todos los días cuentan).
+       base:      referencia normativa que verá el usuario.
+       nota:      explicación en lenguaje llano.
+       ---------------------------------------------------------- */
+    var PLAZOS = [
+      { // VERIFICAR — validar por el despacho antes de publicar
+        id: 'despido',
+        area: 'Laboral',
+        etiqueta: 'Impugnar un despido',
+        dias: 20,
+        tipoDias: 'habiles',
+        base: 'Art. 59.3 del Estatuto de los Trabajadores',
+        nota: 'El plazo de caducidad para demandar por despido es muy breve y no se recupera: cada día cuenta.'
+      },
+      { // VERIFICAR — validar por el despacho antes de publicar
+        id: 'danos',
+        area: 'Civil',
+        etiqueta: 'Reclamar daños y perjuicios (responsabilidad extracontractual)',
+        dias: 365,
+        tipoDias: 'naturales',
+        base: 'Art. 1968.2.º del Código Civil',
+        nota: 'La acción por daños que no derivan de un contrato prescribe en un año desde que pudo ejercitarse.'
+      },
+      { // VERIFICAR — validar por el despacho antes de publicar
+        id: 'vicios',
+        area: 'Consumo',
+        etiqueta: 'Reclamar por vicios ocultos en una compraventa',
+        dias: 180,
+        tipoDias: 'naturales',
+        base: 'Art. 1490 del Código Civil',
+        nota: 'La acción por defectos ocultos de la cosa vendida se extingue a los seis meses de la entrega.'
+      },
+      { // VERIFICAR — validar por el despacho antes de publicar
+        id: 'alzada',
+        area: 'Administrativo',
+        etiqueta: 'Recurso de alzada contra una resolución administrativa',
+        dias: 30,
+        tipoDias: 'naturales',
+        base: 'Art. 122 de la Ley 39/2015',
+        nota: 'El plazo legal es de un mes desde la notificación del acto expreso; aquí se aproxima a 30 días naturales.'
+      }
+    ];
+
+    /* ----------------------------------------------------------
+       FESTIVOS — fechas "YYYY-MM-DD" que no cuentan como día hábil.
+       Mantener actualizado con el calendario oficial aplicable
+       (estatales + Comunidad de Madrid + locales, según el caso).
+       ---------------------------------------------------------- */
+    var FESTIVOS = [
+      // VERIFICAR — ejemplo con festivos estatales/Madrid 2026
+      '2026-01-01', '2026-01-06', '2026-04-02', '2026-04-03',
+      '2026-05-01', '2026-05-02', '2026-08-15', '2026-10-12',
+      '2026-11-02', '2026-12-07', '2026-12-08', '2026-12-25'
+    ];
+
+    var $ = function (sel, ctx) { return (ctx || document).querySelector(sel); };
+    var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    var select = $('#tipo-asunto');
+    var fecha = $('#fecha-hecho');
+    var form = $('#form-plazos');
+    var resultado = $('#resultado');
+    var status = $('.form-status', form);
+
+    /* Poblar el select agrupado por áreas */
+    var areas = [];
+    PLAZOS.forEach(function (p) { if (areas.indexOf(p.area) === -1) areas.push(p.area); });
+    areas.forEach(function (area) {
+      var group = document.createElement('optgroup');
+      group.label = area;
+      PLAZOS.forEach(function (p) {
+        if (p.area !== area) return;
+        var opt = document.createElement('option');
+        opt.value = p.id;
+        opt.textContent = p.etiqueta;
+        group.appendChild(opt);
+      });
+      select.appendChild(group);
+    });
+
+    /* Bloquear fechas futuras */
+    function hoyISO() {
+      var d = new Date();
+      return d.getFullYear() + '-' +
+        String(d.getMonth() + 1).padStart(2, '0') + '-' +
+        String(d.getDate()).padStart(2, '0');
+    }
+    fecha.max = hoyISO();
+
+    /* ---------- Cómputo de fechas ---------- */
+    function esFestivo(d) {
+      var iso = d.getFullYear() + '-' +
+        String(d.getMonth() + 1).padStart(2, '0') + '-' +
+        String(d.getDate()).padStart(2, '0');
+      return FESTIVOS.indexOf(iso) !== -1;
+    }
+    function esHabil(d) {
+      var dia = d.getDay();
+      return dia !== 0 && dia !== 6 && !esFestivo(d);
+    }
+    /* Fecha límite: día en que se consume el último día del plazo */
+    function fechaLimite(inicio, dias, tipo) {
+      var d = new Date(inicio.getTime());
+      var restantes = dias;
+      while (restantes > 0) {
+        d.setDate(d.getDate() + 1);
+        if (tipo === 'naturales' || esHabil(d)) restantes--;
+      }
+      return d;
+    }
+    function diasNaturalesEntre(a, b) {
+      var MS = 24 * 60 * 60 * 1000;
+      var a0 = new Date(a.getFullYear(), a.getMonth(), a.getDate());
+      var b0 = new Date(b.getFullYear(), b.getMonth(), b.getDate());
+      return Math.round((b0 - a0) / MS);
+    }
+    function formatoLargo(d) {
+      return d.toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
+    }
+
+    /* ---------- Contador animado ---------- */
+    function animarContador(el, target) {
+      if (reducedMotion) { el.textContent = target.toLocaleString('es-ES'); return; }
+      var dur = 1100, start = null;
+      function step(ts) {
+        if (!start) start = ts;
+        var p = Math.min((ts - start) / dur, 1);
+        var eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.round(target * eased).toLocaleString('es-ES');
+        if (p < 1) window.requestAnimationFrame(step);
+      }
+      window.requestAnimationFrame(step);
+    }
+
+    /* ---------- Render del resultado ---------- */
+    function render(plazo, inicio) {
+      var limite = fechaLimite(inicio, plazo.dias, plazo.tipoDias);
+      var hoy = new Date();
+      var restantes = diasNaturalesEntre(hoy, limite);
+      var totales = diasNaturalesEntre(inicio, limite);
+      var consumidoPct = totales > 0
+        ? Math.min(100, Math.max(0, Math.round((1 - restantes / totales) * 100)))
+        : 100;
+
+      var estado, estadoTxt;
+      if (restantes < 0) { estado = 'rojo'; estadoTxt = 'Plazo agotado'; }
+      else if (restantes / totales < 0.5) { estado = 'ambar'; estadoTxt = 'Queda poco plazo'; }
+      else { estado = 'verde'; estadoTxt = 'Dentro de plazo'; }
+
+      var tipoTxt = plazo.tipoDias === 'habiles' ? 'días hábiles' : 'días naturales';
+      var html = '';
+      html += '<span class="semaforo ' + estado + '">' + estadoTxt + '</span>';
+
+      if (estado === 'rojo') {
+        html += '<p class="result-fecha">El plazo terminó el <em>' + formatoLargo(limite) + '</em></p>';
+        html += '<p class="result-dias">Han pasado <strong>' + Math.abs(restantes).toLocaleString('es-ES') + '</strong> días desde la fecha límite estimada.</p>';
+      } else {
+        html += '<p class="result-fecha">Tiene hasta el <em>' + formatoLargo(limite) + '</em></p>';
+        html += '<p class="result-dias">Le quedan <strong class="js-contador">0</strong> días naturales.</p>';
+      }
+
+      html += '<div class="plazo-barra" role="img" aria-label="Plazo consumido: ' + consumidoPct + ' por ciento">' +
+              '<span data-pct="' + consumidoPct + '"></span></div>' +
+              '<div class="plazo-barra-label"><span>Plazo consumido</span><span>' + consumidoPct + '%</span></div>';
+
+      html += '<div class="result-nota"><strong>' + plazo.base + ' · ' + plazo.dias + ' ' + tipoTxt + '.</strong> ' + plazo.nota + '</div>';
+
+      if (estado === 'verde') {
+        html += '<div class="result-cta"><a class="btn btn-gold" href="index.html#contacto">Solicitar valoración gratuita</a></div>';
+      } else {
+        html += '<div class="result-cta">' +
+                '<a class="btn btn-gold" href="tel:+34910000000">Consulta urgente — llamar ahora</a>' +
+                '<a class="btn btn-ghost" href="index.html#contacto">Escribir al despacho</a></div>';
+      }
+
+      resultado.innerHTML = html;
+
+      var barra = $('.plazo-barra span', resultado);
+      window.requestAnimationFrame(function () {
+        window.requestAnimationFrame(function () {
+          barra.style.width = barra.getAttribute('data-pct') + '%';
+        });
+      });
+      var contador = $('.js-contador', resultado);
+      if (contador) animarContador(contador, restantes);
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      status.textContent = '';
+      status.className = 'form-status';
+
+      var plazo = null;
+      PLAZOS.forEach(function (p) { if (p.id === select.value) plazo = p; });
+      var inicio = fecha.value ? new Date(fecha.value + 'T00:00:00') : null;
+
+      if (!plazo || !inicio || isNaN(inicio.getTime())) {
+        status.textContent = 'Seleccione el tipo de asunto y la fecha del hecho.';
+        status.className = 'form-status error';
+        return;
+      }
+      if (inicio > new Date()) {
+        status.textContent = 'La fecha no puede ser futura.';
+        status.className = 'form-status error';
+        return;
+      }
+      render(plazo, inicio);
+    });
+  })();
+  </script>
+
+  <!-- WhatsApp flotante — TODO: sustituir número provisional por el real -->
+  <a class="whatsapp-float" href="https://wa.me/34910000000?text=Hola%2C%20me%20gustar%C3%ADa%20consultar%20un%20asunto%20legal%20con%20el%20despacho." target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+  </a>
+
+</body>
+</html>

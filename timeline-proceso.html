@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://www.googletagmanager.com https://*.google-analytics.com; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; object-src 'none'; base-uri 'self'; form-action 'self'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="theme-color" content="#0B1626">
+
+  <title>Fases de su procedimiento, paso a paso | Melgar &amp; Asociados</title>
+  <meta name="description" content="¿Qué ocurre después de encargar su caso? Vea las fases de un divorcio, un despido, una reclamación de cantidad o una herencia: qué hacemos nosotros, qué necesitamos de usted y cuánto suele durar.">
+
+  <!-- TODO: sustituir por el dominio real antes de publicar -->
+  <link rel="canonical" href="https://www.melgarabogados.es/timeline-proceso.html">
+
+  <!-- Google Consent Mode v2 — todo denegado por defecto -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('consent', 'default', {
+      'ad_storage': 'denied',
+      'analytics_storage': 'denied',
+      'ad_user_data': 'denied',
+      'ad_personalization': 'denied',
+      'wait_for_update': 500
+    });
+    gtag('js', new Date());
+  </script>
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:site_name" content="Melgar &amp; Asociados">
+  <meta property="og:url" content="https://www.melgarabogados.es/timeline-proceso.html">
+  <meta property="og:title" content="Fases de su procedimiento, paso a paso">
+  <meta property="og:description" content="Sepa qué ocurre en cada fase de su procedimiento: qué hacemos nosotros, qué necesitamos de usted y cuánto suele durar.">
+  <meta property="og:image" content="https://www.melgarabogados.es/assets/img/og-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css?v=2">
+
+  <style>
+    /* ============================================================
+       LÍNEA TEMPORAL DEL PROCEDIMIENTO — estilos de la herramienta
+       ============================================================ */
+
+    /* ---------- Pestañas ---------- */
+    .proc-tabs {
+      display: flex;
+      gap: .5rem;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding-bottom: .4rem;
+      margin-bottom: clamp(1.6rem, 4vw, 2.4rem);
+    }
+    .proc-tabs::-webkit-scrollbar { display: none; }
+    .proc-tab {
+      flex: none;
+      padding: .75rem 1.3rem;
+      font: inherit;
+      font-size: .8rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--text);
+      background: var(--paper);
+      border: 1px solid var(--line);
+      cursor: pointer;
+      transition: background-color .3s var(--ease), color .3s var(--ease), border-color .3s var(--ease);
+    }
+    .proc-tab:hover { border-color: var(--gold-deep); }
+    .proc-tab[aria-selected="true"] {
+      background: var(--ink);
+      color: var(--gold);
+      border-color: var(--ink);
+    }
+    .proc-tab:focus-visible { outline: 2px solid var(--gold-deep); outline-offset: 2px; }
+
+    /* ---------- Barra de duración total ---------- */
+    .proc-total {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: .6rem 1.2rem;
+      padding: 1.1rem 1.3rem;
+      margin-bottom: clamp(1.8rem, 4vw, 2.6rem);
+      background: rgba(201, 164, 92, .1);
+      border-left: 3px solid var(--gold-deep);
+    }
+    .proc-total strong {
+      font-family: var(--serif);
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: var(--ink);
+    }
+    .proc-total span { font-size: .88rem; color: var(--muted); }
+
+    /* ---------- Línea temporal ---------- */
+    .timeline {
+      position: relative;
+      display: grid;
+      gap: 1.1rem;
+      padding-left: 2rem;
+    }
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: .55rem;
+      top: .6rem;
+      bottom: .6rem;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--gold), var(--line));
+    }
+    .fase {
+      position: relative;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity .7s var(--ease), transform .7s var(--ease), border-color .3s var(--ease);
+    }
+    .fase.in-view { opacity: 1; transform: none; }
+    .fase::before {
+      content: "";
+      position: absolute;
+      left: -1.71rem;
+      top: 1.45rem;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 0 3px var(--ivory);
+    }
+    .fase:hover { border-color: var(--gold-deep); }
+
+    .fase-head {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      width: 100%;
+      padding: 1.1rem 1.2rem;
+      font: inherit;
+      text-align: left;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+    .fase-head:focus-visible { outline: 2px solid var(--gold-deep); outline-offset: -2px; }
+    .fase-ico { flex: none; color: var(--gold-deep); }
+    .fase-num {
+      flex: none;
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: transparent;
+      -webkit-text-stroke: 1px var(--gold-deep);
+      min-width: 1.9rem;
+    }
+    .fase-titulo { flex: 1; min-width: 0; }
+    .fase-titulo h3 { font-size: 1.25rem; color: var(--ink); }
+    .fase-dur {
+      display: inline-block;
+      margin-top: .15rem;
+      font-size: .76rem;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .badge-critico {
+      display: inline-flex;
+      align-items: center;
+      gap: .35rem;
+      margin-left: .6rem;
+      padding: .18rem .55rem;
+      font-size: .64rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: #7A2F24;
+      background: rgba(163, 58, 46, .12);
+      border: 1px solid rgba(163, 58, 46, .35);
+    }
+    .fase-chevron {
+      flex: none;
+      color: var(--gold-deep);
+      transition: transform .35s var(--ease);
+    }
+    .fase-head[aria-expanded="true"] .fase-chevron { transform: rotate(180deg); }
+
+    .fase-body {
+      display: none;
+      padding: 0 1.2rem 1.3rem;
+      border-top: 1px solid var(--line);
+    }
+    .fase-head[aria-expanded="true"] + .fase-body { display: block; }
+    .fase-body h4 {
+      font-family: var(--sans);
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold-deep);
+      margin: 1.2rem 0 .5rem;
+    }
+    .fase-body ul { list-style: none; display: grid; gap: .4rem; }
+    .fase-body li {
+      font-size: .93rem;
+      color: var(--text);
+      padding-left: 1.1rem;
+      position: relative;
+    }
+    .fase-body li::before {
+      content: "—";
+      position: absolute;
+      left: 0;
+      color: var(--gold-deep);
+    }
+    .fase-body .de-usted {
+      margin-top: .2rem;
+      padding: .8rem 1rem;
+      background: rgba(201, 164, 92, .12);
+      border-left: 2px solid var(--gold-deep);
+    }
+    .de-usted li { color: var(--text); font-weight: 600; }
+
+    /* ---------- Escritorio: línea horizontal ---------- */
+    @media (min-width: 1024px) {
+      .timeline {
+        grid-auto-flow: column;
+        grid-auto-columns: minmax(0, 1fr);
+        gap: 1.1rem;
+        padding-left: 0;
+        padding-top: 2rem;
+        align-items: start;
+      }
+      .timeline::before {
+        left: .6rem;
+        right: .6rem;
+        top: .55rem;
+        bottom: auto;
+        width: auto;
+        height: 1px;
+        background: linear-gradient(to right, var(--gold), var(--line));
+      }
+      .fase::before {
+        left: 1.15rem;
+        top: -1.72rem;
+        box-shadow: 0 0 0 3px var(--ivory);
+      }
+      .fase-head { flex-wrap: wrap; gap: .6rem 1rem; }
+    }
+
+    .tool-disclaimer {
+      margin-top: clamp(2rem, 5vw, 3rem);
+      padding: 1.1rem 1.3rem;
+      font-size: .85rem;
+      line-height: 1.65;
+      color: var(--muted);
+      background: rgba(201, 164, 92, .1);
+      border-left: 3px solid var(--gold-deep);
+      max-width: 78ch;
+    }
+
+    .otras-tools { background: var(--paper); border-top: 1px solid var(--line); padding-block: 2.4rem; }
+    .otras-tools .container { display: flex; flex-wrap: wrap; align-items: baseline; gap: 1rem 2rem; }
+    .otras-tools strong { font-family: var(--serif); font-size: 1.3rem; font-weight: 600; color: var(--ink); }
+    .otras-tools a {
+      font-size: .82rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+      text-decoration: none; color: var(--gold-deep); transition: color .3s var(--ease);
+    }
+    .otras-tools a:hover { color: var(--ink); }
+
+    @media (prefers-reduced-motion: reduce) {
+      .fase { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+
+  <header class="site-header" id="cabecera">
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="Melgar y Asociados — inicio">
+        <span class="brand-mark" aria-hidden="true">M</span>
+        <span class="brand-text">
+          <span class="brand-name">Melgar <em>&amp;</em> Asociados</span>
+          <span class="brand-tag">Despacho de Abogados · Madrid</span>
+        </span>
+      </a>
+      <nav class="main-nav" id="menu-principal" aria-label="Navegación principal">
+        <ul>
+          <li><a href="index.html#despacho">El despacho</a></li>
+          <li class="has-submenu">
+            <button type="button" class="submenu-toggle" aria-expanded="false" aria-controls="submenu-areas">
+              Áreas de práctica
+              <svg class="chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <ul class="submenu" id="submenu-areas">
+              <li><a href="derecho-penal.html"><span class="submenu-num" aria-hidden="true">I</span>Derecho Penal</a></li>
+              <li><a href="derecho-civil.html"><span class="submenu-num" aria-hidden="true">II</span>Derecho Civil</a></li>
+              <li><a href="derecho-laboral.html"><span class="submenu-num" aria-hidden="true">III</span>Derecho Laboral</a></li>
+              <li><a href="familia-matrimonio.html"><span class="submenu-num" aria-hidden="true">IV</span>Familia y matrimonio</a></li>
+              <li><a href="derecho-mercantil.html"><span class="submenu-num" aria-hidden="true">V</span>Derecho Mercantil</a></li>
+              <li><a href="negligencias-accidentes.html"><span class="submenu-num" aria-hidden="true">VI</span>Negligencias y accidentes</a></li>
+              <li class="submenu-all"><a href="index.html#areas">Ver todas las áreas<span aria-hidden="true"> →</span></a></li>
+            </ul>
+          </li>
+          <li><a href="index.html#equipo">Equipo</a></li>
+          <li><a href="index.html#testimonios">Testimonios</a></li>
+          <li><a href="index.html#contacto">Contacto</a></li>
+        </ul>
+        <div class="nav-cta-mobile">
+          <a class="btn btn-gold" href="index.html#contacto">Pedir cita</a>
+          <a class="nav-phone" href="tel:+34910000000">+34 910 000 000</a>
+        </div>
+      </nav>
+      <div class="header-actions">
+        <a class="header-phone" href="tel:+34910000000">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>+34 910 000 000</span>
+        </a>
+        <a class="btn btn-gold btn-header" href="index.html#contacto">Pedir cita</a>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu-principal" aria-label="Abrir menú">
+          <span class="menu-bar" aria-hidden="true"></span>
+          <span class="menu-bar" aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="contenido">
+
+    <section class="area-hero">
+      <span class="area-hero-num" aria-hidden="true">¶</span>
+      <div class="container">
+        <nav class="breadcrumb reveal" aria-label="Ruta de navegación">
+          <a href="index.html">Inicio</a><span class="sep" aria-hidden="true">/</span>
+          <span aria-current="page">Fases del procedimiento</span>
+        </nav>
+        <h1>
+          <span class="hero-eyebrow reveal" style="--d:.08s">Herramienta gratuita</span>
+          <span class="area-display reveal" style="--d:.16s">Su procedimiento, <em>paso a paso.</em></span>
+        </h1>
+        <p class="area-hero-sub reveal" style="--d:.26s">
+          La mayor fuente de ansiedad en un pleito es no saber qué viene después.
+          Elija su tipo de procedimiento y vea cada fase: qué hacemos nosotros,
+          qué necesitaremos de usted y cuánto suele durar.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="proc-tabs" role="tablist" aria-label="Tipo de procedimiento" id="proc-tabs"></div>
+        <div class="proc-total" id="proc-total"></div>
+        <div class="timeline" id="timeline"></div>
+
+        <p class="tool-disclaimer">
+          <strong>Aviso:</strong> las duraciones son estimaciones orientativas basadas en
+          la experiencia del despacho y en la carga habitual de los juzgados de Madrid.
+          Cada procedimiento tiene sus particularidades y ningún dato de esta página
+          constituye promesa de plazo ni de resultado.
+        </p>
+      </div>
+    </section>
+
+    <nav class="otras-tools" aria-label="Otras herramientas">
+      <div class="container">
+        <strong>Otras herramientas:</strong>
+        <a href="calculadora-plazos.html">¿Está a tiempo de reclamar?</a>
+        <a href="checklist-consulta.html">Prepare su consulta</a>
+        <a href="simulador-honorarios.html">Estime sus honorarios</a>
+      </div>
+    </nav>
+
+    <section class="cta-band" aria-label="Llamada a la acción">
+      <div class="container cta-inner">
+        <div class="reveal">
+          <h2>¿Listo para dar<br><em>el primer paso?</em></h2>
+          <p>En la primera consulta le explicamos el camino completo de su caso concreto.</p>
+        </div>
+        <div class="cta-actions reveal" style="--d:.12s">
+          <a class="cta-phone" href="tel:+34910000000">+34 910 000 000</a>
+          <a class="btn btn-gold btn-lg" href="index.html#contacto">Consultar mi caso</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="index.html">
+          <span class="brand-mark" aria-hidden="true">M</span>
+          <span class="brand-text">
+            <span class="brand-name">Melgar <em>&amp;</em> Asociados</span>
+            <span class="brand-tag">Despacho de Abogados · Madrid</span>
+          </span>
+        </a>
+        <p>Defensa penal, civil, laboral y de familia ante los tribunales de Madrid. Oficio, criterio y trato directo desde la primera consulta.</p>
+      </div>
+      <nav class="footer-col" aria-label="Áreas de práctica">
+        <h3>Áreas</h3>
+        <ul>
+          <li><a href="derecho-penal.html">Derecho Penal</a></li>
+          <li><a href="derecho-civil.html">Derecho Civil</a></li>
+          <li><a href="derecho-laboral.html">Derecho Laboral</a></li>
+          <li><a href="familia-matrimonio.html">Familia y matrimonio</a></li>
+          <li><a href="derecho-mercantil.html">Derecho Mercantil</a></li>
+          <li><a href="negligencias-accidentes.html">Negligencias y accidentes</a></li>
+        </ul>
+      </nav>
+      <nav class="footer-col" aria-label="Herramientas">
+        <h3>Herramientas</h3>
+        <ul>
+          <li><a href="calculadora-plazos.html">Calculadora de plazos</a></li>
+          <li><a href="timeline-proceso.html">Fases del procedimiento</a></li>
+          <li><a href="checklist-consulta.html">Prepare su consulta</a></li>
+          <li><a href="simulador-honorarios.html">Simulador de honorarios</a></li>
+        </ul>
+      </nav>
+      <nav class="footer-col" aria-label="Información legal">
+        <h3>Legal</h3>
+        <ul>
+          <li><a href="aviso-legal.html">Aviso legal</a></li>
+          <li><a href="privacidad.html">Política de privacidad</a></li>
+          <li><a href="cookies.html">Política de cookies</a></li>
+          <li><button type="button" class="link-btn" id="gestionar-cookies">Gestionar cookies</button></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="container footer-bottom">
+      <p>© <span id="anio">2026</span> Melgar &amp; Asociados. Todos los derechos reservados.</p>
+      <p class="footer-icam">Abogados colegiados · Ilustre Colegio de la Abogacía de Madrid <span class="todo-data">(n.º —)</span></p>
+    </div>
+  </footer>
+
+  <div class="cookie-banner" id="cookie-banner" role="dialog" aria-modal="false" aria-labelledby="cookie-titulo" hidden>
+    <div class="cookie-inner">
+      <div class="cookie-text">
+        <h2 id="cookie-titulo">Su privacidad, primero</h2>
+        <p>
+          Utilizamos cookies propias y de terceros con fines analíticos. Puede aceptarlas
+          o rechazarlas todas; la web funciona igual en ambos casos.
+          <a href="cookies.html">Más información</a>.
+        </p>
+      </div>
+      <div class="cookie-actions">
+        <button type="button" class="btn-cookie" id="cookies-rechazar">Rechazar todo</button>
+        <button type="button" class="btn-cookie" id="cookies-aceptar">Aceptar todo</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/main.js?v=2" defer></script>
+
+  <script>
+  /* ============================================================
+     FASES DEL PROCEDIMIENTO
+     ------------------------------------------------------------
+     ⚠ PARA EL DESPACHO: las duraciones de cada fase son
+     PLACEHOLDER y deben revisarse una a una antes de publicar.
+     Cada fase admite:
+       nombre, durMin/durMax (en semanas), critico (bool),
+       icono (clave del objeto ICONOS),
+       hacemos: [2-3 puntos], necesitamos: [1-2 puntos]
+     ============================================================ */
+  (function () {
+    'use strict';
+
+    var ICONOS = {
+      reunion:  '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 10h8M8 14h5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M21 12a9 9 0 1 1-4.2-7.6L21 3l-.8 4.4A8.96 8.96 0 0 1 21 12z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>',
+      papeles:  '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 3h7l4 4v14H7z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M14 3v4h4M10 12h5M10 16h5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>',
+      balanza:  '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 4v16M5 20h14M12 6l-5 2 5-2 5 2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 13a3 3 0 0 0 6 0L7 8zM14 13a3 3 0 0 0 6 0l-3-5z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>',
+      firma:    '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m14 5 5 5L8 21H3v-5z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M12 7l5 5" stroke="currentColor" stroke-width="1.7"/></svg>',
+      juzgado:  '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 21h18M5 21V10m14 11V10M3 10h18L12 3z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M9 14v4m6-4v4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>',
+      reloj:    '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7"/><path d="M12 7.5V12l3 2.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>',
+      acuerdo:  '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 12 3.5 8.5a2.1 2.1 0 0 1 3-3L12 11m0 0 5.5-5.5a2.1 2.1 0 0 1 3 3L14 15m-2-4 4.5 4.5M9 17l2 2m-4.5-4.5 2 2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+    };
+
+    var PROCEDIMIENTOS = {
+      divorcio: {
+        etiqueta: 'Divorcio de mutuo acuerdo',
+        fases: [
+          { nombre: 'Primera reunión y estrategia', durMin: 1, durMax: 2, icono: 'reunion', // VERIFICAR CON EL DESPACHO
+            hacemos: ['Escuchamos su situación y objetivos', 'Le explicamos opciones, plazos y costes reales', 'Fijamos la estrategia del convenio'],
+            necesitamos: ['Certificado de matrimonio y, si hay hijos, de nacimiento'] },
+          { nombre: 'Negociación del convenio regulador', durMin: 2, durMax: 6, icono: 'acuerdo', // VERIFICAR CON EL DESPACHO
+            hacemos: ['Redactamos el convenio (custodia, uso de vivienda, pensiones)', 'Negociamos los puntos de fricción con la otra parte', 'Ajustamos el texto hasta el acuerdo final'],
+            necesitamos: ['Documentación económica: nóminas, hipoteca, gastos de los hijos'] },
+          { nombre: 'Firma y presentación de la demanda', durMin: 1, durMax: 2, icono: 'firma', // VERIFICAR CON EL DESPACHO
+            hacemos: ['Preparamos demanda conjunta y poderes', 'Presentamos ante el juzgado competente'],
+            necesitamos: ['Firma del convenio y del poder ante notario o en el juzgado'] },
+          { nombre: 'Ratificación ante el juzgado', durMin: 4, durMax: 10, icono: 'juzgado', critico: true, // VERIFICAR CON EL DESPACHO
+            hacemos: ['Le acompañamos el día de la ratificación', 'Resolvemos cualquier requerimiento del juzgado'],
+            necesitamos: ['Su asistencia personal el día señalado'] },
+          { nombre: 'Sentencia e inscripción', durMin: 2, durMax: 6, icono: 'papeles', // VERIFICAR CON EL DESPACHO
+            hacemos: ['Revisamos la sentencia', 'Gestionamos la inscripción en el Registro Civil'],
+            necesitamos: ['Nada más: le entregamos todo archivado y explicado'] }
+        ]
+      },
+      despido: {
+        etiqueta: 'Despido',
+        fases: [
+          { nombre: 'Análisis urgente de la carta de despido', durMin: 1, durMax: 1, icono: 'reunion', critico: true, // VERIFICAR CON EL DESPACHO
+            hacemos: ['Estudiamos la carta y su contrato el mismo día', 'Calculamos su indemnización correcta', 'Le decimos si conviene impugnar'],
+            necesitamos: ['Carta de despido, contrato y últimas nóminas — sin demora: el plazo es de 20 días hábiles'] },
+          { nombre: 'Papeleta de conciliación (SMAC)', durMin: 1, durMax: 3, icono: 'papeles', // VERIFICAR CON EL DESPACHO
+            hacemos: ['Redactamos y presentamos la papeleta', 'Preparamos la posición negociadora'],
+            necesitamos: ['Confirmación de los hechos y fechas clave'] },
+          { nombre: 'Acto de conciliación', durMin: 2, durMax: 6, icono: 'acuerdo', // VERIFICAR CON EL DESPACHO
+            hacemos: ['Negociamos con la empresa en el acto', 'Valoramos con usted cualquier oferta en el momento'],
+            necesitamos: ['Su asistencia (o poder para representarle)'] },
+          { nombre: 'Demanda ante el Juzgado de lo Social', durMin: 1, durMax: 2, icono: 'firma', // VERIFICAR CON EL DESPACHO
+            hacemos: ['Presentamos la demanda con toda la prueba', 'Proponemos testigos y documental'],
+            necesitamos: ['Cualquier prueba adicional: correos, mensajes, testigos'] },
+          { nombre: 'Juicio y sentencia', durMin: 12, durMax: 40, icono: 'juzgado', // VERIFICAR CON EL DESPACHO
+            hacemos: ['Preparamos el juicio con usted, pregunta a pregunta', 'Le defendemos en la vista', 'Analizamos la sentencia y los recursos posibles'],
+            necesitamos: ['Su declaración preparada y su asistencia a la vista'] }
+        ]
+      },
+      cantidad: {
+        etiqueta: 'Reclamación de cantidad',
+        fases: [
+          { nombre: 'Estudio de viabilidad y solvencia', durMin: 1, durMax: 2, icono: 'reunion', // VERIFICAR CON EL DESPACHO
+            hacemos: ['Analizamos contratos, facturas y comunicaciones', 'Verificamos la solvencia del deudor', 'Le damos un veredicto honesto: merece o no la pena'],
+            necesitamos: ['Facturas, contratos y cualquier reconocimiento de deuda'] },
+          { nombre: 'Reclamación extrajudicial', durMin: 2, durMax: 4, icono: 'papeles', // VERIFICAR CON EL DESPACHO
+            hacemos: ['Enviamos requerimiento fehaciente (burofax)', 'Negociamos pago o plan de pagos'],
+            necesitamos: ['Paciencia estratégica: muchas deudas se cobran aquí'] },
+          { nombre: 'Demanda o proceso monitorio', durMin: 1, durMax: 3, icono: 'firma', // VERIFICAR CON EL DESPACHO
+            hacemos: ['Elegimos el cauce procesal más rápido para su importe', 'Presentamos la petición con la documental completa'],
+            necesitamos: ['Originales de la documentación de la deuda'] },
+          { nombre: 'Fase judicial', durMin: 12, durMax: 32, icono: 'juzgado', // VERIFICAR CON EL DESPACHO
+            hacemos: ['Respondemos a la oposición del deudor si la hay', 'Le representamos en la vista'],
+            necesitamos: ['Disponibilidad puntual para aclarar hechos'] },
+          { nombre: 'Ejecución y cobro', durMin: 8, durMax: 24, icono: 'balanza', // VERIFICAR CON EL DESPACHO
+            hacemos: ['Localizamos bienes y solicitamos embargos', 'Perseguimos el cobro efectivo, no solo la sentencia'],
+            necesitamos: ['Cualquier pista sobre bienes o cuentas del deudor'] }
+        ]
+      },
+      herencia: {
+        etiqueta: 'Herencia',
+        fases: [
+          { nombre: 'Reunión inicial y certificados', durMin: 2, durMax: 4, icono: 'reunion', // VERIFICAR CON EL DESPACHO
+            hacemos: ['Pedimos certificados de defunción, últimas voluntades y seguros', 'Localizamos el testamento o abrimos la vía intestada'],
+            necesitamos: ['Certificado de defunción y DNI del fallecido'] },
+          { nombre: 'Inventario del caudal hereditario', durMin: 3, durMax: 8, icono: 'papeles', // VERIFICAR CON EL DESPACHO
+            hacemos: ['Reunimos títulos de propiedad, cuentas y deudas', 'Valoramos los bienes y detectamos riesgos'],
+            necesitamos: ['Escrituras, extractos bancarios y recibos que conserve'] },
+          { nombre: 'Negociación entre herederos', durMin: 2, durMax: 12, icono: 'acuerdo', critico: true, // VERIFICAR CON EL DESPACHO
+            hacemos: ['Proponemos un cuaderno particional equilibrado', 'Mediamos para evitar la vía judicial, más cara y lenta'],
+            necesitamos: ['Su posición clara sobre qué bienes le interesan'] },
+          { nombre: 'Escritura y liquidación de impuestos', durMin: 2, durMax: 6, icono: 'firma', critico: true, // VERIFICAR CON EL DESPACHO
+            hacemos: ['Preparamos la escritura de aceptación y partición', 'Liquidamos el Impuesto de Sucesiones y la plusvalía en plazo'],
+            necesitamos: ['Firma ante notario en la fecha acordada'] },
+          { nombre: 'Cambio de titularidades', durMin: 4, durMax: 12, icono: 'balanza', // VERIFICAR CON EL DESPACHO
+            hacemos: ['Inscribimos inmuebles en el Registro de la Propiedad', 'Gestionamos el desbloqueo de cuentas bancarias'],
+            necesitamos: ['Nada más: le entregamos el expediente completo'] }
+        ]
+      }
+    };
+
+    var $ = function (sel, ctx) { return (ctx || document).querySelector(sel); };
+    var $$ = function (sel, ctx) { return Array.prototype.slice.call((ctx || document).querySelectorAll(sel)); };
+    var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    var tabsWrap = $('#proc-tabs');
+    var totalWrap = $('#proc-total');
+    var timeline = $('#timeline');
+    var claves = Object.keys(PROCEDIMIENTOS);
+
+    /* ---------- Pestañas ---------- */
+    claves.forEach(function (clave, i) {
+      var tab = document.createElement('button');
+      tab.type = 'button';
+      tab.className = 'proc-tab';
+      tab.id = 'tab-' + clave;
+      tab.setAttribute('role', 'tab');
+      tab.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
+      tab.setAttribute('aria-controls', 'timeline');
+      tab.tabIndex = i === 0 ? 0 : -1;
+      tab.textContent = PROCEDIMIENTOS[clave].etiqueta;
+      tab.addEventListener('click', function () { seleccionar(clave); });
+      tabsWrap.appendChild(tab);
+    });
+
+    /* Navegación por teclado en el tablist */
+    tabsWrap.addEventListener('keydown', function (e) {
+      if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+      var tabs = $$('.proc-tab', tabsWrap);
+      var idx = tabs.indexOf(document.activeElement);
+      if (idx === -1) return;
+      e.preventDefault();
+      var next = e.key === 'ArrowRight' ? (idx + 1) % tabs.length : (idx - 1 + tabs.length) % tabs.length;
+      tabs[next].focus();
+      tabs[next].click();
+    });
+
+    function seleccionar(clave) {
+      $$('.proc-tab', tabsWrap).forEach(function (t) {
+        var activa = t.id === 'tab-' + clave;
+        t.setAttribute('aria-selected', String(activa));
+        t.tabIndex = activa ? 0 : -1;
+      });
+      render(clave);
+    }
+
+    /* ---------- Render de la línea temporal ---------- */
+    function render(clave) {
+      var proc = PROCEDIMIENTOS[clave];
+      var totMin = 0, totMax = 0;
+      proc.fases.forEach(function (f) { totMin += f.durMin; totMax += f.durMax; });
+
+      function fmt(sem) {
+        if (sem < 5) return sem + (sem === 1 ? ' semana' : ' semanas');
+        var meses = Math.round(sem / 4.33 * 10) / 10;
+        meses = (meses % 1 === 0) ? meses.toFixed(0) : meses.toFixed(1).replace('.', ',');
+        return meses + ' meses';
+      }
+      totalWrap.innerHTML =
+        '<strong>' + fmt(totMin) + ' – ' + fmt(totMax) + '</strong>' +
+        '<span>duración total estimada de un ' + proc.etiqueta.toLowerCase() +
+        ' (' + proc.fases.length + ' fases) · orientativo</span>';
+
+      timeline.innerHTML = '';
+      proc.fases.forEach(function (f, i) {
+        var art = document.createElement('article');
+        art.className = 'fase';
+        var bodyId = 'fase-body-' + clave + '-' + i;
+        var durTxt = f.durMin === f.durMax
+          ? f.durMin + (f.durMin === 1 ? ' semana' : ' semanas')
+          : f.durMin + '–' + f.durMax + ' semanas';
+
+        art.innerHTML =
+          '<button type="button" class="fase-head" aria-expanded="false" aria-controls="' + bodyId + '">' +
+            '<span class="fase-num" aria-hidden="true">' + String(i + 1).padStart(2, '0') + '</span>' +
+            '<span class="fase-ico" aria-hidden="true">' + (ICONOS[f.icono] || ICONOS.papeles) + '</span>' +
+            '<span class="fase-titulo"><h3>' + f.nombre + '</h3>' +
+              '<span class="fase-dur">' + durTxt + '</span>' +
+              (f.critico ? '<span class="badge-critico">Punto crítico</span>' : '') +
+            '</span>' +
+            '<svg class="fase-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
+          '</button>' +
+          '<div class="fase-body" id="' + bodyId + '">' +
+            '<h4>Qué hacemos nosotros</h4>' +
+            '<ul>' + f.hacemos.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>' +
+            '<h4>Qué necesitamos de usted</h4>' +
+            '<ul class="de-usted">' + f.necesitamos.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>' +
+          '</div>';
+
+        var head = $('.fase-head', art);
+        head.addEventListener('click', function () {
+          head.setAttribute('aria-expanded', head.getAttribute('aria-expanded') !== 'true');
+        });
+        timeline.appendChild(art);
+      });
+
+      /* Animación de entrada */
+      var fases = $$('.fase', timeline);
+      if (reducedMotion || !('IntersectionObserver' in window)) {
+        fases.forEach(function (el) { el.classList.add('in-view'); });
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+      fases.forEach(function (el, i) {
+        el.style.transitionDelay = (i * 0.08) + 's';
+        io.observe(el);
+      });
+    }
+
+    seleccionar(claves[0]);
+  })();
+  </script>
+
+  <!-- WhatsApp flotante — TODO: sustituir número provisional por el real -->
+  <a class="whatsapp-float" href="https://wa.me/34910000000?text=Hola%2C%20me%20gustar%C3%ADa%20consultar%20un%20asunto%20legal%20con%20el%20despacho." target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+  </a>
+
+</body>
+</html>

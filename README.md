@@ -7,6 +7,10 @@ HTML + CSS + JavaScript vanilla, lista para desplegar en cualquier hosting.
 
 ```
 index.html                    Landing principal
+calculadora-plazos.html       Herramienta — ¿Aún está a tiempo de reclamar?
+timeline-proceso.html         Herramienta — Fases del procedimiento
+checklist-consulta.html       Herramienta — Prepare su consulta (documentos)
+simulador-honorarios.html     Herramienta — Simulador de honorarios
 derecho-penal.html            Área I   — Derecho Penal
 derecho-civil.html            Área II  — Derecho Civil
 derecho-laboral.html          Área III — Derecho Laboral
@@ -57,3 +61,8 @@ incluido activa HTTPS forzado, cabeceras de seguridad, compresión y caché).
 - [ ] Backend del formulario de contacto (repetir validación y honeypot en servidor)
 - [ ] ID real de GA4 en el script comentado (Consent Mode v2 ya configurado)
 - [ ] Revisión de textos legales por un abogado
+- [ ] **Herramientas** — validar por un abogado ANTES de publicar:
+  - `calculadora-plazos.html`: array `PLAZOS` (plazos y régimen de cómputo) y `FESTIVOS`
+  - `timeline-proceso.html`: duraciones de cada fase (objeto `PROCEDIMIENTOS`)
+  - `checklist-consulta.html`: listas de documentos (objeto `REGLAS`)
+  - `simulador-honorarios.html`: TODOS los importes del objeto `TARIFAS`
