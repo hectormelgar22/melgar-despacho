@@ -51,9 +51,4 @@
     <priority>0.6</priority>
     <changefreq>monthly</changefreq>
   </url>
-  <url>
-    <loc>https://www.melgarabogados.es/simulador-honorarios.html</loc>
-    <priority>0.6</priority>
-    <changefreq>monthly</changefreq>
-  </url>
 </urlset>

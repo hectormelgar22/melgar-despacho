@@ -41,7 +41,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=2">
+  <link rel="stylesheet" href="css/styles.css?v=3">
 
   <style>
     /* ============================================================
@@ -189,24 +189,24 @@
     .check-item {
       display: flex;
       align-items: flex-start;
-      gap: .8rem;
-      padding: .9rem 1rem;
+      gap: 1rem;
+      padding: .95rem 1.1rem;
       background: var(--ivory);
       border: 1px solid var(--line);
     }
-    .check-item input[type="checkbox"] {
+    .check-num {
       flex: none;
-      width: 19px;
-      height: 19px;
-      margin-top: .15rem;
-      accent-color: var(--gold-deep);
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      font-weight: 600;
+      line-height: 1.35;
+      color: transparent;
+      -webkit-text-stroke: 1px var(--gold-deep);
     }
-    .check-item label { font-size: .95rem; font-weight: 600; color: var(--text); cursor: pointer; }
-    .check-item small { display: block; margin-top: .2rem; font-size: .82rem; font-weight: 400; color: var(--muted); }
-    .check-item.done label { text-decoration: line-through; text-decoration-color: var(--gold-deep); opacity: .75; }
+    .check-texto strong { display: block; font-size: .96rem; font-weight: 600; color: var(--text); }
+    .check-texto small { display: block; margin-top: .2rem; font-size: .84rem; color: var(--muted); }
 
     .check-actions { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 1.8rem; }
-    .check-saved { margin-top: .8rem; font-size: .88rem; font-weight: 600; color: #1E5B36; }
 
     .tool-disclaimer {
       margin-top: clamp(2rem, 5vw, 3rem);
@@ -233,7 +233,7 @@
     .print-head { display: none; }
     @media print {
       body { background: #fff; }
-      .site-header, .area-hero, .wizard-progress, .check-actions, .check-saved,
+      .site-header, .area-hero, .wizard-progress, .check-actions,
       .otras-tools, .cta-band, .site-footer, .cookie-banner, .whatsapp-float,
       .skip-link, .tool-disclaimer { display: none !important; }
       .wizard { border: none; padding: 0; max-width: none; }
@@ -251,7 +251,6 @@
       }
       .print-head span { display: block; font-size: 9pt; color: #55616E; margin-top: .15cm; }
       .check-item { border: 1px solid #ccc; break-inside: avoid; }
-      .check-item input { accent-color: #7A6027; }
     }
   </style>
 </head>
@@ -377,7 +376,6 @@
         <strong>Otras herramientas:</strong>
         <a href="calculadora-plazos.html">¿Está a tiempo de reclamar?</a>
         <a href="timeline-proceso.html">Fases de su procedimiento</a>
-        <a href="simulador-honorarios.html">Estime sus honorarios</a>
       </div>
     </nav>
 
@@ -424,7 +422,6 @@
           <li><a href="calculadora-plazos.html">Calculadora de plazos</a></li>
           <li><a href="timeline-proceso.html">Fases del procedimiento</a></li>
           <li><a href="checklist-consulta.html">Prepare su consulta</a></li>
-          <li><a href="simulador-honorarios.html">Simulador de honorarios</a></li>
         </ul>
       </nav>
       <nav class="footer-col" aria-label="Información legal">
@@ -460,7 +457,7 @@
     </div>
   </div>
 
-  <script src="js/main.js?v=2" defer></script>
+  <script src="js/main.js?v=3" defer></script>
 
   <script>
   /* ============================================================
@@ -484,24 +481,58 @@
       { id: 'familia', nombre: 'Familia', desc: 'Divorcios, custodias, pensiones',
         icono: '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="9" cy="8" r="3" stroke="currentColor" stroke-width="1.7"/><circle cx="16.5" cy="9.5" r="2.2" stroke="currentColor" stroke-width="1.7"/><path d="M3.5 20c.6-3.2 2.8-5 5.5-5s4.9 1.8 5.5 5M14.5 15.4c2.3.2 4 1.7 4.6 4.6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>' },
       { id: 'herencias', nombre: 'Herencias', desc: 'Testamentos, particiones, impuestos',
-        icono: '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 3h7l4 4v14H7z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M14 3v4h4M10 12h5M10 16h5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>' }
+        icono: '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 3h7l4 4v14H7z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M14 3v4h4M10 12h5M10 16h5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>' },
+      { id: 'contratos', nombre: 'Contratos y deudas', desc: 'Impagos, alquileres, consumo y banca',
+        icono: '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 4v16M5 20h14M12 6l-5 2 5-2 5 2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 13a3 3 0 0 0 6 0L7 8zM14 13a3 3 0 0 0 6 0l-3-5z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>' },
+      { id: 'accidentes', nombre: 'Accidentes y salud', desc: 'Tráfico, negligencias, incapacidades',
+        icono: '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21s7-5 7-10.5A7 7 0 0 0 5 10.5C5 16 12 21 12 21z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M12 7.5v5M9.5 10h5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>' },
+      { id: 'penal', nombre: 'Penal', desc: 'Denuncias, detenciones, citaciones',
+        icono: '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2 4 5.5v5.1c0 4.9 3.4 9.5 8 10.9 4.6-1.4 8-6 8-10.9V5.5L12 2z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="m8.8 12 2.2 2.2 4.2-4.4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>' }
     ];
 
     var SITUACIONES = { // VERIFICAR
       laboral: [
         { id: 'despido', texto: 'Me han despedido o creo que van a despedirme' },
-        { id: 'impago', texto: 'Me deben salarios u horas extra' },
-        { id: 'acoso', texto: 'Sufro acoso o presiones en el trabajo' }
+        { id: 'impago', texto: 'Me deben salarios, horas extra o el finiquito' },
+        { id: 'acoso', texto: 'Sufro acoso o presiones en el trabajo' },
+        { id: 'modificacion', texto: 'Me han cambiado el horario, el sueldo o las funciones' },
+        { id: 'sancion', texto: 'Me han sancionado o abierto un expediente' }
       ],
       familia: [
         { id: 'divorcio-acuerdo', texto: 'Queremos divorciarnos de mutuo acuerdo' },
         { id: 'divorcio-contencioso', texto: 'Quiero divorciarme y no hay acuerdo' },
-        { id: 'pension', texto: 'Quiero modificar o reclamar una pensión' }
+        { id: 'pension', texto: 'Quiero modificar o reclamar una pensión' },
+        { id: 'custodia', texto: 'Hay un conflicto por la custodia o las visitas' },
+        { id: 'incumplimiento', texto: 'La otra parte no cumple la sentencia o el convenio' }
       ],
       herencias: [
         { id: 'aceptar', texto: 'Ha fallecido un familiar y hay que tramitar la herencia' },
         { id: 'conflicto', texto: 'Hay conflicto entre herederos' },
-        { id: 'testamento', texto: 'Quiero planificar mi testamento' }
+        { id: 'testamento', texto: 'Quiero planificar mi testamento' },
+        { id: 'legitima', texto: 'Creo que me han dejado fuera o me corresponde más' },
+        { id: 'deudas-herencia', texto: 'La herencia puede tener más deudas que bienes' }
+      ],
+      contratos: [
+        { id: 'me-deben', texto: 'Me deben dinero por un contrato o una factura' },
+        { id: 'me-reclaman', texto: 'Me reclaman una deuda que no reconozco' },
+        { id: 'alquiler-propietario', texto: 'Soy propietario y mi inquilino no paga' },
+        { id: 'alquiler-inquilino', texto: 'Soy inquilino y tengo un problema con el arrendador' },
+        { id: 'banca', texto: 'Creo que mi banco me ha cobrado cláusulas abusivas' },
+        { id: 'compra-defectuosa', texto: 'Compré algo defectuoso o un servicio no prestado' }
+      ],
+      accidentes: [
+        { id: 'trafico', texto: 'He tenido un accidente de tráfico' },
+        { id: 'negligencia', texto: 'Creo que he sufrido una negligencia médica' },
+        { id: 'laboral-accidente', texto: 'He sufrido un accidente en el trabajo' },
+        { id: 'incapacidad', texto: 'Me han denegado una incapacidad permanente' },
+        { id: 'caida', texto: 'Me he caído o lesionado en la vía pública o en un local' }
+      ],
+      penal: [
+        { id: 'denunciado', texto: 'Me han denunciado o citado a declarar' },
+        { id: 'detenido', texto: 'Me han detenido o han detenido a un familiar' },
+        { id: 'quiero-denunciar', texto: 'Quiero denunciar unos hechos' },
+        { id: 'juicio', texto: 'Tengo señalado un juicio' },
+        { id: 'antecedentes', texto: 'Quiero cancelar mis antecedentes penales' }
       ]
     };
 
@@ -518,6 +549,18 @@
       herencias: [
         { id: 'testamento-si', texto: '¿Sabe si existe testamento?' },
         { id: 'inmuebles', texto: '¿Hay inmuebles en la herencia?' }
+      ],
+      contratos: [
+        { id: 'contrato-escrito', texto: '¿Existe contrato o documento firmado?' },
+        { id: 'reclamado-antes', texto: '¿Ha reclamado ya por escrito a la otra parte?' }
+      ],
+      accidentes: [
+        { id: 'parte-medico', texto: '¿Fue atendido por un médico y conserva los informes?' },
+        { id: 'baja-laboral', texto: '¿Ha estado de baja laboral por este motivo?' }
+      ],
+      penal: [
+        { id: 'citacion', texto: '¿Ha recibido alguna citación o notificación por escrito?' },
+        { id: 'ya-declaro', texto: '¿Ha declarado ya ante la policía o el juzgado?' }
       ]
     };
 
@@ -547,6 +590,18 @@
         { t: 'Mensajes, correos o notas relevantes', ayuda: 'Haga capturas y guarde originales; no los borre', nivel: 'imprescindible' },
         { t: 'Partes médicos o de baja', ayuda: 'Su centro de salud o mutua', nivel: 'recomendable' }
       ],
+      'modificacion': [
+        { t: 'Comunicación de la empresa con los cambios', ayuda: 'Carta, correo o notificación en el portal del empleado', nivel: 'imprescindible' },
+        { t: 'Contrato de trabajo y anexos', ayuda: 'Su copia o solicítelo a la empresa', nivel: 'imprescindible' },
+        { t: 'Nóminas anteriores y posteriores al cambio', ayuda: 'Para acreditar el perjuicio económico', nivel: 'imprescindible' },
+        { t: 'Convenio colectivo aplicable', ayuda: 'Le ayudamos a localizarlo; figura en la nómina', nivel: 'recomendable' }
+      ],
+      'sancion': [
+        { t: 'Carta de sanción o pliego de cargos', ayuda: 'Se la debe entregar la empresa; no la firme como «conforme»', nivel: 'imprescindible' },
+        { t: 'Contrato de trabajo', ayuda: 'Su copia o el SEPE', nivel: 'imprescindible' },
+        { t: 'Su versión escrita de los hechos', ayuda: 'Redáctela cuanto antes, mientras recuerda los detalles', nivel: 'imprescindible' },
+        { t: 'Sanciones anteriores, si las hubo', ayuda: 'Influyen en la graduación de la falta', nivel: 'recomendable' }
+      ],
       'ctx:doc-escrito:si': [
         { t: 'Esa comunicación escrita (original)', ayuda: 'No responda a ella sin consultarnos antes', nivel: 'imprescindible' }
       ],
@@ -570,6 +625,17 @@
         { t: 'Sentencia o convenio vigente', ayuda: 'La que fijó la pensión actual', nivel: 'imprescindible' },
         { t: 'Prueba del cambio de circunstancias', ayuda: 'Nuevo contrato, despido, certificado de ingresos…', nivel: 'imprescindible' },
         { t: 'Justificantes de pagos o impagos', ayuda: 'Extractos bancarios de los últimos 12 meses', nivel: 'recomendable' }
+      ],
+      'custodia': [
+        { t: 'Sentencia o convenio regulador vigente', ayuda: 'El que fijó el régimen actual', nivel: 'imprescindible' },
+        { t: 'Certificados de nacimiento de los hijos', ayuda: 'Registro Civil, gratuito', nivel: 'imprescindible' },
+        { t: 'Registro de incidencias', ayuda: 'Anote fechas y hechos concretos: entregas, retrasos, negativas', nivel: 'imprescindible' },
+        { t: 'Informes escolares o médicos de los hijos', ayuda: 'Centro escolar o pediatra', nivel: 'recomendable' }
+      ],
+      'incumplimiento': [
+        { t: 'Sentencia o convenio incumplido', ayuda: 'Copia con sello del juzgado', nivel: 'imprescindible' },
+        { t: 'Prueba del incumplimiento', ayuda: 'Extractos bancarios que muestren impagos, mensajes, testigos', nivel: 'imprescindible' },
+        { t: 'Cronología de los incumplimientos', ayuda: 'Fechas concretas: el juzgado valora la reiteración', nivel: 'recomendable' }
       ],
       'ctx:menores:si': [
         { t: 'Certificados de nacimiento de los hijos', ayuda: 'Registro Civil, gratuito', nivel: 'imprescindible' },
@@ -597,18 +663,153 @@
         { t: 'Relación de bienes y deudas', ayuda: 'Lista aproximada: inmuebles, cuentas, préstamos', nivel: 'imprescindible' },
         { t: 'Libro de familia', ayuda: 'Si tiene hijos o cónyuge', nivel: 'recomendable' }
       ],
+      'legitima': [
+        { t: 'Testamento del fallecido', ayuda: 'Copia autorizada en la notaría donde se otorgó', nivel: 'imprescindible' },
+        { t: 'Certificado de defunción y de últimas voluntades', ayuda: 'Registro Civil y Ministerio de Justicia', nivel: 'imprescindible' },
+        { t: 'Documentos que acrediten su parentesco', ayuda: 'Libro de familia o certificado de nacimiento', nivel: 'imprescindible' },
+        { t: 'Datos de donaciones en vida que conozca', ayuda: 'Pueden computar para calcular su legítima', nivel: 'recomendable' }
+      ],
+      'deudas-herencia': [
+        { t: 'Certificado de defunción', ayuda: 'Registro Civil o funeraria', nivel: 'imprescindible' },
+        { t: 'Relación de deudas conocidas', ayuda: 'Préstamos, hipotecas, avales, deudas con Hacienda', nivel: 'imprescindible' },
+        { t: 'Relación de bienes conocidos', ayuda: 'Inmuebles, cuentas, vehículos', nivel: 'imprescindible' },
+        { t: 'Correspondencia de acreedores', ayuda: 'Cartas o burofaxes recibidos tras el fallecimiento', nivel: 'recomendable' }
+      ],
       'ctx:testamento-si:si': [
         { t: 'Copia del testamento', ayuda: 'Copia autorizada en la notaría donde se otorgó', nivel: 'imprescindible' }
       ],
       'ctx:inmuebles:si': [
         { t: 'Escrituras de los inmuebles', ayuda: 'Copia propia o nota simple del Registro de la Propiedad (~10 €)', nivel: 'imprescindible' },
         { t: 'Último recibo del IBI de cada inmueble', ayuda: 'Ayuntamiento o banca online; identifica la referencia catastral', nivel: 'recomendable' }
+      ],
+
+      /* --- CONTRATOS Y DEUDAS --- */
+      'me-deben': [
+        { t: 'Contrato, presupuesto o pedido aceptado', ayuda: 'Vale también un correo donde se acepte el encargo', nivel: 'imprescindible' },
+        { t: 'Facturas impagadas', ayuda: 'Su programa de facturación o copias emitidas', nivel: 'imprescindible' },
+        { t: 'Prueba de que el trabajo se hizo o el bien se entregó', ayuda: 'Albaranes, partes firmados, fotos, correos de conformidad', nivel: 'imprescindible' },
+        { t: 'Extractos bancarios de los cobros parciales', ayuda: 'Banca online; acreditan el saldo pendiente real', nivel: 'recomendable' }
+      ],
+      'me-reclaman': [
+        { t: 'La reclamación recibida', ayuda: 'Burofax, carta del despacho de cobros o demanda', nivel: 'imprescindible' },
+        { t: 'Contrato o documento del que nace la supuesta deuda', ayuda: 'Si no lo tiene, dígalo: la carga de la prueba es de quien reclama', nivel: 'imprescindible' },
+        { t: 'Justificantes de pago que conserve', ayuda: 'Extractos, recibos, transferencias', nivel: 'imprescindible' },
+        { t: 'Fecha aproximada del último movimiento', ayuda: 'Determina si la deuda puede estar prescrita', nivel: 'recomendable' }
+      ],
+      'alquiler-propietario': [
+        { t: 'Contrato de arrendamiento firmado', ayuda: 'Su copia original', nivel: 'imprescindible' },
+        { t: 'Justificantes de las rentas impagadas', ayuda: 'Extractos que muestren los meses sin ingreso', nivel: 'imprescindible' },
+        { t: 'Comunicaciones con el inquilino', ayuda: 'Mensajes, correos o burofaxes reclamando el pago', nivel: 'imprescindible' },
+        { t: 'Justificante de la fianza depositada', ayuda: 'Organismo autonómico de vivienda', nivel: 'recomendable' }
+      ],
+      'alquiler-inquilino': [
+        { t: 'Contrato de arrendamiento firmado', ayuda: 'Su copia original', nivel: 'imprescindible' },
+        { t: 'Justificantes de pago de las rentas', ayuda: 'Extractos bancarios o recibos', nivel: 'imprescindible' },
+        { t: 'Comunicaciones con el propietario', ayuda: 'Mensajes o correos, especialmente sobre reparaciones', nivel: 'imprescindible' },
+        { t: 'Fotografías del estado de la vivienda', ayuda: 'Haga fotos fechadas de los desperfectos', nivel: 'recomendable' }
+      ],
+      'banca': [
+        { t: 'Escritura del préstamo o contrato bancario', ayuda: 'Su copia o pídala en la notaría o en la entidad', nivel: 'imprescindible' },
+        { t: 'Cuadro de amortización', ayuda: 'Solicítelo en su oficina o descárguelo de la banca online', nivel: 'imprescindible' },
+        { t: 'Recibos o extractos de las comisiones cobradas', ayuda: 'Banca online, histórico de movimientos', nivel: 'imprescindible' },
+        { t: 'Reclamación previa presentada, si la hubo', ayuda: 'Servicio de atención al cliente de la entidad', nivel: 'recomendable' }
+      ],
+      'compra-defectuosa': [
+        { t: 'Factura o justificante de compra', ayuda: 'Tique, factura o confirmación del pedido', nivel: 'imprescindible' },
+        { t: 'Fotografías o prueba del defecto', ayuda: 'Imágenes claras y fechadas del problema', nivel: 'imprescindible' },
+        { t: 'Reclamación hecha al vendedor', ayuda: 'Correos, hoja de reclamaciones o chat de atención al cliente', nivel: 'imprescindible' },
+        { t: 'Documento de garantía', ayuda: 'Suele venir con el producto o en la factura', nivel: 'recomendable' }
+      ],
+      'ctx:contrato-escrito:si': [
+        { t: 'El contrato completo, con todos sus anexos', ayuda: 'Incluya las páginas de condiciones generales', nivel: 'imprescindible' }
+      ],
+      'ctx:reclamado-antes:si': [
+        { t: 'Copia de la reclamación y su acuse de recibo', ayuda: 'El burofax con acuse interrumpe la prescripción: guárdelo', nivel: 'imprescindible' }
+      ],
+
+      /* --- ACCIDENTES Y SALUD --- */
+      'trafico': [
+        { t: 'Atestado o parte amistoso', ayuda: 'Solicite copia del atestado a la Guardia Civil o Policía Local', nivel: 'imprescindible' },
+        { t: 'Partes médicos de urgencias y seguimiento', ayuda: 'Hospital y centro de salud; pídalos todos', nivel: 'imprescindible' },
+        { t: 'Datos del vehículo contrario y su aseguradora', ayuda: 'Matrícula y póliza; figuran en el parte', nivel: 'imprescindible' },
+        { t: 'Justificantes de gastos y días de baja', ayuda: 'Facturas, taxis, fisioterapia y partes de baja', nivel: 'recomendable' },
+        { t: 'Fotografías del accidente y de los daños', ayuda: 'Las suyas o las de testigos', nivel: 'recomendable' }
+      ],
+      'negligencia': [
+        { t: 'Historia clínica completa', ayuda: 'Tiene derecho a pedirla al hospital; le damos el modelo de solicitud', nivel: 'imprescindible' },
+        { t: 'Informes de alta y de las pruebas realizadas', ayuda: 'Servicio de atención al paciente del centro', nivel: 'imprescindible' },
+        { t: 'Consentimiento informado que firmó', ayuda: 'Forma parte de la historia clínica', nivel: 'imprescindible' },
+        { t: 'Cronología de lo ocurrido', ayuda: 'Escriba fechas, profesionales y qué le dijeron en cada momento', nivel: 'imprescindible' },
+        { t: 'Informes de otros médicos posteriores', ayuda: 'Segundas opiniones o tratamientos de corrección', nivel: 'recomendable' }
+      ],
+      'laboral-accidente': [
+        { t: 'Parte de accidente de trabajo', ayuda: 'La empresa está obligada a tramitarlo; pida copia', nivel: 'imprescindible' },
+        { t: 'Informes médicos y partes de baja', ayuda: 'Mutua o centro de salud', nivel: 'imprescindible' },
+        { t: 'Contrato de trabajo y nóminas', ayuda: 'Su copia o el SEPE', nivel: 'imprescindible' },
+        { t: 'Información sobre prevención de riesgos', ayuda: 'Formación recibida, EPIs entregados, evaluación del puesto', nivel: 'recomendable' }
+      ],
+      'incapacidad': [
+        { t: 'Resolución del INSS que deniega la incapacidad', ayuda: 'La notificación que recibió; el plazo corre desde ahí', nivel: 'imprescindible' },
+        { t: 'Dictamen del tribunal médico (EVI)', ayuda: 'Puede pedir copia del expediente al INSS', nivel: 'imprescindible' },
+        { t: 'Todos sus informes médicos', ayuda: 'Especialistas, pruebas de imagen, tratamientos y bajas', nivel: 'imprescindible' },
+        { t: 'Informe de vida laboral', ayuda: 'Se descarga al momento en la sede de la Seguridad Social', nivel: 'recomendable' },
+        { t: 'Descripción de su puesto de trabajo', ayuda: 'Qué tareas hace realmente: es clave para el grado', nivel: 'recomendable' }
+      ],
+      'caida': [
+        { t: 'Fotografías del lugar y del obstáculo', ayuda: 'Tómelas cuanto antes: los desperfectos se reparan', nivel: 'imprescindible' },
+        { t: 'Partes médicos de urgencias', ayuda: 'Hospital o centro de salud del mismo día', nivel: 'imprescindible' },
+        { t: 'Datos de testigos', ayuda: 'Nombre y teléfono de quien presenciara la caída', nivel: 'imprescindible' },
+        { t: 'Hoja de reclamaciones o parte del establecimiento', ayuda: 'Si ocurrió en un local, pídala en el momento', nivel: 'recomendable' }
+      ],
+      'ctx:parte-medico:si': [
+        { t: 'Todos los informes médicos, ordenados por fecha', ayuda: 'Desde urgencias hasta el alta: son la base de la indemnización', nivel: 'imprescindible' }
+      ],
+      'ctx:baja-laboral:si': [
+        { t: 'Partes de baja y de alta laboral', ayuda: 'Mutua, centro de salud o portal de la Seguridad Social', nivel: 'imprescindible' },
+        { t: 'Nóminas del periodo de baja', ayuda: 'Para calcular el lucro cesante', nivel: 'recomendable' }
+      ],
+
+      /* --- PENAL --- */
+      'denunciado': [
+        { t: 'La denuncia o citación recibida', ayuda: 'El documento del juzgado o de la policía', nivel: 'imprescindible' },
+        { t: 'Su relato escrito de los hechos', ayuda: 'Escríbalo antes de que se difumine; solo lo veremos nosotros', nivel: 'imprescindible' },
+        { t: 'Cualquier prueba a su favor', ayuda: 'Mensajes, correos, facturas, ubicaciones, testigos', nivel: 'imprescindible' },
+        { t: 'Documentación personal', ayuda: 'DNI y, si procede, informes médicos o laborales', nivel: 'recomendable' }
+      ],
+      'detenido': [
+        { t: 'Atestado policial, si ya se lo han facilitado', ayuda: 'Se solicita en comisaría o en el juzgado', nivel: 'imprescindible' },
+        { t: 'Datos del juzgado y número de diligencias', ayuda: 'Figuran en cualquier papel que le hayan entregado', nivel: 'imprescindible' },
+        { t: 'DNI de la persona detenida', ayuda: 'Copia simple', nivel: 'imprescindible' },
+        { t: 'Nada más: llámenos primero', ayuda: 'Atendemos urgencias penales 24 h. No declare sin abogado', nivel: 'recomendable' }
+      ],
+      'quiero-denunciar': [
+        { t: 'Cronología escrita de los hechos', ayuda: 'Fechas, lugares, personas y qué ocurrió exactamente', nivel: 'imprescindible' },
+        { t: 'Toda la prueba que conserve', ayuda: 'Mensajes, correos, fotos, grabaciones, documentos', nivel: 'imprescindible' },
+        { t: 'Partes médicos, si hubo lesiones', ayuda: 'Urgencias o centro de salud', nivel: 'imprescindible' },
+        { t: 'Datos de testigos', ayuda: 'Nombre y forma de contacto de quien presenciara los hechos', nivel: 'recomendable' }
+      ],
+      'juicio': [
+        { t: 'Citación con la fecha del juicio', ayuda: 'El documento del juzgado; indíquenos la fecha cuanto antes', nivel: 'imprescindible' },
+        { t: 'Copia del procedimiento, si la tiene', ayuda: 'Su abogado anterior o el juzgado', nivel: 'imprescindible' },
+        { t: 'Toda la prueba de descargo', ayuda: 'Documentos y datos de testigos que quiera proponer', nivel: 'imprescindible' },
+        { t: 'Documentación personal y laboral', ayuda: 'Puede influir en la individualización de la pena', nivel: 'recomendable' }
+      ],
+      'antecedentes': [
+        { t: 'Sentencia condenatoria', ayuda: 'Copia con sello del juzgado que la dictó', nivel: 'imprescindible' },
+        { t: 'Certificado de antecedentes penales', ayuda: 'Ministerio de Justicia, online o presencial', nivel: 'imprescindible' },
+        { t: 'Justificante del cumplimiento de la pena', ayuda: 'Del juzgado de ejecución: incluye multas y responsabilidad civil', nivel: 'imprescindible' },
+        { t: 'DNI', ayuda: 'Copia simple', nivel: 'recomendable' }
+      ],
+      'ctx:citacion:si': [
+        { t: 'La citación completa, con todas sus páginas', ayuda: 'Indica el juzgado, la causa y su condición en el procedimiento', nivel: 'imprescindible' }
+      ],
+      'ctx:ya-declaro:si': [
+        { t: 'Copia de su declaración anterior', ayuda: 'Puede pedirla en el juzgado; necesitamos saber qué dijo exactamente', nivel: 'imprescindible' }
       ]
     };
 
     /* ---------- Estado (solo en memoria, sin storage) ---------- */
-    var estado = { paso: 1, area: null, situacion: null, ctx: {}, marcados: {} };
-    var guardado = null; // instantánea de "Guardar mi progreso"
+    var estado = { paso: 1, area: null, situacion: null, ctx: {} };
 
     var $ = function (sel, ctx) { return (ctx || document).querySelector(sel); };
     var $$ = function (sel, ctx) { return Array.prototype.slice.call((ctx || document).querySelectorAll(sel)); };
@@ -734,57 +935,30 @@
 
       var html = '<div class="check-header">' +
         '<h2 style="font-family:var(--serif);font-size:1.7rem;color:var(--ink)">Su lista de documentos</h2>' +
-        '<span class="check-counter" aria-live="polite" id="check-counter"></span></div>';
+        '<span class="check-counter">' + docs.length + ' documentos</span></div>';
 
       [['imprescindible', 'Imprescindible'], ['recomendable', 'Recomendable']].forEach(function (par) {
         if (!grupos[par[0]].length) return;
         html += '<h3 class="check-group-title">' + par[1] + '</h3><ul class="check-list">';
-        grupos[par[0]].forEach(function (item) {
-          var id = 'doc-' + item.idx;
-          html += '<li class="check-item" id="item-' + item.idx + '">' +
-            '<input type="checkbox" id="' + id + '" data-idx="' + item.idx + '">' +
-            '<label for="' + id + '">' + item.doc.t +
-            '<small>' + item.doc.ayuda + '</small></label></li>';
+        grupos[par[0]].forEach(function (item, i) {
+          html += '<li class="check-item">' +
+            '<span class="check-num" aria-hidden="true">' + String(i + 1).padStart(2, '0') + '</span>' +
+            '<span class="check-texto"><strong>' + item.doc.t + '</strong>' +
+            '<small>' + item.doc.ayuda + '</small></span></li>';
         });
         html += '</ul>';
       });
 
       html += '<div class="check-actions">' +
-        '<button type="button" class="btn btn-gold" id="btn-imprimir">Descargar en PDF / imprimir</button>' +
-        '<button type="button" class="btn btn-line" id="btn-guardar">Guardar mi progreso</button>' +
-        '<button type="button" class="btn btn-line" id="btn-reiniciar">Empezar de nuevo</button></div>' +
-        '<p class="check-saved" id="check-saved" role="status"></p>';
+        '<a class="btn btn-gold" href="index.html#contacto">Pedir cita con estos documentos</a>' +
+        '<button type="button" class="btn btn-line" id="btn-reiniciar">Empezar de nuevo</button></div>';
 
       resultadoWrap.innerHTML = html;
-      resultadoWrap.focus && resultadoWrap.setAttribute('tabindex', '-1');
+      resultadoWrap.setAttribute('tabindex', '-1');
       resultadoWrap.focus();
 
-      var checks = $$('.check-item input', resultadoWrap);
-      function actualizarContador() {
-        var hechos = checks.filter(function (c) { return c.checked; }).length;
-        $('#check-counter').textContent = hechos + ' de ' + checks.length + ' documentos preparados';
-        checks.forEach(function (c) {
-          c.closest('.check-item').classList.toggle('done', c.checked);
-        });
-      }
-      checks.forEach(function (c) {
-        /* Restaurar estado guardado en memoria si coincide la selección */
-        if (estado.marcados[c.dataset.idx]) c.checked = true;
-        c.addEventListener('change', function () {
-          estado.marcados[c.dataset.idx] = c.checked;
-          actualizarContador();
-        });
-      });
-      actualizarContador();
-
-      $('#btn-imprimir').addEventListener('click', function () { window.print(); });
-      $('#btn-guardar').addEventListener('click', function () {
-        guardado = JSON.parse(JSON.stringify(estado));
-        $('#check-saved').textContent =
-          'Progreso guardado para esta visita. Se borra al cerrar la pestaña: no almacenamos nada en su dispositivo.';
-      });
       $('#btn-reiniciar').addEventListener('click', function () {
-        estado = { paso: 1, area: null, situacion: null, ctx: {}, marcados: {} };
+        estado = { paso: 1, area: null, situacion: null, ctx: {} };
         resultadoWrap.hidden = true;
         resultadoWrap.innerHTML = '';
         form.hidden = false;

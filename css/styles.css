@@ -1580,6 +1580,62 @@ a.contact-value:hover { color: var(--gold-deep); }
 }
 
 /* ============================================================
+   HERRAMIENTAS (portada)
+   ============================================================ */
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.4rem;
+}
+.tool-card {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 1.8rem;
+  text-decoration: none;
+  background: var(--navy);
+  border: 1px solid var(--line-dark);
+  transition: transform .45s var(--ease), border-color .45s var(--ease);
+  will-change: transform;
+}
+.tool-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(201, 164, 92, .45);
+}
+.tool-ico {
+  display: inline-flex;
+  margin-bottom: 1.3rem;
+  color: var(--gold);
+}
+.tool-card h3 {
+  font-size: 1.45rem;
+  color: var(--ivory);
+  margin-bottom: .6rem;
+}
+.tool-card p {
+  flex: 1;
+  font-size: .93rem;
+  color: var(--light-muted);
+}
+.tool-link {
+  display: inline-block;
+  margin-top: 1.4rem;
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--gold);
+  transition: color .3s var(--ease);
+}
+.tool-card:hover .tool-link { color: var(--gold-soft); }
+
+@media (max-width: 1080px) {
+  .tools-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .tools-grid { grid-template-columns: 1fr; }
+}
+
+/* ============================================================
    WHATSAPP FLOTANTE
    ============================================================ */
 .whatsapp-float {

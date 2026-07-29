@@ -41,7 +41,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=2">
+  <link rel="stylesheet" href="css/styles.css?v=3">
 
   <style>
     /* ============================================================
@@ -322,7 +322,6 @@
         <strong>Otras herramientas:</strong>
         <a href="timeline-proceso.html">Fases de su procedimiento</a>
         <a href="checklist-consulta.html">Prepare su consulta</a>
-        <a href="simulador-honorarios.html">Estime sus honorarios</a>
       </div>
     </nav>
 
@@ -369,7 +368,6 @@
           <li><a href="calculadora-plazos.html">Calculadora de plazos</a></li>
           <li><a href="timeline-proceso.html">Fases del procedimiento</a></li>
           <li><a href="checklist-consulta.html">Prepare su consulta</a></li>
-          <li><a href="simulador-honorarios.html">Simulador de honorarios</a></li>
         </ul>
       </nav>
       <nav class="footer-col" aria-label="Información legal">
@@ -405,7 +403,7 @@
     </div>
   </div>
 
-  <script src="js/main.js?v=2" defer></script>
+  <script src="js/main.js?v=3" defer></script>
 
   <script>
   /* ============================================================
@@ -421,48 +419,204 @@
 
     /* ----------------------------------------------------------
        PLAZOS — un objeto por tipo de asunto.
-       dias:      número de días del plazo.
-       tipoDias:  "habiles" (se saltan sábados, domingos y FESTIVOS)
-                  o "naturales" (todos los días cuentan).
+       cantidad:  número de unidades del plazo.
+       unidad:    "dias" | "meses" | "anios".
+       tipoDias:  solo para unidad "dias" — "habiles" (se saltan
+                  sábados, domingos y FESTIVOS) o "naturales".
        base:      referencia normativa que verá el usuario.
        nota:      explicación en lenguaje llano.
+       desde:     desde qué momento se cuenta (se muestra al usuario).
+
+       Las etiquetas están redactadas en primera persona y en
+       lenguaje corriente: el cliente no sabe si lo suyo es una
+       "acción de repetición", sabe que le han despedido.
        ---------------------------------------------------------- */
     var PLAZOS = [
-      { // VERIFICAR — validar por el despacho antes de publicar
-        id: 'despido',
-        area: 'Laboral',
-        etiqueta: 'Impugnar un despido',
-        dias: 20,
-        tipoDias: 'habiles',
+
+      /* ==================== LABORAL ==================== */
+      { // VERIFICAR
+        id: 'despido', area: 'Trabajo y Seguridad Social',
+        etiqueta: 'Me han despedido',
+        cantidad: 20, unidad: 'dias', tipoDias: 'habiles',
         base: 'Art. 59.3 del Estatuto de los Trabajadores',
-        nota: 'El plazo de caducidad para demandar por despido es muy breve y no se recupera: cada día cuenta.'
+        desde: 'la fecha de efectos del despido',
+        nota: 'Es un plazo de caducidad brevísimo y no se recupera. Si ha presentado papeleta de conciliación, el cómputo se suspende.'
       },
-      { // VERIFICAR — validar por el despacho antes de publicar
-        id: 'danos',
-        area: 'Civil',
-        etiqueta: 'Reclamar daños y perjuicios (responsabilidad extracontractual)',
-        dias: 365,
-        tipoDias: 'naturales',
+      { // VERIFICAR
+        id: 'sancion', area: 'Trabajo y Seguridad Social',
+        etiqueta: 'Me han sancionado en el trabajo',
+        cantidad: 20, unidad: 'dias', tipoDias: 'habiles',
+        base: 'Art. 114.1 de la Ley Reguladora de la Jurisdicción Social',
+        desde: 'la notificación de la sanción',
+        nota: 'Impugnar una sanción tiene el mismo plazo corto que el despido. No firme la carta como «conforme» sin consultarnos.'
+      },
+      { // VERIFICAR
+        id: 'modificacion', area: 'Trabajo y Seguridad Social',
+        etiqueta: 'Me han cambiado el horario, el salario o las funciones',
+        cantidad: 20, unidad: 'dias', tipoDias: 'habiles',
+        base: 'Art. 59.4 del Estatuto de los Trabajadores',
+        desde: 'la notificación de la decisión de la empresa',
+        nota: 'Si acepta la modificación sin impugnarla en plazo, se consolida. Seguir trabajando no implica renunciar, pero el plazo corre igual.'
+      },
+      { // VERIFICAR
+        id: 'salarios', area: 'Trabajo y Seguridad Social',
+        etiqueta: 'Me deben salarios, horas extra o el finiquito',
+        cantidad: 1, unidad: 'anios',
+        base: 'Art. 59.2 del Estatuto de los Trabajadores',
+        desde: 'el día en que debió cobrarse cada cantidad',
+        nota: 'Cada mensualidad prescribe por separado: cuanto más tarde, menos meses podrá reclamar hacia atrás.'
+      },
+      { // VERIFICAR
+        id: 'incapacidad', area: 'Trabajo y Seguridad Social',
+        etiqueta: 'Me han denegado una incapacidad permanente',
+        cantidad: 30, unidad: 'dias', tipoDias: 'habiles',
+        base: 'Art. 71 de la Ley Reguladora de la Jurisdicción Social',
+        desde: 'la notificación de la resolución del INSS',
+        nota: 'Antes de demandar hay que presentar reclamación previa ante el INSS dentro de este plazo.'
+      },
+      { // VERIFICAR
+        id: 'accidente-laboral', area: 'Trabajo y Seguridad Social',
+        etiqueta: 'He sufrido un accidente de trabajo',
+        cantidad: 1, unidad: 'anios',
+        base: 'Art. 59.2 del Estatuto de los Trabajadores y art. 1968.2.º del Código Civil',
+        desde: 'el alta médica o la estabilización de las secuelas',
+        nota: 'El recargo de prestaciones y la indemnización por daños siguen vías distintas: conviene valorarlas juntas y pronto.'
+      },
+
+      /* ==================== CIVIL ==================== */
+      { // VERIFICAR
+        id: 'danos', area: 'Civil y patrimonio',
+        etiqueta: 'Alguien me ha causado un daño y quiero reclamarle',
+        cantidad: 1, unidad: 'anios',
         base: 'Art. 1968.2.º del Código Civil',
-        nota: 'La acción por daños que no derivan de un contrato prescribe en un año desde que pudo ejercitarse.'
+        desde: 'que usted supo del daño y de quién lo causó',
+        nota: 'Es el plazo general para daños que no nacen de un contrato. Una reclamación extrajudicial fehaciente lo interrumpe y reinicia.'
       },
-      { // VERIFICAR — validar por el despacho antes de publicar
-        id: 'vicios',
-        area: 'Consumo',
-        etiqueta: 'Reclamar por vicios ocultos en una compraventa',
-        dias: 180,
-        tipoDias: 'naturales',
+      { // VERIFICAR
+        id: 'deuda-contrato', area: 'Civil y patrimonio',
+        etiqueta: 'Me deben dinero por un contrato o una factura',
+        cantidad: 5, unidad: 'anios',
+        base: 'Art. 1964.2 del Código Civil',
+        desde: 'que la deuda pudo exigirse',
+        nota: 'Plazo general de las acciones personales. Cada burofax reclamando el pago vuelve a poner el contador a cero.'
+      },
+      { // VERIFICAR
+        id: 'rentas', area: 'Civil y patrimonio',
+        etiqueta: 'Mi inquilino me debe rentas de alquiler',
+        cantidad: 5, unidad: 'anios',
+        base: 'Art. 1966.3.º del Código Civil',
+        desde: 'el vencimiento de cada mensualidad impagada',
+        nota: 'El desahucio por impago no tiene plazo de caducidad, pero las rentas atrasadas sí prescriben una a una.'
+      },
+      { // VERIFICAR
+        id: 'vicios', area: 'Civil y patrimonio',
+        etiqueta: 'Compré algo (vivienda, coche…) y tiene defectos ocultos',
+        cantidad: 6, unidad: 'meses',
         base: 'Art. 1490 del Código Civil',
-        nota: 'La acción por defectos ocultos de la cosa vendida se extingue a los seis meses de la entrega.'
+        desde: 'la entrega de la cosa vendida',
+        nota: 'Plazo muy corto entre particulares. Si compró como consumidor a una empresa, es probable que le ampare otro régimen más favorable.'
       },
-      { // VERIFICAR — validar por el despacho antes de publicar
-        id: 'alzada',
-        area: 'Administrativo',
-        etiqueta: 'Recurso de alzada contra una resolución administrativa',
-        dias: 30,
-        tipoDias: 'naturales',
-        base: 'Art. 122 de la Ley 39/2015',
-        nota: 'El plazo legal es de un mes desde la notificación del acto expreso; aquí se aproxima a 30 días naturales.'
+      { // VERIFICAR
+        id: 'nulidad', area: 'Civil y patrimonio',
+        etiqueta: 'Firmé un contrato por error, engaño o presión',
+        cantidad: 4, unidad: 'anios',
+        base: 'Art. 1301 del Código Civil',
+        desde: 'la consumación del contrato o el cese de la presión',
+        nota: 'El momento inicial del cómputo se discute mucho en los tribunales: no dé por perdido el asunto sin que lo veamos.'
+      },
+      { // VERIFICAR
+        id: 'sucesiones', area: 'Civil y patrimonio',
+        etiqueta: 'Ha fallecido un familiar y hay que liquidar el impuesto',
+        cantidad: 6, unidad: 'meses',
+        base: 'Art. 67 del Reglamento del Impuesto sobre Sucesiones y Donaciones',
+        desde: 'la fecha del fallecimiento',
+        nota: 'Se puede pedir prórroga de otros seis meses dentro de los cinco primeros. Pasado el plazo hay recargos y se pierden bonificaciones.'
+      },
+
+      /* ==================== CONSUMO ==================== */
+      { // VERIFICAR
+        id: 'garantia', area: 'Consumo y banca',
+        etiqueta: 'Un producto que compré se ha estropeado o no funciona',
+        cantidad: 3, unidad: 'anios',
+        base: 'Art. 120 del texto refundido de la Ley General para la Defensa de los Consumidores y Usuarios',
+        desde: 'la entrega del producto',
+        nota: 'Garantía legal para compras a partir de 2022. Además, tiene un plazo propio para comunicar la falta de conformidad al vendedor.'
+      },
+      { // VERIFICAR
+        id: 'vuelo', area: 'Consumo y banca',
+        etiqueta: 'Mi vuelo se retrasó, se canceló o me denegaron el embarque',
+        cantidad: 5, unidad: 'anios',
+        base: 'Reglamento (CE) 261/2004 y art. 1964.2 del Código Civil',
+        desde: 'la fecha del vuelo',
+        nota: 'En España el plazo para reclamar judicialmente es amplio, pero las aerolíneas responden mucho mejor en los primeros meses.'
+      },
+      { // VERIFICAR
+        id: 'producto-defectuoso', area: 'Consumo y banca',
+        etiqueta: 'Un producto defectuoso me causó un daño personal',
+        cantidad: 3, unidad: 'anios',
+        base: 'Art. 143 del texto refundido de la Ley General para la Defensa de los Consumidores y Usuarios',
+        desde: 'que sufrió el daño y conoció al responsable',
+        nota: 'Es una vía distinta de la garantía: aquí no reclama el producto, sino el perjuicio que le ocasionó.'
+      },
+
+      /* ==================== ADMINISTRATIVO ==================== */
+      { // VERIFICAR
+        id: 'multa', area: 'Administración y multas',
+        etiqueta: 'He recibido una multa de tráfico',
+        cantidad: 20, unidad: 'dias', tipoDias: 'naturales',
+        base: 'Art. 95 de la Ley sobre Tráfico y Seguridad Vial',
+        desde: 'la notificación de la denuncia',
+        nota: 'En ese plazo puede alegar y, en muchos casos, pagar con reducción. Pagar suele suponer renunciar a recurrir.'
+      },
+      { // VERIFICAR
+        id: 'alzada', area: 'Administración y multas',
+        etiqueta: 'Quiero recurrir una resolución de la Administración',
+        cantidad: 1, unidad: 'meses',
+        base: 'Arts. 122 y 124 de la Ley 39/2015',
+        desde: 'la notificación de la resolución',
+        nota: 'Un mes para el recurso de alzada o de reposición. Si la Administración no contestó, el plazo puede ser distinto.'
+      },
+      { // VERIFICAR
+        id: 'contencioso', area: 'Administración y multas',
+        etiqueta: 'Quiero llevar a los tribunales una resolución administrativa',
+        cantidad: 2, unidad: 'meses',
+        base: 'Art. 46 de la Ley de la Jurisdicción Contencioso-Administrativa',
+        desde: 'la notificación del acto que agota la vía administrativa',
+        nota: 'Antes hay que haber agotado la vía administrativa. Es un plazo de caducidad: no se interrumpe con reclamaciones informales.'
+      },
+      { // VERIFICAR
+        id: 'resp-patrimonial', area: 'Administración y multas',
+        etiqueta: 'La Administración o un servicio público me ha causado un daño',
+        cantidad: 1, unidad: 'anios',
+        base: 'Art. 67 de la Ley 39/2015',
+        desde: 'el hecho dañoso o la curación de las lesiones',
+        nota: 'Incluye caídas en la vía pública, daños sanitarios y errores de la Administración. Si hay secuelas, el plazo cuenta desde su estabilización.'
+      },
+
+      /* =============== ACCIDENTES Y SALUD =============== */
+      { // VERIFICAR
+        id: 'trafico', area: 'Accidentes y negligencias',
+        etiqueta: 'He tenido un accidente de tráfico',
+        cantidad: 1, unidad: 'anios',
+        base: 'Art. 7 de la Ley sobre Responsabilidad Civil y Seguro en la Circulación de Vehículos a Motor',
+        desde: 'el alta médica o la estabilización de las secuelas',
+        nota: 'La reclamación previa a la aseguradora interrumpe el plazo. No firme un finiquito de la compañía sin que lo revisemos.'
+      },
+      { // VERIFICAR
+        id: 'negligencia', area: 'Accidentes y negligencias',
+        etiqueta: 'Creo que he sufrido una negligencia médica',
+        cantidad: 1, unidad: 'anios',
+        base: 'Art. 1968.2.º del Código Civil (sanidad privada) y art. 67 de la Ley 39/2015 (pública)',
+        desde: 'la estabilización de las secuelas, no desde la intervención',
+        nota: 'El plazo suele contar desde que se conoce el alcance definitivo del daño. Pida cuanto antes su historia clínica completa.'
+      },
+      { // VERIFICAR
+        id: 'delito-leve', area: 'Accidentes y negligencias',
+        etiqueta: 'Quiero denunciar unos hechos que podrían ser delito leve',
+        cantidad: 1, unidad: 'anios',
+        base: 'Art. 131.1 del Código Penal',
+        desde: 'la fecha en que ocurrieron los hechos',
+        nota: 'Los delitos leves prescriben al año. Los delitos graves tienen plazos mucho más largos: consúltenos su caso concreto.'
       }
     ];
 
@@ -523,15 +677,37 @@
       var dia = d.getDay();
       return dia !== 0 && dia !== 6 && !esFestivo(d);
     }
-    /* Fecha límite: día en que se consume el último día del plazo */
-    function fechaLimite(inicio, dias, tipo) {
+    /* Fecha límite: día en que se consume el último día del plazo.
+       Los plazos por meses y años se computan "de fecha a fecha"
+       con aritmética de calendario, no aproximando a 30/365 días.
+       Si el día de destino no existe (p. ej. 31 de enero + 1 mes),
+       se ajusta al último día del mes, como es criterio habitual. */
+    function fechaLimite(inicio, plazo) {
       var d = new Date(inicio.getTime());
-      var restantes = dias;
+
+      if (plazo.unidad === 'meses' || plazo.unidad === 'anios') {
+        var meses = plazo.unidad === 'anios' ? plazo.cantidad * 12 : plazo.cantidad;
+        var diaOriginal = d.getDate();
+        d.setDate(1);
+        d.setMonth(d.getMonth() + meses);
+        var ultimoDia = new Date(d.getFullYear(), d.getMonth() + 1, 0).getDate();
+        d.setDate(Math.min(diaOriginal, ultimoDia));
+        return d;
+      }
+
+      var restantes = plazo.cantidad;
       while (restantes > 0) {
         d.setDate(d.getDate() + 1);
-        if (tipo === 'naturales' || esHabil(d)) restantes--;
+        if (plazo.tipoDias === 'naturales' || esHabil(d)) restantes--;
       }
       return d;
+    }
+
+    /* Texto legible del plazo: "20 días hábiles", "6 meses", "1 año" */
+    function textoPlazo(p) {
+      if (p.unidad === 'anios') return p.cantidad + (p.cantidad === 1 ? ' año' : ' años');
+      if (p.unidad === 'meses') return p.cantidad + (p.cantidad === 1 ? ' mes' : ' meses');
+      return p.cantidad + ' días ' + (p.tipoDias === 'habiles' ? 'hábiles' : 'naturales');
     }
     function diasNaturalesEntre(a, b) {
       var MS = 24 * 60 * 60 * 1000;
@@ -559,7 +735,7 @@
 
     /* ---------- Render del resultado ---------- */
     function render(plazo, inicio) {
-      var limite = fechaLimite(inicio, plazo.dias, plazo.tipoDias);
+      var limite = fechaLimite(inicio, plazo);
       var hoy = new Date();
       var restantes = diasNaturalesEntre(hoy, limite);
       var totales = diasNaturalesEntre(inicio, limite);
@@ -572,7 +748,6 @@
       else if (restantes / totales < 0.5) { estado = 'ambar'; estadoTxt = 'Queda poco plazo'; }
       else { estado = 'verde'; estadoTxt = 'Dentro de plazo'; }
 
-      var tipoTxt = plazo.tipoDias === 'habiles' ? 'días hábiles' : 'días naturales';
       var html = '';
       html += '<span class="semaforo ' + estado + '">' + estadoTxt + '</span>';
 
@@ -588,7 +763,9 @@
               '<span data-pct="' + consumidoPct + '"></span></div>' +
               '<div class="plazo-barra-label"><span>Plazo consumido</span><span>' + consumidoPct + '%</span></div>';
 
-      html += '<div class="result-nota"><strong>' + plazo.base + ' · ' + plazo.dias + ' ' + tipoTxt + '.</strong> ' + plazo.nota + '</div>';
+      html += '<div class="result-nota">' +
+              '<strong>Plazo aplicable: ' + textoPlazo(plazo) + '</strong>, contados desde ' + plazo.desde + '.<br>' +
+              plazo.nota + '<br><span style="opacity:.75">' + plazo.base + '</span></div>';
 
       if (estado === 'verde') {
         html += '<div class="result-cta"><a class="btn btn-gold" href="index.html#contacto">Solicitar valoración gratuita</a></div>';

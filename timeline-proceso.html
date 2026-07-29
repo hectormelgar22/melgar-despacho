@@ -41,7 +41,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=2">
+  <link rel="stylesheet" href="css/styles.css?v=3">
 
   <style>
     /* ============================================================
@@ -376,7 +376,6 @@
         <strong>Otras herramientas:</strong>
         <a href="calculadora-plazos.html">¿Está a tiempo de reclamar?</a>
         <a href="checklist-consulta.html">Prepare su consulta</a>
-        <a href="simulador-honorarios.html">Estime sus honorarios</a>
       </div>
     </nav>
 
@@ -423,7 +422,6 @@
           <li><a href="calculadora-plazos.html">Calculadora de plazos</a></li>
           <li><a href="timeline-proceso.html">Fases del procedimiento</a></li>
           <li><a href="checklist-consulta.html">Prepare su consulta</a></li>
-          <li><a href="simulador-honorarios.html">Simulador de honorarios</a></li>
         </ul>
       </nav>
       <nav class="footer-col" aria-label="Información legal">
@@ -459,7 +457,7 @@
     </div>
   </div>
 
-  <script src="js/main.js?v=2" defer></script>
+  <script src="js/main.js?v=3" defer></script>
 
   <script>
   /* ============================================================
@@ -564,6 +562,146 @@
           { nombre: 'Cambio de titularidades', durMin: 4, durMax: 12, icono: 'balanza', // VERIFICAR CON EL DESPACHO
             hacemos: ['Inscribimos inmuebles en el Registro de la Propiedad', 'Gestionamos el desbloqueo de cuentas bancarias'],
             necesitamos: ['Nada más: le entregamos el expediente completo'] }
+        ]
+      },
+      'divorcio-contencioso': {
+        etiqueta: 'Divorcio sin acuerdo',
+        fases: [
+          { nombre: 'Primera reunión y estrategia', durMin: 1, durMax: 2, icono: 'reunion', // VERIFICAR CON EL DESPACHO
+            hacemos: ['Analizamos su situación familiar y económica', 'Fijamos objetivos realistas: qué se puede pedir y qué no', 'Valoramos si aún cabe un acuerdo parcial'],
+            necesitamos: ['Certificado de matrimonio y de nacimiento de los hijos'] },
+          { nombre: 'Medidas provisionales (si urgen)', durMin: 3, durMax: 8, icono: 'reloj', critico: true, // VERIFICAR CON EL DESPACHO
+            hacemos: ['Solicitamos custodia, uso de vivienda y pensiones con carácter urgente', 'Le representamos en la vista de medidas'],
+            necesitamos: ['Prueba de la situación actual: ingresos, gastos y convivencia'] },
+          { nombre: 'Demanda y contestación', durMin: 4, durMax: 10, icono: 'firma', // VERIFICAR CON EL DESPACHO
+            hacemos: ['Redactamos la demanda con toda la prueba documental', 'Proponemos periciales si hacen falta'],
+            necesitamos: ['Documentación económica completa de ambas partes'] },
+          { nombre: 'Vista y prueba', durMin: 12, durMax: 32, icono: 'juzgado', // VERIFICAR CON EL DESPACHO
+            hacemos: ['Preparamos su declaración con antelación', 'Le defendemos en la vista y practicamos la prueba'],
+            necesitamos: ['Su asistencia y la de los testigos que propongamos'] },
+          { nombre: 'Sentencia y ejecución', durMin: 4, durMax: 16, icono: 'balanza', // VERIFICAR CON EL DESPACHO
+            hacemos: ['Analizamos la sentencia y valoramos el recurso', 'Ejecutamos las medidas si la otra parte no cumple'],
+            necesitamos: ['Que nos avise en cuanto detecte un incumplimiento'] }
+        ]
+      },
+      incapacidad: {
+        etiqueta: 'Incapacidad permanente',
+        fases: [
+          { nombre: 'Estudio del expediente médico', durMin: 1, durMax: 3, icono: 'reunion', // VERIFICAR CON EL DESPACHO
+            hacemos: ['Revisamos su historia clínica y el dictamen del tribunal médico', 'Valoramos el grado al que puede aspirar', 'Le decimos con honestidad si es viable'],
+            necesitamos: ['Informes médicos completos y la resolución del INSS'] },
+          { nombre: 'Reclamación previa ante el INSS', durMin: 1, durMax: 2, icono: 'papeles', critico: true, // VERIFICAR CON EL DESPACHO
+            hacemos: ['Redactamos y presentamos la reclamación previa', 'Aportamos los informes que faltaban en el expediente'],
+            necesitamos: ['No agotar el plazo: es de 30 días desde la notificación'] },
+          { nombre: 'Resolución del INSS', durMin: 4, durMax: 8, icono: 'reloj', // VERIFICAR CON EL DESPACHO
+            hacemos: ['Seguimos el expediente y le informamos del resultado', 'Preparamos ya la vía judicial por si se desestima'],
+            necesitamos: ['Avisarnos de cualquier notificación que reciba'] },
+          { nombre: 'Demanda ante el Juzgado de lo Social', durMin: 2, durMax: 4, icono: 'firma', // VERIFICAR CON EL DESPACHO
+            hacemos: ['Presentamos la demanda con informe pericial propio', 'Proponemos la prueba médica más favorable'],
+            necesitamos: ['Someterse a la valoración de nuestro perito médico'] },
+          { nombre: 'Juicio y sentencia', durMin: 16, durMax: 44, icono: 'juzgado', // VERIFICAR CON EL DESPACHO
+            hacemos: ['Preparamos con usted la explicación de sus limitaciones', 'Defendemos el grado solicitado en la vista'],
+            necesitamos: ['Su asistencia a la vista y a los reconocimientos médicos'] }
+        ]
+      },
+      trafico: {
+        etiqueta: 'Accidente de tráfico',
+        fases: [
+          { nombre: 'Atención inmediata y recopilación', durMin: 1, durMax: 2, icono: 'reunion', critico: true, // VERIFICAR CON EL DESPACHO
+            hacemos: ['Reunimos atestado, parte amistoso y partes médicos', 'Identificamos a la aseguradora responsable', 'Le indicamos qué NO firmar'],
+            necesitamos: ['Que acuda al médico desde el primer día y guarde todo justificante'] },
+          { nombre: 'Seguimiento de las lesiones', durMin: 6, durMax: 40, icono: 'reloj', // VERIFICAR CON EL DESPACHO
+            hacemos: ['Coordinamos la valoración con nuestro perito médico', 'Documentamos días de baja y secuelas'],
+            necesitamos: ['Constancia en el tratamiento: cada sesión cuenta en la indemnización'] },
+          { nombre: 'Reclamación a la aseguradora', durMin: 4, durMax: 12, icono: 'papeles', // VERIFICAR CON EL DESPACHO
+            hacemos: ['Cuantificamos la indemnización según el baremo legal', 'Negociamos con la compañía desde una posición documentada'],
+            necesitamos: ['No aceptar la primera oferta sin consultarnos'] },
+          { nombre: 'Demanda judicial (si no hay acuerdo)', durMin: 2, durMax: 4, icono: 'firma', // VERIFICAR CON EL DESPACHO
+            hacemos: ['Presentamos demanda con informe pericial completo', 'Reclamamos también los intereses de demora'],
+            necesitamos: ['Su conformidad con la estrategia y la cuantía reclamada'] },
+          { nombre: 'Juicio, sentencia y cobro', durMin: 12, durMax: 36, icono: 'balanza', // VERIFICAR CON EL DESPACHO
+            hacemos: ['Le representamos en la vista', 'Perseguimos el cobro efectivo de la indemnización'],
+            necesitamos: ['Su asistencia a la vista si el juzgado la requiere'] }
+        ]
+      },
+      negligencia: {
+        etiqueta: 'Negligencia médica',
+        fases: [
+          { nombre: 'Primera valoración del caso', durMin: 1, durMax: 3, icono: 'reunion', // VERIFICAR CON EL DESPACHO
+            hacemos: ['Escuchamos qué ocurrió y qué secuelas le han quedado', 'Solicitamos su historia clínica completa', 'Le explicamos la diferencia entre mal resultado y negligencia'],
+            necesitamos: ['Todos los informes médicos y partes que conserve'] },
+          { nombre: 'Dictamen pericial médico', durMin: 6, durMax: 16, icono: 'papeles', critico: true, // VERIFICAR CON EL DESPACHO
+            hacemos: ['Encargamos peritaje a un especialista de la misma rama', 'Solo seguimos adelante si el perito confirma la mala praxis'],
+            necesitamos: ['Someterse a la valoración del perito y ser exhaustivo al relatar'] },
+          { nombre: 'Reclamación previa o extrajudicial', durMin: 4, durMax: 16, icono: 'acuerdo', // VERIFICAR CON EL DESPACHO
+            hacemos: ['Vía administrativa si fue sanidad pública; aseguradora si fue privada', 'Negociamos con el informe pericial sobre la mesa'],
+            necesitamos: ['Paciencia: esta fase evita muchos pleitos largos'] },
+          { nombre: 'Demanda judicial', durMin: 2, durMax: 5, icono: 'firma', // VERIFICAR CON EL DESPACHO
+            hacemos: ['Presentamos la demanda con el dictamen pericial', 'Cuantificamos el daño conforme al baremo'],
+            necesitamos: ['Su conformidad tras explicarle costes y probabilidades'] },
+          { nombre: 'Juicio y sentencia', durMin: 20, durMax: 60, icono: 'juzgado', // VERIFICAR CON EL DESPACHO
+            hacemos: ['Interrogamos a los peritos de la contraparte', 'Defendemos su caso en la vista'],
+            necesitamos: ['Su asistencia a la vista y a los reconocimientos'] }
+        ]
+      },
+      penal: {
+        etiqueta: 'Defensa penal',
+        fases: [
+          { nombre: 'Asistencia urgente', durMin: 1, durMax: 1, icono: 'reloj', critico: true, // VERIFICAR CON EL DESPACHO
+            hacemos: ['Le asistimos en dependencias policiales o en el juzgado, 24 h', 'Le explicamos su derecho a no declarar antes de que declare', 'Estudiamos el atestado'],
+            necesitamos: ['Llamarnos ANTES de declarar: es el momento más determinante'] },
+          { nombre: 'Instrucción', durMin: 12, durMax: 52, icono: 'papeles', // VERIFICAR CON EL DESPACHO
+            hacemos: ['Proponemos diligencias de prueba a su favor', 'Solicitamos el sobreseimiento cuando procede', 'Le acompañamos en cada comparecencia'],
+            necesitamos: ['Contarnos todo, también lo incómodo: el secreto profesional lo protege'] },
+          { nombre: 'Escrito de defensa', durMin: 2, durMax: 5, icono: 'firma', critico: true, // VERIFICAR CON EL DESPACHO
+            hacemos: ['Redactamos la calificación y proponemos toda la prueba', 'Valoramos con usted una posible conformidad'],
+            necesitamos: ['Su decisión informada sobre ir a juicio o conformar'] },
+          { nombre: 'Juicio oral', durMin: 12, durMax: 52, icono: 'juzgado', // VERIFICAR CON EL DESPACHO
+            hacemos: ['Preparamos su declaración pregunta a pregunta', 'Interrogamos a testigos y peritos', 'Defendemos su caso ante el tribunal'],
+            necesitamos: ['Su asistencia obligatoria y su preparación con nosotros'] },
+          { nombre: 'Sentencia y recursos', durMin: 4, durMax: 20, icono: 'balanza', // VERIFICAR CON EL DESPACHO
+            hacemos: ['Analizamos la sentencia y sus opciones de recurso', 'Tramitamos suspensión de condena o cancelación de antecedentes'],
+            necesitamos: ['Nada inmediato: le explicamos cada paso al recibir la sentencia'] }
+        ]
+      },
+      desahucio: {
+        etiqueta: 'Desahucio por impago',
+        fases: [
+          { nombre: 'Estudio del contrato y la deuda', durMin: 1, durMax: 2, icono: 'reunion', // VERIFICAR CON EL DESPACHO
+            hacemos: ['Revisamos el contrato de arrendamiento y los impagos', 'Comprobamos si el inquilino es vulnerable (afecta al procedimiento)'],
+            necesitamos: ['Contrato de alquiler y justificantes de los recibos impagados'] },
+          { nombre: 'Requerimiento previo', durMin: 2, durMax: 4, icono: 'papeles', // VERIFICAR CON EL DESPACHO
+            hacemos: ['Enviamos burofax requiriendo el pago', 'Intentamos una salida negociada, más rápida que el juzgado'],
+            necesitamos: ['No aceptar pagos parciales sin consultarnos: pueden enervar el desahucio'] },
+          { nombre: 'Demanda de desahucio', durMin: 1, durMax: 3, icono: 'firma', // VERIFICAR CON EL DESPACHO
+            hacemos: ['Presentamos demanda de desahucio y reclamación de rentas', 'Solicitamos fecha de lanzamiento desde el inicio'],
+            necesitamos: ['Poder notarial y originales del contrato'] },
+          { nombre: 'Tramitación judicial', durMin: 12, durMax: 36, icono: 'juzgado', critico: true, // VERIFICAR CON EL DESPACHO
+            hacemos: ['Seguimos el procedimiento y respondemos a la oposición', 'Le representamos en la vista si la hay'],
+            necesitamos: ['Avisarnos si el inquilino paga o abandona la vivienda'] },
+          { nombre: 'Lanzamiento y cobro', durMin: 4, durMax: 20, icono: 'balanza', // VERIFICAR CON EL DESPACHO
+            hacemos: ['Coordinamos el lanzamiento con la comisión judicial', 'Ejecutamos la deuda de rentas contra el patrimonio del deudor'],
+            necesitamos: ['Su presencia o representación el día del lanzamiento'] }
+        ]
+      },
+      consumo: {
+        etiqueta: 'Reclamación bancaria o de consumo',
+        fases: [
+          { nombre: 'Análisis del contrato', durMin: 1, durMax: 3, icono: 'reunion', // VERIFICAR CON EL DESPACHO
+            hacemos: ['Revisamos su contrato en busca de cláusulas abusivas', 'Calculamos cuánto podría recuperar', 'Le decimos si compensa reclamar'],
+            necesitamos: ['Contrato, escritura de préstamo y cuadro de amortización'] },
+          { nombre: 'Reclamación ante la entidad', durMin: 4, durMax: 8, icono: 'papeles', critico: true, // VERIFICAR CON EL DESPACHO
+            hacemos: ['Presentamos reclamación ante el servicio de atención al cliente', 'Es requisito previo en muchos casos: no lo saltamos'],
+            necesitamos: ['Reenviarnos cualquier respuesta que reciba de la entidad'] },
+          { nombre: 'Organismo supervisor o arbitraje', durMin: 6, durMax: 20, icono: 'acuerdo', // VERIFICAR CON EL DESPACHO
+            hacemos: ['Acudimos al Banco de España o al arbitraje de consumo si procede', 'Valoramos cualquier oferta de acuerdo'],
+            necesitamos: ['Su decisión sobre aceptar o rechazar la oferta'] },
+          { nombre: 'Demanda judicial', durMin: 2, durMax: 4, icono: 'firma', // VERIFICAR CON EL DESPACHO
+            hacemos: ['Presentamos demanda de nulidad y reclamación de cantidad', 'Solicitamos la condena en costas a la entidad'],
+            necesitamos: ['Poder para pleitos y su conformidad con la cuantía'] },
+          { nombre: 'Sentencia y devolución', durMin: 16, durMax: 44, icono: 'balanza', // VERIFICAR CON EL DESPACHO
+            hacemos: ['Le representamos en la vista', 'Ejecutamos la sentencia hasta el ingreso efectivo'],
+            necesitamos: ['Nada más: le avisamos cuando el dinero esté en su cuenta'] }
         ]
       }
     };
