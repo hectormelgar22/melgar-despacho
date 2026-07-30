@@ -749,6 +749,47 @@
       return d.toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
     }
 
+    /* Desglosa la distancia entre dos fechas en años, meses y días de
+       calendario (de fecha a fecha), no dividiendo por 30 o 365. */
+    function desglosarDuracion(desde, hasta) {
+      var anios = hasta.getFullYear() - desde.getFullYear();
+      var meses = hasta.getMonth() - desde.getMonth();
+      var dias = hasta.getDate() - desde.getDate();
+      if (dias < 0) {
+        meses--;
+        // días del mes inmediatamente anterior a "hasta"
+        dias += new Date(hasta.getFullYear(), hasta.getMonth(), 0).getDate();
+      }
+      if (meses < 0) { anios--; meses += 12; }
+      return { anios: anios, meses: meses, dias: dias };
+    }
+
+    function unirNatural(partes) {
+      if (partes.length === 1) return partes[0];
+      return partes.slice(0, -1).join(', ') + ' y ' + partes[partes.length - 1];
+    }
+
+    /* Concordancia del verbo: "queda 1 año" pero "quedan 5 meses". */
+    function esUno(texto) {
+      return texto === '1 año' || texto === '1 mes' || texto === '1 día';
+    }
+
+    /* Texto de una duración según su tamaño:
+       - menos de 100 días → null (el llamador muestra los días con contador)
+       - 100 días o más    → meses y días (solo meses si es exacto)
+       - 365 días o más    → años, meses y días (solo años si es exacto)
+       Los componentes a cero se omiten para que lea natural. */
+    function textoDuracion(dias, desde, hasta) {
+      if (dias < 100) return null;
+      var g = desglosarDuracion(desde, hasta);
+      var partes = [];
+      if (dias >= 365 && g.anios) partes.push(g.anios + (g.anios === 1 ? ' año' : ' años'));
+      if (g.meses) partes.push(g.meses + (g.meses === 1 ? ' mes' : ' meses'));
+      if (g.dias) partes.push(g.dias + (g.dias === 1 ? ' día' : ' días'));
+      if (!partes.length) partes.push(dias.toLocaleString('es-ES') + ' días');
+      return unirNatural(partes);
+    }
+
     /* ---------- Contador animado ---------- */
     function animarContador(el, target) {
       if (reducedMotion) { el.textContent = target.toLocaleString('es-ES'); return; }
@@ -782,11 +823,28 @@
       html += '<span class="semaforo ' + estado + '">' + estadoTxt + '</span>';
 
       if (estado === 'rojo') {
+        var pasados = Math.abs(restantes);
+        var txtPasados = textoDuracion(pasados, limite, hoy);
         html += '<p class="result-fecha">El plazo terminó el <em>' + formatoLargo(limite) + '</em></p>';
-        html += '<p class="result-dias">Han pasado <strong>' + Math.abs(restantes).toLocaleString('es-ES') + '</strong> días desde la fecha límite estimada.</p>';
+        if (txtPasados) {
+          html += '<p class="result-dias">' + (esUno(txtPasados) ? 'Ha pasado' : 'Han pasado') +
+                  ' <strong>' + txtPasados + '</strong> desde la fecha límite estimada.</p>';
+        } else {
+          html += '<p class="result-dias">' + (pasados === 1 ? 'Ha pasado' : 'Han pasado') +
+                  ' <strong>' + pasados.toLocaleString('es-ES') + '</strong> ' +
+                  (pasados === 1 ? 'día' : 'días') + ' desde la fecha límite estimada.</p>';
+        }
       } else {
+        var txtRestante = textoDuracion(restantes, hoy, limite);
         html += '<p class="result-fecha">Tiene hasta el <em>' + formatoLargo(limite) + '</em></p>';
-        html += '<p class="result-dias">Le quedan <strong class="js-contador">0</strong> días naturales.</p>';
+        if (txtRestante) {
+          html += '<p class="result-dias">Le ' + (esUno(txtRestante) ? 'queda' : 'quedan') +
+                  ' <strong>' + txtRestante + '</strong>.</p>';
+        } else {
+          html += '<p class="result-dias">Le ' + (restantes === 1 ? 'queda' : 'quedan') +
+                  ' <strong class="js-contador">0</strong> ' +
+                  (restantes === 1 ? 'día natural' : 'días naturales') + '.</p>';
+        }
       }
 
       html += '<div class="plazo-barra" role="img" aria-label="Plazo consumido: ' + consumidoPct + ' por ciento">' +
