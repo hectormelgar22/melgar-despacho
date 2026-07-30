@@ -41,7 +41,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=4">
+  <link rel="stylesheet" href="css/styles.css?v=5">
 </head>
 <body>
 
@@ -58,10 +58,10 @@
       </a>
       <nav class="main-nav" id="menu-principal" aria-label="Navegación principal">
         <ul>
-          <li><a href="index.html#despacho">El despacho</a></li>
+          <li><a href="index.html#despacho">Despacho</a></li>
           <li class="has-submenu">
             <button type="button" class="submenu-toggle" aria-expanded="false" aria-controls="submenu-areas">
-              Áreas de práctica
+              Áreas
               <svg class="chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
             <ul class="submenu" id="submenu-areas">
@@ -74,11 +74,24 @@
               <li class="submenu-all"><a href="index.html#areas">Ver todas las áreas<span aria-hidden="true"> →</span></a></li>
             </ul>
           </li>
+          <li><a href="index.html#por-que-elegirnos">Por qué elegirnos</a></li>
+          <li class="has-submenu">
+            <button type="button" class="submenu-toggle" aria-expanded="false" aria-controls="submenu-herramientas">
+              Herramientas
+              <svg class="chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <ul class="submenu" id="submenu-herramientas">
+              <li><a href="calculadora-plazos.html"><span class="submenu-num" aria-hidden="true">I</span>¿Está a tiempo de reclamar?</a></li>
+              <li><a href="timeline-proceso.html"><span class="submenu-num" aria-hidden="true">II</span>Fases del procedimiento</a></li>
+              <li><a href="checklist-consulta.html"><span class="submenu-num" aria-hidden="true">III</span>Prepare su consulta</a></li>
+              <li class="submenu-all"><a href="index.html#herramientas">Ver todas<span aria-hidden="true"> →</span></a></li>
+            </ul>
+          </li>
           <li><a href="index.html#equipo">Equipo</a></li>
-          <li><a href="index.html#testimonios">Testimonios</a></li>
           <li><a href="index.html#contacto">Contacto</a></li>
         </ul>
         <div class="nav-cta-mobile">
+          <!-- TODO: teléfono real del despacho -->
           <a class="btn btn-gold" href="index.html#contacto">Pedir cita</a>
           <a class="nav-phone" href="tel:+34910000000">+34 910 000 000</a>
         </div>
@@ -113,8 +126,7 @@
         </h1>
         <p class="area-hero-sub reveal" style="--d:.26s">
           Deudas que no le pagan, herencias bloqueadas, contratos incumplidos, inquilinos
-          que no abandonan la vivienda. El Derecho Civil resuelve los conflictos del día a
-          día — y nosotros lo hacemos primero negociando y, si hace falta, ganando en el juzgado.
+          que no abandonan la vivienda. El Derecho Civil resuelve los conflictos del día a día, y nosotros lo hacemos primero negociando y, si hace falta, ganando en el juzgado.
         </p>
         <div class="area-hero-actions reveal" style="--d:.36s">
           <a class="btn btn-gold btn-lg" href="index.html#contacto">Consultar mi caso</a>
@@ -394,6 +406,14 @@
           <li><a href="checklist-consulta.html">Prepare su consulta</a></li>
         </ul>
       </nav>
+      <nav class="footer-col" aria-label="Equipo">
+        <h3>Equipo</h3>
+        <ul>
+          <li><a href="abogado-hector-melgar.html">Héctor Melgar</a></li>
+          <li><a href="abogado-lucia-arteaga.html">Lucía Arteaga</a></li>
+          <li><a href="abogado-javier-ordonez.html">Javier Ordóñez</a></li>
+        </ul>
+      </nav>
       <nav class="footer-col" aria-label="Información legal">
         <h3>Legal</h3>
         <ul>
@@ -427,7 +447,7 @@
     </div>
   </div>
 
-  <script src="js/main.js?v=4" defer></script>
+  <script src="js/main.js?v=5" defer></script>
 
   <!-- WhatsApp flotante — TODO: sustituir número provisional por el real -->
   <a class="whatsapp-float" href="https://wa.me/34910000000?text=Hola%2C%20me%20gustar%C3%ADa%20consultar%20un%20asunto%20legal%20con%20el%20despacho." target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp">

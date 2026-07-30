@@ -14,23 +14,75 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=4">
+  <link rel="stylesheet" href="css/styles.css?v=5">
 </head>
 <body>
-  <header class="site-header scrolled">
+
+  <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+  <header class="site-header" id="cabecera">
     <div class="container header-inner">
-      <a class="brand" href="index.html">
+      <a class="brand" href="index.html" aria-label="Melgar y Asociados — inicio">
         <span class="brand-mark" aria-hidden="true">M</span>
         <span class="brand-text">
           <span class="brand-name">Melgar <em>&amp;</em> Asociados</span>
           <span class="brand-tag">Despacho de Abogados · Madrid</span>
         </span>
       </a>
-      <a class="btn btn-gold btn-header" href="index.html#contacto">Pedir cita</a>
+      <nav class="main-nav" id="menu-principal" aria-label="Navegación principal">
+        <ul>
+          <li><a href="index.html#despacho">Despacho</a></li>
+          <li class="has-submenu">
+            <button type="button" class="submenu-toggle" aria-expanded="false" aria-controls="submenu-areas">
+              Áreas
+              <svg class="chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <ul class="submenu" id="submenu-areas">
+              <li><a href="derecho-penal.html"><span class="submenu-num" aria-hidden="true">I</span>Derecho Penal</a></li>
+              <li><a href="derecho-civil.html"><span class="submenu-num" aria-hidden="true">II</span>Derecho Civil</a></li>
+              <li><a href="derecho-laboral.html"><span class="submenu-num" aria-hidden="true">III</span>Derecho Laboral</a></li>
+              <li><a href="familia-matrimonio.html"><span class="submenu-num" aria-hidden="true">IV</span>Familia y matrimonio</a></li>
+              <li><a href="derecho-mercantil.html"><span class="submenu-num" aria-hidden="true">V</span>Derecho Mercantil</a></li>
+              <li><a href="negligencias-accidentes.html"><span class="submenu-num" aria-hidden="true">VI</span>Negligencias y accidentes</a></li>
+              <li class="submenu-all"><a href="index.html#areas">Ver todas las áreas<span aria-hidden="true"> →</span></a></li>
+            </ul>
+          </li>
+          <li><a href="index.html#por-que-elegirnos">Por qué elegirnos</a></li>
+          <li class="has-submenu">
+            <button type="button" class="submenu-toggle" aria-expanded="false" aria-controls="submenu-herramientas">
+              Herramientas
+              <svg class="chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <ul class="submenu" id="submenu-herramientas">
+              <li><a href="calculadora-plazos.html"><span class="submenu-num" aria-hidden="true">I</span>¿Está a tiempo de reclamar?</a></li>
+              <li><a href="timeline-proceso.html"><span class="submenu-num" aria-hidden="true">II</span>Fases del procedimiento</a></li>
+              <li><a href="checklist-consulta.html"><span class="submenu-num" aria-hidden="true">III</span>Prepare su consulta</a></li>
+              <li class="submenu-all"><a href="index.html#herramientas">Ver todas<span aria-hidden="true"> →</span></a></li>
+            </ul>
+          </li>
+          <li><a href="index.html#equipo">Equipo</a></li>
+          <li><a href="index.html#contacto">Contacto</a></li>
+        </ul>
+        <div class="nav-cta-mobile">
+          <!-- TODO: teléfono real del despacho -->
+          <a class="btn btn-gold" href="index.html#contacto">Pedir cita</a>
+          <a class="nav-phone" href="tel:+34910000000">+34 910 000 000</a>
+        </div>
+      </nav>
+      <div class="header-actions">
+        <a class="header-phone" href="tel:+34910000000">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>+34 910 000 000</span>
+        </a>
+        <a class="btn btn-gold btn-header" href="index.html#contacto">Pedir cita</a>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu-principal" aria-label="Abrir menú">
+          <span class="menu-bar" aria-hidden="true"></span>
+          <span class="menu-bar" aria-hidden="true"></span>
+        </button>
+      </div>
     </div>
   </header>
 
-  <main class="area-hero" style="min-height: 100svh; display: flex; align-items: center;">
+  <main id="contenido" class="area-hero" style="min-height: 100svh; display: flex; align-items: center;">
     <span class="area-hero-num" aria-hidden="true">404</span>
     <div class="container">
       <h1>
@@ -47,6 +99,90 @@
       </div>
     </div>
   </main>
+
+
+<footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="index.html">
+          <span class="brand-mark" aria-hidden="true">M</span>
+          <span class="brand-text">
+            <span class="brand-name">Melgar <em>&amp;</em> Asociados</span>
+            <span class="brand-tag">Despacho de Abogados · Madrid</span>
+          </span>
+        </a>
+        <p>Defensa penal, civil, laboral, de familia, mercantil y de negligencias ante los tribunales de Madrid. Oficio, criterio y trato directo.</p>
+      </div>
+      <nav class="footer-col" aria-label="Áreas de práctica">
+        <h3>Áreas</h3>
+        <ul>
+          <li><a href="derecho-penal.html">Derecho Penal</a></li>
+          <li><a href="derecho-civil.html">Derecho Civil</a></li>
+          <li><a href="derecho-laboral.html">Derecho Laboral</a></li>
+          <li><a href="familia-matrimonio.html">Familia y matrimonio</a></li>
+          <li><a href="derecho-mercantil.html">Derecho Mercantil</a></li>
+          <li><a href="negligencias-accidentes.html">Negligencias y accidentes</a></li>
+        </ul>
+      </nav>
+      <nav class="footer-col" aria-label="El despacho">
+        <h3>Despacho</h3>
+        <ul>
+          <li><a href="index.html#despacho">Quiénes somos</a></li>
+          <li><a href="index.html#equipo">Equipo</a></li>
+          <li><a href="index.html#testimonios">Testimonios</a></li>
+          <li><a href="index.html#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+      <nav class="footer-col" aria-label="Herramientas">
+        <h3>Herramientas</h3>
+        <ul>
+          <li><a href="calculadora-plazos.html">Calculadora de plazos</a></li>
+          <li><a href="timeline-proceso.html">Fases del procedimiento</a></li>
+          <li><a href="checklist-consulta.html">Prepare su consulta</a></li>
+        </ul>
+      </nav>
+      <nav class="footer-col" aria-label="Equipo">
+        <h3>Equipo</h3>
+        <ul>
+          <li><a href="abogado-hector-melgar.html">Héctor Melgar</a></li>
+          <li><a href="abogado-lucia-arteaga.html">Lucía Arteaga</a></li>
+          <li><a href="abogado-javier-ordonez.html">Javier Ordóñez</a></li>
+        </ul>
+      </nav>
+      <nav class="footer-col" aria-label="Información legal">
+        <h3>Legal</h3>
+        <ul>
+          <li><a href="aviso-legal.html">Aviso legal</a></li>
+          <li><a href="privacidad.html">Política de privacidad</a></li>
+          <li><a href="cookies.html">Política de cookies</a></li>
+          <li><button type="button" class="link-btn" id="gestionar-cookies">Gestionar cookies</button></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="container footer-bottom">
+      <p>© <span id="anio">2026</span> Melgar &amp; Asociados. Todos los derechos reservados.</p>
+      <p class="footer-icam">Abogados colegiados · Ilustre Colegio de la Abogacía de Madrid <span class="todo-data">(n.º —)</span></p>
+    </div>
+  </footer>
+
+  <div class="cookie-banner" id="cookie-banner" role="dialog" aria-modal="false" aria-labelledby="cookie-titulo" hidden>
+    <div class="cookie-inner">
+      <div class="cookie-text">
+        <h2 id="cookie-titulo">Su privacidad, primero</h2>
+        <p>
+          Utilizamos cookies propias y de terceros con fines analíticos. Puede aceptarlas
+          o rechazarlas todas; la web funciona igual en ambos casos.
+          <a href="cookies.html">Más información</a>.
+        </p>
+      </div>
+      <div class="cookie-actions">
+        <button type="button" class="btn-cookie" id="cookies-rechazar">Rechazar todo</button>
+        <button type="button" class="btn-cookie" id="cookies-aceptar">Aceptar todo</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/main.js?v=5" defer></script>
 
   <!-- WhatsApp flotante — TODO: sustituir número provisional por el real -->
   <a class="whatsapp-float" href="https://wa.me/34910000000?text=Hola%2C%20me%20gustar%C3%ADa%20consultar%20un%20asunto%20legal%20con%20el%20despacho." target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp">

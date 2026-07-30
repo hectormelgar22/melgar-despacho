@@ -250,7 +250,7 @@ h2 em { font-style: italic; color: var(--gold-deep); }
 .main-nav ul {
   display: flex;
   align-items: center;
-  gap: 1.9rem;
+  gap: 1.5rem;
   list-style: none;
 }
 .main-nav li {
@@ -280,6 +280,17 @@ h2 em { font-style: italic; color: var(--gold-deep); }
 }
 .main-nav a:hover { color: var(--gold-soft); }
 .main-nav a:hover::after { transform: scaleX(1); transform-origin: left; }
+
+/* En escritorio los rótulos nunca se parten en dos líneas: sin esto,
+   flex los comprime y "Despacho" cae a dos renglones. Con seis
+   entradas el menú va justo, así que se aprieta algo el tracking. */
+@media (min-width: 1025px) {
+  .main-nav > ul > li { flex: none; }
+  .main-nav > ul > li > a,
+  .main-nav > ul > li > .submenu-toggle { white-space: nowrap; }
+  .main-nav > ul > li > a,
+  .main-nav > ul > li > .submenu-toggle { font-size: .82rem; letter-spacing: .07em; }
+}
 
 /* ---------- Submenú de áreas ---------- */
 .has-submenu { position: relative; }
@@ -1580,6 +1591,219 @@ a.contact-value:hover { color: var(--gold-deep); }
 }
 
 /* ============================================================
+   FICHA DE ABOGADO
+   ============================================================ */
+.perfil-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(2rem, 5vw, 3.5rem);
+  align-items: start;
+}
+@media (min-width: 920px) {
+  .perfil-grid { grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); }
+}
+.perfil-foto {
+  position: relative;
+  border: 1px solid var(--line-dark);
+}
+.perfil-foto::after {
+  content: "";
+  position: absolute;
+  inset: .9rem;
+  border: 1px solid rgba(201, 164, 92, .45);
+  pointer-events: none;
+}
+.perfil-foto img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 9 / 11.5;
+  object-fit: cover;
+}
+.perfil-monograma {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-family: var(--serif);
+  font-size: clamp(3.5rem, 9vw, 5.5rem);
+  font-weight: 500;
+  letter-spacing: .06em;
+  color: rgba(201, 164, 92, .8);
+  pointer-events: none;
+}
+.perfil-rol {
+  display: block;
+  margin-top: 1rem;
+  font-size: .8rem;
+  font-weight: 700;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.perfil-intro { margin-top: 1.4rem; max-width: 58ch; font-size: 1.06rem; color: var(--light-muted); }
+.perfil-datos {
+  list-style: none;
+  display: grid;
+  gap: .9rem;
+  margin-top: 1.8rem;
+  padding-top: 1.6rem;
+  border-top: 1px solid var(--line-dark);
+}
+@media (min-width: 640px) { .perfil-datos { grid-template-columns: 1fr 1fr; } }
+.perfil-datos dt,
+.perfil-datos .dato-label {
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: .2rem;
+}
+.perfil-datos .dato-valor { font-size: .95rem; color: var(--light); }
+.perfil-acciones { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 2rem; }
+
+/* ---------- Cuerpo de la ficha ---------- */
+.cv-cols {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(2rem, 5vw, 3.5rem);
+  align-items: start;
+}
+@media (min-width: 860px) { .cv-cols { grid-template-columns: 1fr 1fr; } }
+
+.cv-bloque + .cv-bloque { margin-top: clamp(2.5rem, 5vw, 3.5rem); }
+.cv-titulo {
+  font-family: var(--sans);
+  font-size: .74rem;
+  font-weight: 700;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+  padding-bottom: .6rem;
+  margin-bottom: 1.3rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.cv-lista { list-style: none; display: grid; gap: 1.5rem; }
+.cv-item { display: grid; grid-template-columns: 5.5rem 1fr; gap: 1rem; }
+@media (max-width: 480px) { .cv-item { grid-template-columns: 1fr; gap: .3rem; } }
+.cv-anio {
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--gold-deep);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.5;
+}
+.cv-item h4 { font-family: var(--serif); font-size: 1.2rem; font-weight: 600; color: var(--ink); }
+.cv-item p { font-size: .93rem; color: var(--muted); margin-top: .2rem; }
+
+.cv-prosa p { color: var(--text); }
+.cv-prosa p + p { margin-top: 1rem; }
+
+.chips { display: flex; flex-wrap: wrap; gap: .55rem; }
+.chip {
+  padding: .5rem 1rem;
+  font-size: .84rem;
+  font-weight: 600;
+  color: var(--text);
+  background: var(--paper);
+  border: 1px solid var(--line);
+}
+
+/* ---------- Asuntos representativos ---------- */
+.casos-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.3rem;
+}
+@media (min-width: 760px) { .casos-grid { grid-template-columns: repeat(2, 1fr); } }
+.caso {
+  background: var(--navy);
+  border: 1px solid var(--line-dark);
+  padding: 1.8rem 1.7rem;
+  transition: transform .45s var(--ease), border-color .45s var(--ease);
+  will-change: transform;
+}
+.caso:hover { transform: translateY(-5px); border-color: rgba(201, 164, 92, .45); }
+.caso-tipo {
+  display: block;
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: .7rem;
+}
+.caso h3 { font-size: 1.3rem; color: var(--ivory); margin-bottom: .5rem; }
+.caso p { font-size: .93rem; color: var(--light-muted); }
+.caso-desenlace {
+  display: block;
+  margin-top: .9rem;
+  padding-top: .8rem;
+  border-top: 1px solid var(--line-dark);
+  font-size: .88rem;
+  font-weight: 600;
+  color: var(--gold-soft);
+}
+
+.perfil-aviso {
+  margin-top: 2.4rem;
+  padding: 1.1rem 1.3rem;
+  max-width: 78ch;
+  font-size: .85rem;
+  line-height: 1.65;
+  color: var(--light-muted);
+  background: rgba(201, 164, 92, .12);
+  border-left: 3px solid var(--gold);
+}
+
+/* ---------- Otros miembros del equipo ---------- */
+.otros-equipo { display: grid; grid-template-columns: 1fr; gap: 1.3rem; }
+@media (min-width: 640px) { .otros-equipo { grid-template-columns: 1fr 1fr; } }
+.mini-ficha {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 1.3rem 1.4rem;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  text-decoration: none;
+  transition: transform .4s var(--ease), border-color .4s var(--ease);
+}
+.mini-ficha:hover { transform: translateY(-4px); border-color: var(--gold-deep); }
+.mini-mono {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  font-family: var(--serif);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--gold-deep);
+  background: var(--ivory);
+  border: 1px solid var(--line);
+}
+.mini-ficha strong { display: block; font-family: var(--serif); font-size: 1.25rem; font-weight: 600; color: var(--ink); }
+.mini-ficha span { font-size: .8rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--gold-deep); }
+
+/* Enlace a la ficha desde la tarjeta del equipo en portada */
+.lawyer-photo-link { display: block; text-decoration: none; }
+.lawyer-link {
+  display: inline-block;
+  margin-top: .9rem;
+  font-size: .76rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+  text-decoration: none;
+  transition: color .3s var(--ease);
+}
+.lawyer-link:hover { color: var(--ink); }
+
+/* ============================================================
    HERRAMIENTAS (portada)
    ============================================================ */
 .tools-grid {
@@ -1712,7 +1936,9 @@ a.contact-value:hover { color: var(--gold-deep); }
   .header-phone span { display: none; }
 }
 
-@media (max-width: 920px) {
+/* El menú pasa a hamburguesa a 1024px, no a 920: con seis entradas
+   ya no cabe en horizontal por debajo de ese ancho. */
+@media (max-width: 1024px) {
   .about-grid, .faq-grid, .contact-grid { grid-template-columns: 1fr; }
   .about-media { max-width: 560px; }
   .team-grid { grid-template-columns: repeat(2, 1fr); }
