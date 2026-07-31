@@ -1,69 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- TODO: sustituir https://www.melgarabogados.es por el dominio real antes de publicar -->
+<!-- TODO: sustituir https://www.melgarabogados.es por el dominio real y
+     actualizar <lastmod> cuando cambie el contenido de cada página. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.melgarabogados.es/</loc>
-    <priority>1.0</priority>
+    <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
   </url>
   <url>
     <loc>https://www.melgarabogados.es/derecho-penal.html</loc>
-    <priority>0.8</priority>
+    <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.melgarabogados.es/derecho-civil.html</loc>
-    <priority>0.8</priority>
+    <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.melgarabogados.es/derecho-laboral.html</loc>
-    <priority>0.8</priority>
+    <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.melgarabogados.es/familia-matrimonio.html</loc>
-    <priority>0.8</priority>
+    <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.melgarabogados.es/derecho-mercantil.html</loc>
-    <priority>0.8</priority>
+    <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.melgarabogados.es/negligencias-accidentes.html</loc>
-    <priority>0.8</priority>
+    <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.melgarabogados.es/calculadora-plazos.html</loc>
-    <priority>0.6</priority>
+    <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.melgarabogados.es/timeline-proceso.html</loc>
-    <priority>0.6</priority>
+    <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.melgarabogados.es/checklist-consulta.html</loc>
-    <priority>0.6</priority>
+    <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.melgarabogados.es/abogado-hector-melgar.html</loc>
-    <priority>0.5</priority>
+    <lastmod>2026-08-04</lastmod>
     <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://www.melgarabogados.es/abogado-lucia-arteaga.html</loc>
-    <priority>0.5</priority>
+    <lastmod>2026-08-04</lastmod>
     <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://www.melgarabogados.es/abogado-javier-ordonez.html</loc>
-    <priority>0.5</priority>
+    <lastmod>2026-08-04</lastmod>
     <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
   </url>
 </urlset>

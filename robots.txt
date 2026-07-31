@@ -1,5 +1,62 @@
+# ============================================================
+# robots.txt — Melgar & Asociados
+# El sitio es totalmente indexable. Damos la bienvenida
+# explícita a los buscadores, a los rastreadores de redes
+# sociales (para las tarjetas de enlace) y a los de IA
+# (para que el despacho aparezca en respuestas de asistentes).
+# TODO: sustituir el dominio por el real antes de publicar.
+# ============================================================
+
+# --- Buscadores y regla general ---
 User-agent: *
 Allow: /
+Disallow: /.well-known/
 
-# TODO: sustituir por el dominio real antes de publicar
+# --- Rastreadores de IA (bienvenidos: aportan visibilidad) ---
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+# --- Rastreadores de redes sociales (tarjetas de enlace) ---
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: WhatsApp
+Allow: /
+
+User-agent: TelegramBot
+Allow: /
+
 Sitemap: https://www.melgarabogados.es/sitemap.xml

@@ -24,9 +24,18 @@ aviso-legal | privacidad | cookies .html   Páginas legales (estructura base)
 css/styles.css                Sistema de diseño completo
 js/main.js                    Interacciones (menú, slider, cookies, formulario)
 assets/img/                   Imágenes WebP (placeholders — sustituir por fotos reales)
-.htaccess                     Seguridad y caché en Hostinger/Apache (GitHub Pages lo ignora)
-robots.txt + sitemap.xml      SEO (actualizar dominio)
+assets/favicon.svg + icon-*   Juego de iconos (favicon, apple-touch, PWA)
+site.webmanifest              Manifiesto PWA (iconos, nombre, colores)
+.well-known/security.txt      Contacto de seguridad (RFC 9116)
+.htaccess                     Seguridad, compresión y caché (Hostinger/Apache; GitHub Pages lo ignora)
+robots.txt + sitemap.xml      SEO (buscadores, redes e IA — actualizar dominio)
+DESPLIEGUE.md                 GUÍA DE PUESTA EN PRODUCCIÓN (léela antes de publicar)
 ```
+
+## Puesta en producción
+
+Todo el proceso (qué datos rellenar, cómo subir a Hostinger y cómo comprobar
+que funciona) está en **[DESPLIEGUE.md](DESPLIEGUE.md)**.
 
 ## Vista previa local
 

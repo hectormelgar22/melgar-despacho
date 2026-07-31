@@ -1,43 +1,154 @@
 # ============================================================
-# MELGAR & ASOCIADOS — Configuración Apache/LiteSpeed (Hostinger)
-# GitHub Pages ignora este fichero (no le afecta).
+# MELGAR & ASOCIADOS — Configuración Apache / LiteSpeed (Hostinger)
+# Seguridad, rendimiento y caché. GitHub Pages ignora este fichero.
 # ============================================================
 
-# --- Forzar HTTPS ---
-<IfModule mod_rewrite.c>
-RewriteEngine On
-RewriteCond %{HTTPS} !=on
-RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-</IfModule>
+# --- Codificación por defecto ---
+AddDefaultCharset UTF-8
 
-# --- Cabeceras de seguridad ---
+# --- Ocultar información del servidor ---
+ServerSignature Off
 <IfModule mod_headers.c>
-Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
-Header always set X-Content-Type-Options "nosniff"
-Header always set X-Frame-Options "DENY"
-Header always set Referrer-Policy "strict-origin-when-cross-origin"
-Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"
-Header always set Cross-Origin-Opener-Policy "same-origin"
+  Header always unset X-Powered-By
+  Header always unset Server
 </IfModule>
 
-# --- Compresión ---
+# --- Sin listado de directorios ni negociación de contenido ---
+Options -Indexes -MultiViews
+
+# ============================================================
+# 1. HTTPS FORZADO  (+ canonicalización de dominio, opcional)
+# ============================================================
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Redirige todo el tráfico a HTTPS.
+  RewriteCond %{HTTPS} !=on
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # Bloquea métodos peligrosos (TRACE/TRACK: riesgo de Cross-Site Tracing).
+  RewriteCond %{REQUEST_METHOD} ^(TRACE|TRACK) [NC]
+  RewriteRule .* - [F]
+
+  # --- OPCIONAL: unificar www / sin-www para no duplicar contenido. ---
+  # Descomente UNA de las dos según el dominio canónico que elija.
+  # (A) Forzar www:
+  # RewriteCond %{HTTP_HOST} !^www\. [NC]
+  # RewriteRule ^ https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+  # (B) Forzar sin-www:
+  # RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+  # RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
+</IfModule>
+
+# ============================================================
+# 2. CABECERAS DE SEGURIDAD
+# ============================================================
+<IfModule mod_headers.c>
+  # HSTS: obliga a HTTPS durante un año. El token 'preload' permite
+  # inscribir el dominio en https://hstspreload.org (opcional).
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+
+  # Evita el sniffing de tipo MIME.
+  Header always set X-Content-Type-Options "nosniff"
+
+  # Anti-clickjacking (el sitio no puede incrustarse en iframes ajenos).
+  Header always set X-Frame-Options "DENY"
+
+  # Política de referente: no filtra la URL a destinos inseguros.
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+  # Desactiva APIs sensibles del navegador que el sitio no usa.
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=(), magnetometer=(), accelerometer=(), gyroscope=(), interest-cohort=()"
+
+  # Aísla el contexto de navegación (Spectre / ventanas emergentes).
+  Header always set Cross-Origin-Opener-Policy "same-origin"
+  Header always set Cross-Origin-Resource-Policy "same-origin"
+
+  # Content Security Policy como cabecera real (más fuerte que el <meta>).
+  # Debe coincidir con el <meta http-equiv="Content-Security-Policy"> de las
+  # páginas. Si añade scripts o dominios, actualícelo en AMBOS sitios.
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://www.googletagmanager.com https://*.google-analytics.com; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; frame-src https://www.google.com https://maps.google.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
+</IfModule>
+
+# ============================================================
+# 3. PROTEGER FICHEROS SENSIBLES
+# ============================================================
+# Ficheros ocultos y de desarrollo (excepto .well-known, que debe servirse).
+<FilesMatch "^\.(?!well-known)">
+  Require all denied
+</FilesMatch>
+
+# Extensiones que nunca deben servirse en producción.
+<FilesMatch "\.(md|py|sh|bak|old|log|ini|sql|gitignore|gitattributes)$">
+  Require all denied
+</FilesMatch>
+
+# El propio .htaccess.
+<Files ".htaccess">
+  Require all denied
+</Files>
+
+# ============================================================
+# 4. COMPRESIÓN
+# ============================================================
+# Brotli si está disponible (LiteSpeed / Apache reciente); si no, gzip.
+<IfModule mod_brotli.c>
+  AddOutputFilterByType BROTLI_COMPRESS text/html text/css text/plain text/xml application/javascript application/json application/xml image/svg+xml application/manifest+json
+</IfModule>
 <IfModule mod_deflate.c>
-AddOutputFilterByType DEFLATE text/html text/css text/plain application/javascript application/json image/svg+xml application/xml
+  AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application/javascript application/json application/xml image/svg+xml application/manifest+json
 </IfModule>
 
-# --- Caché del navegador ---
+# ============================================================
+# 5. CACHÉ DEL NAVEGADOR
+# ============================================================
 <IfModule mod_expires.c>
-ExpiresActive On
-ExpiresByType text/html "access plus 0 seconds"
-ExpiresByType text/css "access plus 1 month"
-ExpiresByType application/javascript "access plus 1 month"
-ExpiresByType image/webp "access plus 1 year"
-ExpiresByType image/jpeg "access plus 1 year"
-ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresActive On
+  # HTML: siempre fresco (el contenido puede cambiar).
+  ExpiresByType text/html "access plus 0 seconds"
+  # CSS y JS: llevan ?v= para invalidar la caché al actualizar.
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  # Imágenes e iconos.
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType image/x-icon "access plus 1 year"
+  # Manifest y datos.
+  ExpiresByType application/manifest+json "access plus 1 week"
+  ExpiresByType application/xml "access plus 1 day"
 </IfModule>
 
-# --- Página de error personalizada ---
-ErrorDocument 404 /404.html
+<IfModule mod_headers.c>
+  # Marca los recursos estáticos como inmutables (sirve la copia local sin revalidar).
+  <FilesMatch "\.(css|js|webp|jpg|jpeg|png|svg|ico|woff2)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  # El HTML nunca debe quedarse cacheado de forma agresiva.
+  <FilesMatch "\.html$">
+    Header set Cache-Control "public, max-age=0, must-revalidate"
+  </FilesMatch>
+</IfModule>
 
-# --- Ocultar listado de directorios ---
-Options -Indexes
+# ETags fuera: con Expires/Cache-Control sobran y evitan revalidaciones extra.
+<IfModule mod_headers.c>
+  Header unset ETag
+</IfModule>
+FileETag None
+
+# ============================================================
+# 6. TIPOS MIME CORRECTOS
+# ============================================================
+<IfModule mod_mime.c>
+  AddType application/manifest+json .webmanifest
+  AddType image/svg+xml .svg
+  AddType image/webp .webp
+  AddType text/plain .txt
+</IfModule>
+
+# ============================================================
+# 7. PÁGINAS DE ERROR
+# ============================================================
+ErrorDocument 403 /404.html
+ErrorDocument 404 /404.html

@@ -1,0 +1,16 @@
+{
+  "name": "Melgar & Asociados — Abogados en Madrid",
+  "short_name": "Melgar & Asociados",
+  "description": "Despacho de abogados en Madrid: penal, civil, laboral, familia, mercantil y negligencias.",
+  "lang": "es",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0B1626",
+  "theme_color": "#0B1626",
+  "icons": [
+    { "src": "/assets/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/assets/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/assets/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

@@ -1,0 +1,11 @@
+# security.txt — https://securitytxt.org/  (RFC 9116)
+# Vía de contacto para comunicar vulnerabilidades de seguridad.
+# TODO: sustituir el correo y el dominio por los reales antes de publicar.
+
+Contact: mailto:seguridad@melgarabogados.es
+Preferred-Languages: es, en
+Canonical: https://www.melgarabogados.es/.well-known/security.txt
+
+# Fecha de caducidad de este documento (renovar cada año).
+# TODO: fijar una fecha real, p. ej. Expires: 2027-12-31T23:00:00.000Z
+Expires: 2027-12-31T23:00:00.000Z

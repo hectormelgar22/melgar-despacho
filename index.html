@@ -3,6 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="author" content="Melgar &amp; Asociados">
+  <meta name="geo.region" content="ES-MD">
+  <meta name="geo.placename" content="Madrid">
 
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://www.googletagmanager.com https://*.google-analytics.com; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; frame-src https://www.google.com https://maps.google.com; object-src 'none'; base-uri 'self'; form-action 'self'">
   <meta name="referrer" content="strict-origin-when-cross-origin">
@@ -46,6 +50,8 @@
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:image:alt" content="Melgar &amp; Asociados — Despacho de Abogados en Madrid">
+  <meta name="twitter:image:alt" content="Melgar &amp; Asociados — Despacho de Abogados en Madrid">
   <meta name="twitter:title" content="Melgar &amp; Asociados — Despacho de Abogados en Madrid">
   <meta name="twitter:description" content="Defensa penal, civil, laboral, de familia, mercantil y de negligencias médicas ante los tribunales. Más de 25 años de ejercicio.">
   <meta name="twitter:image" content="https://www.melgarabogados.es/assets/img/og-image.jpg">
@@ -116,12 +122,115 @@
   ============================================================ -->
 
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+
+  <!-- Precarga del hero (elemento LCP): empieza a descargarse cuanto antes -->
+  <link rel="preload" as="image" href="assets/img/hero-columnas.webp" type="image/webp" fetchpriority="high">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="css/styles.css?v=5">
+  <!-- Datos estructurados: sitio y preguntas frecuentes (contenido real).
+       El bloque LegalService con telefono/direccion sigue mas arriba, comentado,
+       para activarlo cuando el despacho aporte los datos reales. -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://www.melgarabogados.es/#website",
+      "url": "https://www.melgarabogados.es/",
+      "name": "Melgar & Asociados",
+      "description": "Despacho de abogados en Madrid: penal, civil, laboral, familia y matrimonio, mercantil y negligencias medicas.",
+      "inLanguage": "es-ES",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Melgar & Asociados",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.melgarabogados.es/assets/icon-512.png"
+        }
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://www.melgarabogados.es/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cuánto cuesta la primera consulta?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nada. La primera consulta es gratuita y sin compromiso: escuchamos su caso, le decimos si tiene recorrido y le damos un presupuesto cerrado por escrito. Solo cobramos si decide encargarnos el asunto, y siempre por el importe pactado de antemano."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Atienden urgencias y detenciones fuera de horario?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí. Las urgencias penales —detenciones, citaciones inminentes, registros— se atienden las 24 horas, los 365 días del año. Llame al teléfono del despacho y le asistirá un abogado, no un contestador."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo se calculan los honorarios?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "En función de la complejidad del asunto y las fases previsibles del procedimiento. Antes de empezar firmamos una hoja de encargo con el importe cerrado y las condiciones de pago, que puede ser fraccionado."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Todo lo que les cuente es confidencial?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Absolutamente. El secreto profesional del abogado ampara todo lo que nos comunique, incluso si finalmente decide no contratarnos. Es una obligación legal y deontológica que cumplimos con el máximo rigor."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuánto puede durar mi procedimiento?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Depende del tipo de asunto y de la carga del juzgado. En la primera consulta le daremos una estimación realista de plazos y le mantendremos informado en cada hito, sin que tenga que perseguirnos."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Puedo perder el derecho a reclamar por dejar pasar el tiempo?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí, y es el error más frecuente que vemos. Cada tipo de asunto tiene su propio plazo, y algunos son muy cortos: impugnar un despido, por ejemplo, son veinte días hábiles. Puede hacerse una idea con nuestra calculadora de plazos, aunque solo un abogado puede confirmarle si el suyo sigue vivo, porque los plazos se interrumpen y se suspenden en muchos supuestos."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Tengo que ir al juzgado o pueden representarme ustedes?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Depende del trámite. En muchas actuaciones basta con que nos otorgue un poder para pleitos y no necesita desplazarse. En otras su presencia es obligatoria: la ratificación de un divorcio, su declaración en un procedimiento penal o el interrogatorio en una vista. Le diremos con antelación en qué fechas concretas se le va a necesitar, para que pueda organizarse."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Puedo cambiar de abogado si ya tengo el procedimiento empezado?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí, puede hacerlo en cualquier momento y no necesita justificar el motivo. Nos encargamos de solicitar el expediente al compañero anterior y de la venia colegial, un trámite entre abogados que es habitual y no le afecta a usted. Lo que sí revisamos antes de aceptar es en qué fase está el asunto: si queda poco para una vista señalada, se lo diremos con franqueza."
+          }
+        }
+      ]
+    }
+  ]
+}
+  </script>
 </head>
 <body>
 
